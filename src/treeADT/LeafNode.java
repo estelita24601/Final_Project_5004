@@ -39,11 +39,6 @@ public class LeafNode<T> extends TreeNode<T> {
     }
 
     @Override
-    TreeNode<T> partialCopy() {
-        return new LeafNode<T>(this.data);
-    }
-
-    @Override
     TreeNode<T> findNode(Predicate<T> identifier) {
         if(identifier.test(this.data)){
             return this;

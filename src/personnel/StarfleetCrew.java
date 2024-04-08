@@ -2,7 +2,7 @@ package personnel;
 
 import treeADT.*;
 
-public abstract class Crew {
+public abstract class StarfleetCrew implements ICrew{
     private TreeNode<ICrewMember> root;
 
 

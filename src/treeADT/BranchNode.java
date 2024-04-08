@@ -9,10 +9,12 @@ import java.util.function.Predicate;
 public class BranchNode<T> extends LeafNode<T> {
     public BranchNode(T initData) {
         super(initData);
+        this.children = new ArrayList<TreeNode<T>>();
     }
 
     public BranchNode(T initData, TreeNode<T> initParent) {
-        super(initData, initParent);
+        this(initData);
+        this.parent = initParent;
     }
 
     @Override

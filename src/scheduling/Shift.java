@@ -45,11 +45,11 @@ public abstract class Shift {
 
     public void changeStart(){
         //TODO
-        this.updateNumHours();
+        //this.updateNumHours();
     }
 
     public void changeEnd(){
         //TODO
-        this.updateNumHours();
+        //this.updateNumHours();
     }
 }
