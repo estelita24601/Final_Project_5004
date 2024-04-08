@@ -1,8 +1,4 @@
-package scheduling;
-
-import personnel.ICrewMember;
-import java.time.Duration;
-import java.sql.Time;
+package model.scheduling;
 
 
 public abstract class Shift {
@@ -45,11 +41,12 @@ public abstract class Shift {
 
     public void changeStart(){
         //TODO
-        //this.updateNumHours();
+
+
     }
 
     public void changeEnd(){
         //TODO
-        //this.updateNumHours();
+
     }
 }

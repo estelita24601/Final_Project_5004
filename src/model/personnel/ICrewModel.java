@@ -1,10 +1,10 @@
-package personnel;
+package model.personnel;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.List;
 
-public interface ICrew {
+public interface ICrewModel<ICrewMember> {
     //folding to an integer
     int countAll();
 //    int countRank(String rankName);
@@ -20,7 +20,7 @@ public interface ICrew {
 //    List<String> dutyRoster (String shiftName);
 
     List<String> memberNameList();
-//    List<String> memberNameList(Predicate<ICrewMember> filter);
+    List<String> memberNameList(Predicate<ICrewMember> filter);
 
     //getting info on individual member of the crew
     String getCrewMemberInfo(String crewMemberName);

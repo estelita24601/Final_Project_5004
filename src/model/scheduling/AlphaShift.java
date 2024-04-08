@@ -1,4 +1,4 @@
-package scheduling;
+package model.scheduling;
 
 public class AlphaShift extends Shift{
 

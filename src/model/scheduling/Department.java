@@ -1,4 +1,4 @@
-package scheduling;
+package model.scheduling;
 
 public enum Department {
     ENGINEERING, BRIDGE, SECURITY, SCIENCE, MEDICAL_BAY;

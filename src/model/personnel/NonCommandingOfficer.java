@@ -1,4 +1,4 @@
-package personnel;
+package model.personnel;
 
 public class NonCommandingOfficer implements ICrewMember {
 }
