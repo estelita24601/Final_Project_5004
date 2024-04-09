@@ -2,7 +2,7 @@ package model.personnel;
 
 import treeADT.*;
 
-public abstract class StarfleetCrew implements ICrewModel {
+public abstract class StarfleetCrew implements ICrew {
     private TreeNode<ICrewMember> root;
 
 
