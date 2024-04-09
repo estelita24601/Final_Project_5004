@@ -1,5 +1,6 @@
 package model.personnel;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.List;
@@ -12,19 +13,18 @@ public interface ICrew<ICrewMember> {
     //getting info on entire crew
     List<String> membersList();
     List<String> membersList(Predicate<ICrewMember> filter);
-
-    List<String> memberNameList();
-    List<String> memberNameList(Predicate<ICrewMember> filter);
+    List<String> membersNameList();
+    List<String> membersNameList(Predicate<ICrewMember> filter);
 
     //getting info on individual member of the crew
-    String getCrewMemberInfo(String crewMemberName);
-    String getCrewMemberInfo(String crewMemberName, Function<ICrewMember, String> convertInfoToStr);
+    ICrewMember getCrewMember(Predicate<ICrewMember> thisMember);
+    String getCrewMemberInfo(Predicate<ICrewMember> thisMember);
+    String getCrewMemberInfo(Predicate<ICrewMember> thisMember, Function<ICrewMember, String> convertInfoToStr);
 
     //used to update state of the crew
-    void promote(String crewMemberName, Rank newRank);
-    void demote(String crewMemberName, Rank newRank);
-    void addCrewMember(String crewMemberName, String superiorsName);
-    void removeCrewMember(String crewMemberName);
-    void reAssignTo(String crewMemberName, String newSuperiorName);
-    void putInCommandOf(String commandingMemberName, String newSubordinateName);
+    void editCrewMember(Predicate<ICrewMember> thisMember, Consumer<ICrewMember> crewEditor);
+    void addCrewMember(ICrewMember newCrewMember, Predicate<ICrewMember> newSuperior);
+    void removeCrewMember(Predicate<ICrewMember> identifier);
+    void reAssignTo(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> newSuperior);
+    void putInCommandOf(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> newSubordinate);
 }
