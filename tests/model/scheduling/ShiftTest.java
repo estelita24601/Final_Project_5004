@@ -3,6 +3,8 @@ package model.scheduling;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalTime;
+
 import static org.junit.Assert.*;
 
 public class ShiftTest {
@@ -58,19 +60,30 @@ public class ShiftTest {
 
     @Test
     public void testGetAndSetStart() {
+        alpha.changeStart(8,0);
+        assertEquals(LocalTime.of(8,0), alpha.getStartTime());
+        assertEquals(4, alpha.getNumHours(), 0.01);
     }
 
     @Test
     public void testGetAndSetEnd() {
+        alpha.changeEnd(11,0);
+        assertEquals(5, alpha.getNumHours(), 0.01);
     }
 
     @Test
     public void testGetAndSetBoth() {
+        alpha.changeTimes(8,45,10,45);
+        assertEquals(LocalTime.of(8,45), alpha.getStartTime());
+        assertEquals(LocalTime.of(10, 45), alpha.getEndTime());
+        assertEquals(2, alpha.getNumHours(), 0.01);
     }
-
 
     @Test
     public void testGetAndSetShiftName() {
+        assertEquals("Alpha", alpha.getShiftName());
+        beta.setShiftName("Beta Shift Best Shift");
+        assertEquals("Beta Shift Best Shift", beta.getShiftName());
     }
 
 }
