@@ -1,12 +1,9 @@
 package model.scheduling;
 
-public class AlphaShift extends Shift{
+import java.time.LocalTime;
 
-    public AlphaShift(Department d) {
-        super(d);
-        this.shiftName = "Alpha";
-        this.startTime = 600;
-        this.endTime = 1200;
-        this.length = 6;
+public class AlphaShift extends Shift{
+    public AlphaShift(Department department) {
+        super(department, "Alpha", LocalTime.of(6, 0), LocalTime.of(12, 0));
     }
 }
