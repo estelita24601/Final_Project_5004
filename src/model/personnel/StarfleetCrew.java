@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class StarfleetCrew implements ICrew {
+public class StarFleetCrew implements ICrew {
     private TreeNode<ICrewMember> root;
 
     @Override
@@ -94,7 +94,5 @@ public class StarfleetCrew implements ICrew {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'putInCommandOf'");
     }
-
-
 
 }

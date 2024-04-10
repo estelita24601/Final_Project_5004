@@ -1,8 +1,7 @@
 package model.scheduling;
-
-
 import java.time.Duration;
 import java.time.LocalTime;
+import model.Department;
 
 public abstract class Shift {
     static final Duration MAX_HOURS = Duration.ofHours(10);

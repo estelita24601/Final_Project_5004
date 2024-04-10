@@ -1,4 +1,4 @@
-package model.personnel;
+package model;
 
 public enum Rank {
     TECHNICIAN(0),
@@ -39,6 +39,4 @@ public enum Rank {
     public double getRankValue(){
         return this.rank_hierarchy;
     }
-
-
-    }
+}

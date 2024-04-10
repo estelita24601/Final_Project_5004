@@ -1,6 +1,7 @@
 package model.scheduling;
 
 import java.time.LocalTime;
+import model.Department;
 
 public class BetaShift extends Shift{
     public BetaShift(Department department) {

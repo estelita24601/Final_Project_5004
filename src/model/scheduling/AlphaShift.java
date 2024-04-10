@@ -1,5 +1,7 @@
 package model.scheduling;
 
+import model.Department;
+
 import java.time.LocalTime;
 
 public class AlphaShift extends Shift{
