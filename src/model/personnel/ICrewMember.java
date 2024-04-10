@@ -3,7 +3,6 @@ package model.personnel;
 import model.scheduling.Shift;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 import model.*;
 
@@ -18,7 +17,7 @@ public interface ICrewMember {
     void setHeritage(ArrayList<Species> heritage);
     void addToHeritage(Species newSpecies);
     void removeFromHeritage(Species newSpecies);
-    List<String> getHeritage();
+    ArrayList<Species> getHeritage();
 
     void editShift(Consumer<Shift> shiftEditor);
     void setShift(Shift newShift);
