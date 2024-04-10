@@ -1,21 +1,24 @@
 package model;
 
 public enum Species {
-HUMAN, VULCAN, KLINGON, ROMULAN, BAJORAN, ANDORIAN, FERENGI, TRILL, BETAZOID;
+    HUMAN("Human"),
+    VULCAN("Vulcan"),
+    KLINGON("Klingon"),
+    ROMULAN("Romulan"),
+    BAJORAN("Bajoran"),
+    ANDORIAN("Andorian"),
+    FERENGI("Ferengi"),
+    TRILL("Trill"),
+    BETAZOID("Betazoid");
+
+    public final String name;
+
+    Species(String str) {
+        this.name = str;
+    }
 
     @Override
     public String toString() {
-        switch (this) {
-            case HUMAN:return "Human";
-            case VULCAN:return "Vulcan";
-            case KLINGON:return "Klingon";
-            case ROMULAN:return "Romulan";
-            case BAJORAN:return "Bajoran";
-            case ANDORIAN:return "Andorian";
-            case FERENGI:return "Ferengi";
-            case TRILL:return "Trill";
-            case BETAZOID:return "Betazoid";
-            default: return "Unknown Species";
-        }
+        return this.name;
     }
 }

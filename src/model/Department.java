@@ -1,33 +1,20 @@
 package model;
 
 public enum Department {
-    ENGINEERING, BRIDGE, SECURITY, SCIENCE, MEDICAL_BAY;
+    ENGINEERING("Engineering"),
+    BRIDGE("Bridge"),
+    SECURITY("Security"),
+    SCIENCE("Science"),
+    MEDICAL_BAY("Medical Bay");
+
+    public final String name;
+
+    Department(String name) {
+        this.name = name;
+    }
 
     @Override
     public String toString() {
-        String output = null;
-        switch (this) {
-            case ENGINEERING -> {
-                output = "Engineering";
-            }
-            case BRIDGE -> {
-                output = "Bridge";
-            }
-            case SECURITY -> {
-                output = "Security";
-            }
-            case SCIENCE -> {
-                output = "Science Department";
-            }
-            case MEDICAL_BAY -> {
-                output = "Medical Bay";
-            }default -> {
-                throw new IllegalStateException("Invalid value for department enum");
-            }
-        }
-
-        return output;
+        return this.name;
     }
-
-
 }
