@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import model.*;
-import model.Shift;
+import model.scheduling.Shift;
 
 public class StarFleetOfficer implements ICrewMember {
     String fullName;
@@ -20,7 +20,6 @@ public class StarFleetOfficer implements ICrewMember {
         this.rank = rank;
         this.assignment = department;
         this.heritage = new ArrayList<Species>();
-        this.shift = null;
 
         if (rank == Rank.TECHNICIAN) {
             this.canCommand = false;
@@ -28,6 +27,7 @@ public class StarFleetOfficer implements ICrewMember {
             this.canCommand = true;
         }
 
+        
     }
 
     public StarFleetOfficer(String name, Rank rank, Department department, ArrayList<Species> heritage) {

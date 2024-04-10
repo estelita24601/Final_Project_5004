@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.personnel.ICrew;
 import model.personnel.ICrewMember;
+import model.scheduling.Shift;
 
 public class CrewModel implements IModel {
     ArrayList<String> rankOptions;
