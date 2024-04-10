@@ -22,7 +22,7 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
         this.rank = rank;
         this.job = department;
         this.heritage = new ArrayList<Species>();
-        this.shift = new Shift(department, shifRotation);\
+        this.shift = new Shift(department, shifRotation);
         this.setCommandAbility();
     }
 
