@@ -1,6 +1,6 @@
 package model.personnel;
 
-import model.scheduling.Shift;
+import model.Shift;
 
 import java.util.ArrayList;
 import java.util.List;

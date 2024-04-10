@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import model.*;
-import model.personnel.ICrewMember;
-import model.scheduling.Shift;
+import model.Shift;
 
 public class StarFleetOfficer implements ICrewMember {
     String fullName;

@@ -9,7 +9,6 @@ package model;
 import java.util.ArrayList;
 
 import model.personnel.ICrewMember;
-import model.scheduling.Shift;
 
 public interface IModel {
     
