@@ -32,30 +32,36 @@ public class Shift {
         this.length = calculateDuration(start, end);
     }
 
-    // constructor for default shift
+    // constructor for default shifts
     public Shift(Department department, Rotation rotation) {
-        this.location = department;
+        String name;
+        LocalTime start;
+        LocalTime end;
         if (rotation == Rotation.ALPHA) {
-            this.name = "Alpha";
-            this.startTime = sixAM;
-            this.endTime = noon;
+            name = "Alpha";
+            start = sixAM;
+            end = noon;
         } else if (rotation == Rotation.BETA) {
-            this.name = "Beta";
-            this.startTime = noon;
-            this.endTime = sixPM;
+            name = "Beta";
+            start = noon;
+            end = sixPM;
         } else if (rotation == Rotation.GAMMA) {
-            this.name = "Gamma";
-            this.startTime = sixPM;
-            this.endTime = midnight;
+            name = "Gamma";
+            start = sixPM;
+            end = midnight;
         } else if (rotation == Rotation.DELTA) {
-            this.name = "Delta";
-            this.startTime = midnight;
-            this.endTime = sixAM;
+            name = "Delta";
+            start = midnight;
+            end = sixAM;
         }else{
             throw new IllegalArgumentException("Rotation given does not have default values");
         }
 
-        this.length = calculateDuration(startTime, endTime);
+        this.location = department;
+        this.name = name;
+        this.startTime = start;
+        this.endTime = end;
+        this.length = calculateDuration(start, end);
     }
 
     @Override
