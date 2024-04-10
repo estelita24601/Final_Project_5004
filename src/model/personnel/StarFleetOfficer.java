@@ -7,6 +7,7 @@ import model.Species;
 import model.scheduling.Shift;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOfficer> {
@@ -27,7 +28,7 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
     }
 
     public StarFleetOfficer(String name, Rank rank, Department department, Rotation shifRotation,
-            ArrayList<Species> heritage) {
+            List<Species> heritage) {
         this(name, rank, department, shifRotation);
         this.heritage.addAll(heritage);
     }

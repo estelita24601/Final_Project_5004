@@ -4,27 +4,27 @@ import model.Department;
 import model.Rank;
 import model.Rotation;
 import model.Species;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StarFleetOfficerTest {
     StarFleetOfficer janeway;
     StarFleetOfficer sisko;
     StarFleetOfficer belanna;
-    StarFleetOfficer kira;
+    StarFleetOfficer jadzia;
+    StarFleetOfficer testOfficer;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         janeway = new StarFleetOfficer("Katheryn Janeway", Rank.CAPTAIN, Department.BRIDGE, Rotation.ALPHA, Species.HUMAN);
         sisko = new StarFleetOfficer("Benjamin Sisko", Rank.CAPTAIN, Department.BRIDGE, Rotation.ALPHA, Species.HUMAN);
-        belanna = new StarFleetOfficer("B'Elanna Torres", Rank.LIEUTENANT_JR_GRADE, Department.BRIDGE, Rotation.BETA);
-    }
-
-    @Test
-    public void canBeCommandingOfficer() {
+        ArrayList<Species> belannaHeritage = new ArrayList<>(List.of(Species.HUMAN, Species.KLINGON));
+        belanna = new StarFleetOfficer("B'Elanna Torres", Rank.LIEUTENANT_JR_GRADE, Department.ENGINEERING, Rotation.BETA, belannaHeritage);
+        jadzia = new StarFleetOfficer("Jadzia Dax", Rank.LIEUTENANT_COMMANDER, Department.SCIENCE, Rotation.GAMMA, Species.TRILL);
+        testOfficer = new StarFleetOfficer("Jane Doe", Rank.ENSIGN, Department.SECURITY, Rotation.DELTA);
     }
 
     @Test
@@ -40,15 +40,7 @@ public class StarFleetOfficerTest {
     }
 
     @Test
-    public void getRank() {
-    }
-
-    @Test
     public void changeName() {
-    }
-
-    @Test
-    public void getName() {
     }
 
     @Test
@@ -64,19 +56,7 @@ public class StarFleetOfficerTest {
     }
 
     @Test
-    public void getHeritage() {
-    }
-
-    @Test
     public void editShift() {
-    }
-
-    @Test
-    public void getShift() {
-    }
-
-    @Test
-    public void getJob() {
     }
 
     @Test
