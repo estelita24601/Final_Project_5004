@@ -7,32 +7,32 @@ import static org.junit.Assert.*;
 import model.*;
 
 public class ShiftTest {
-    AlphaShift alpha;
-    BetaShift beta;
-    GammaShift gamma;
-    DeltaShift delta;
+    Shift alpha;
+    Shift beta;
+    Shift gamma;
+    Shift delta;
 
     @Before
     public void setUp(){
-        alpha = new AlphaShift(Department.BRIDGE);
-        beta = new BetaShift(Department.BRIDGE);
-        gamma = new GammaShift(Department.BRIDGE);
-        delta = new DeltaShift(Department.BRIDGE);
+        alpha = new Shift(Department.BRIDGE, Rotation.ALPHA);
+        beta = new Shift(Department.BRIDGE, Rotation.BETA);
+        gamma = new Shift(Department.BRIDGE, Rotation.GAMMA);
+        delta = new Shift(Department.BRIDGE, Rotation.DELTA);
     }
 
     @Test
     public void testToString() {
         //"%s Shift: %s\n\t%d - %d\n"
-        String expectedAlpha = "Alpha Shift: Bridge\n\t06:00 - 12:00\n";
+        String expectedAlpha = "Alpha Shift (Bridge)\n\t06:00 - 12:00\n";
         assertEquals(expectedAlpha, alpha.toString());
 
-        String expectedBeta = "Beta Shift: Bridge\n\t12:00 - 18:00\n";
+        String expectedBeta = "Beta Shift (Bridge)\n\t12:00 - 18:00\n";
         assertEquals(expectedBeta, beta.toString());
 
-        String expectedGamma = "Gamma Shift: Bridge\n\t18:00 - 00:00\n";
+        String expectedGamma = "Gamma Shift (Bridge)\n\t18:00 - 00:00\n";
         assertEquals(expectedGamma, gamma.toString());
 
-        String expectedDelta = "Delta Shift: Bridge\n\t00:00 - 06:00\n";
+        String expectedDelta = "Delta Shift (Bridge)\n\t00:00 - 06:00\n";
         assertEquals(expectedDelta, delta.toString());
     }
 
@@ -72,7 +72,7 @@ public class ShiftTest {
 
     @Test
     public void testGetAndSetBoth() {
-        alpha.changeTimes(8,45,10,45);
+        alpha.changeStartAndEnd(8,45,10,45);
         assertEquals(LocalTime.of(8,45), alpha.getStartTime());
         assertEquals(LocalTime.of(10, 45), alpha.getEndTime());
         assertEquals(2, alpha.getNumHours(), 0.01);
@@ -80,9 +80,9 @@ public class ShiftTest {
 
     @Test
     public void testGetAndSetShiftName() {
-        assertEquals("Alpha", alpha.getShiftName());
-        beta.setShiftName("Beta Shift Best Shift");
-        assertEquals("Beta Shift Best Shift", beta.getShiftName());
+        assertEquals("Alpha", alpha.getName());
+        beta.setName("Beta Shift Best Shift");
+        assertEquals("Beta Shift Best Shift", beta.getName());
     }
 
 }
