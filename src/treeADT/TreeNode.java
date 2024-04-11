@@ -58,21 +58,21 @@ public abstract class TreeNode<T> {
 
     public abstract int countAll();
 
-    protected abstract List<T> toList();
+    public abstract List<T> toList();
 
-    protected abstract boolean addChild(TreeNode<T> newChild);
+    public abstract boolean addChild(TreeNode<T> newChild);
 
-    protected abstract boolean removeChild(Predicate<T> identifier);
+    public abstract boolean removeChild(Predicate<T> identifier);
 
-    protected abstract TreeNode<T> deepCopy();
+    public abstract TreeNode<T> deepCopy();
 
-    protected abstract TreeNode<T> findNode(Predicate<T> identifier);
+    public abstract TreeNode<T> findNode(Predicate<T> identifier);
 
-    protected abstract <R> R fold(R initial, BiFunction<R, T, R> combiner);
+    public abstract <R> R fold(R initial, BiFunction<R, T, R> combiner);
 
-    protected abstract List<T> filterToList(Predicate<T> filter);
+    public abstract List<T> filterToList(Predicate<T> filter);
 
-    protected abstract <R> TreeNode<R> map(Function<T, R> converter);
+    public abstract <R> TreeNode<R> map(Function<T, R> converter);
 
-    protected abstract <R> List<R> mapToList(Function<T, R> converter);
+    public abstract <R> List<R> mapToList(Function<T, R> converter);
 }

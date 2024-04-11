@@ -37,28 +37,28 @@ public class LeafNode<T> extends TreeNode<T> {
     }
 
     @Override
-    protected List<T> toList() {
+    public List<T> toList() {
         Predicate<T> getAll = (t) -> true;
         return filterToList(getAll);
     }
 
     @Override //leaf nodes can't have children
-    protected boolean addChild(TreeNode<T> newChild) {
+    public boolean addChild(TreeNode<T> newChild) {
         return false;
     }
 
     @Override //leaf nodes don't have children
-    protected boolean removeChild(Predicate<T> identifier) {
+    public boolean removeChild(Predicate<T> identifier) {
         return false;
     }
 
     @Override
-    protected TreeNode<T> deepCopy() {
+    public TreeNode<T> deepCopy() {
         return new LeafNode<T>(this.data, this.parent.deepCopy());
     }
 
     @Override
-    protected TreeNode<T> findNode(Predicate<T> identifier) {
+    public TreeNode<T> findNode(Predicate<T> identifier) {
         if (identifier.test(this.data)) {
             return this;
         } else {
@@ -67,12 +67,12 @@ public class LeafNode<T> extends TreeNode<T> {
     }
 
     @Override
-    protected <R> R fold(R initial, BiFunction<R, T, R> combiner) {
+    public <R> R fold(R initial, BiFunction<R, T, R> combiner) {
         return combiner.apply(initial, this.data);
     }
 
     @Override
-    protected List<T> filterToList(Predicate<T> filter) {
+    public List<T> filterToList(Predicate<T> filter) {
         List<T> filteredList = new ArrayList<T>();
         if (filter.test(this.data)) {
             filteredList.add(this.data);
@@ -81,12 +81,12 @@ public class LeafNode<T> extends TreeNode<T> {
     }
 
     @Override
-    protected <R> TreeNode<R> map(Function<T, R> converter) {
+    public <R> TreeNode<R> map(Function<T, R> converter) {
         return new LeafNode<R>(converter.apply(this.data));
     }
 
     @Override
-    protected <R> List<R> mapToList(Function<T, R> converter) {
+    public <R> List<R> mapToList(Function<T, R> converter) {
         List<R> mappedList = new ArrayList<R>();
         mappedList.add(converter.apply(this.data));
         return mappedList;

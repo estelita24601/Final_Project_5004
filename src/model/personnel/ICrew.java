@@ -11,20 +11,18 @@ public interface ICrew<ICrewMember> {
     int countFilter(Predicate<ICrewMember> filter);
 
     //getting info on entire crew
-    List<String> membersList();
-    List<String> membersList(Predicate<ICrewMember> filter);
-    List<String> membersNameList();
-    List<String> membersNameList(Predicate<ICrewMember> filter);
+    List<ICrewMember> getMemberList();
+    List<ICrewMember> getMemberList(Predicate<ICrewMember> filter);
+    List<String> getMemberInfoList(Predicate<ICrewMember> filter, Function<ICrewMember, String> convertInfoToStr);
 
     //getting info on individual member of the crew
-    ICrewMember getCrewMember(Predicate<ICrewMember> thisMember);
-    String getCrewMemberInfo(Predicate<ICrewMember> thisMember);
-    String getCrewMemberInfo(Predicate<ICrewMember> thisMember, Function<ICrewMember, String> convertInfoToStr);
+    ICrewMember getCrewMember(Predicate<ICrewMember> findThisMember);
+    String getCrewMemberInfo(Predicate<ICrewMember> findThisMember, Function<ICrewMember, String> convertInfoToStr);
 
     //used to update state of the crew
-    void editCrewMember(Predicate<ICrewMember> thisMember, Consumer<ICrewMember> crewEditor);
-    void addCrewMember(ICrewMember newCrewMember, Predicate<ICrewMember> newSuperior);
-    void removeCrewMember(Predicate<ICrewMember> identifier);
-    void reAssignTo(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> newSuperior);
-    void putInCommandOf(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> newSubordinate);
+    void editCrewMember(Predicate<ICrewMember> findMemberToEdit, Consumer<ICrewMember> crewMemberEditor);
+    void addCrewMember(ICrewMember newCrewMember, Predicate<ICrewMember> findNewSuperior);
+    void removeCrewMember(Predicate<ICrewMember> findMemberToRemove);
+    void reAssignTo(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> findNewSuperior);
+    void putInCommandOf(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> findNewSubordinate);
 }
