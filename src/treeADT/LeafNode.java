@@ -18,56 +18,75 @@ public class LeafNode<T> extends TreeNode<T> {
     }
 
     @Override //leaf nodes don't have children
-    ArrayList<TreeNode<T>> getChildren() {
+    public ArrayList<TreeNode<T>> getChildren() {
         return null;
     }
 
+    @Override
+    public int countIf(Predicate<T> filter) {
+        if(filter.test(this.data)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
+    public int countAll() {
+        return 1;
+    }
+
+    @Override
+    protected List<T> toList() {
+        Predicate<T> getAll = (t) -> true;
+        return filterToList(getAll);
+    }
 
     @Override //leaf nodes can't have children
-    boolean addChild(TreeNode<T> newChild) {
+    protected boolean addChild(TreeNode<T> newChild) {
         return false;
     }
 
     @Override //leaf nodes don't have children
-    boolean removeChild(Predicate<T> identifier) {
+    protected boolean removeChild(Predicate<T> identifier) {
         return false;
     }
 
     @Override
-    TreeNode<T> deepCopy() {
+    protected TreeNode<T> deepCopy() {
         return new LeafNode<T>(this.data, this.parent.deepCopy());
     }
 
     @Override
-    TreeNode<T> findNode(Predicate<T> identifier) {
-        if(identifier.test(this.data)){
+    protected TreeNode<T> findNode(Predicate<T> identifier) {
+        if (identifier.test(this.data)) {
             return this;
-        }else{
+        } else {
             return null;
         }
     }
 
     @Override
-    <R> R fold(R initial, BiFunction<R, T, R> combiner) {
+    protected <R> R fold(R initial, BiFunction<R, T, R> combiner) {
         return combiner.apply(initial, this.data);
     }
 
     @Override
-    List<T> filterToList(Predicate<T> filter) {
+    protected List<T> filterToList(Predicate<T> filter) {
         List<T> filteredList = new ArrayList<T>();
-        if(filter.test(this.data)){
+        if (filter.test(this.data)) {
             filteredList.add(this.data);
         }
         return filteredList;
     }
 
     @Override
-    <R> TreeNode<R> map(Function<T, R> converter) {
+    protected <R> TreeNode<R> map(Function<T, R> converter) {
         return new LeafNode<R>(converter.apply(this.data));
     }
 
     @Override
-    <R> List<R> mapToList(Function<T, R> converter) {
+    protected <R> List<R> mapToList(Function<T, R> converter) {
         List<R> mappedList = new ArrayList<R>();
         mappedList.add(converter.apply(this.data));
         return mappedList;

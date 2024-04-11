@@ -23,19 +23,19 @@ public abstract class TreeNode<T> {
 
     //CONCRETE METHODS////////////////////////////////////////////////////////////////////////
 
-    T getData() {
+    public T getData() {
         return this.data;
     }
 
-    void setData(T newData) {
+    public void setData(T newData) {
         this.data = newData;
     }
 
-    void editData(Consumer<T> editor) {
+    public void editData(Consumer<T> editor) {
         editor.accept(this.data);
     }
 
-    TreeNode<T> getParent() {
+    public TreeNode<T> getParent() {
         if (this.parent != null) {
             return this.parent.deepCopy();
         } else {
@@ -43,50 +43,36 @@ public abstract class TreeNode<T> {
         }
     }
 
-    void setParent(TreeNode<T> newParent) {
+    public void setParent(TreeNode<T> newParent) {
         this.parent = newParent.deepCopy();
     }
 
-    ArrayList<TreeNode<T>> getChildren() {
+    public ArrayList<TreeNode<T>> getChildren() {
         return this.children;
     }
 
-    int countIf(Predicate<T> filter) {
-        BiFunction<Integer, T, Integer> counter = (i, t) -> {
-            if (filter.test(t)) {
-                return i + 1;
-            } else {
-                return i;
-            }
-        };
-        return this.fold(0, counter);
-    }
-
-    int countAll() {
-        Predicate<T> all = (t) -> true;
-        return this.countIf(all);
-    }
-
-    List<T> toList() {
-        Predicate<T> all = (t) -> true;
-        return this.filterToList(all);
-    }
 
     //ABSTRACT METHODS//////////////////////////////////////////////////////////////////
 
-    abstract boolean addChild(TreeNode<T> newChild);
+    public abstract int countIf(Predicate<T> filter);
 
-    abstract boolean removeChild(Predicate<T> identifier);
+    public abstract int countAll();
 
-    abstract TreeNode<T> deepCopy();
+    protected abstract List<T> toList();
 
-    abstract TreeNode<T> findNode(Predicate<T> identifier);
+    protected abstract boolean addChild(TreeNode<T> newChild);
 
-    abstract <R> R fold(R initial, BiFunction<R, T, R> combiner);
+    protected abstract boolean removeChild(Predicate<T> identifier);
 
-    abstract List<T> filterToList(Predicate<T> filter);
+    protected abstract TreeNode<T> deepCopy();
 
-    abstract <R> TreeNode<R> map(Function<T, R> converter);
+    protected abstract TreeNode<T> findNode(Predicate<T> identifier);
 
-    abstract <R> List<R> mapToList(Function<T, R> converter);
+    protected abstract <R> R fold(R initial, BiFunction<R, T, R> combiner);
+
+    protected abstract List<T> filterToList(Predicate<T> filter);
+
+    protected abstract <R> TreeNode<R> map(Function<T, R> converter);
+
+    protected abstract <R> List<R> mapToList(Function<T, R> converter);
 }

@@ -17,11 +17,6 @@ public class BranchNode<T> extends LeafNode<T> {
         this.parent = initParent;
     }
 
-    @Override
-    ArrayList<TreeNode<T>> getChildren() {
-        return this.children;
-    }
-
     public BranchNode(T initData, TreeNode<T> initParent, ArrayList<TreeNode<T>> initChildren) {
         this(initData, initParent);
         this.children = initChildren;
@@ -33,19 +28,24 @@ public class BranchNode<T> extends LeafNode<T> {
     }
 
     @Override
-    boolean addChild(TreeNode<T> newChild) {
-        if(newChild == null){
+    public ArrayList<TreeNode<T>> getChildren() {
+        return this.children;
+    }
+
+    @Override
+    protected boolean addChild(TreeNode<T> newChild) {
+        if (newChild == null) {
             return false;
-        }else{
+        } else {
             this.children.add(newChild);
             return true;
         }
     }
 
     @Override
-    boolean removeChild(Predicate<T> identifier) {
-        for(TreeNode<T> child : children){
-            if(identifier.test(child.getData())){
+    protected boolean removeChild(Predicate<T> identifier) {
+        for (TreeNode<T> child : children) {
+            if (identifier.test(child.getData())) {
                 this.children.remove(child);
                 return true;
             }
@@ -54,14 +54,14 @@ public class BranchNode<T> extends LeafNode<T> {
     }
 
     @Override
-    TreeNode<T> deepCopy() {
+    protected TreeNode<T> deepCopy() {
         return new BranchNode<T>(this.data, this.parent, this.children);
     }
 
     @Override
-    TreeNode<T> findNode(Predicate<T> identifier) {
-        for(TreeNode<T> child : this.children){
-            if(identifier.test(child.getData())){
+    protected TreeNode<T> findNode(Predicate<T> identifier) {
+        for (TreeNode<T> child : this.children) {
+            if (identifier.test(child.getData())) {
                 return child;
             }
         }
@@ -69,12 +69,49 @@ public class BranchNode<T> extends LeafNode<T> {
     }
 
     @Override
-    <R> R fold(R initial, BiFunction<R, T, R> combiner) {
+    protected <R> R fold(R initial, BiFunction<R, T, R> combiner) {
         initial = super.fold(initial, combiner);
-        for(TreeNode<T> child: this.children){
+        for (TreeNode<T> child : this.children) {
             initial = child.fold(initial, combiner);
         }
         return initial;
+    }
+
+    @Override
+    public int countIf(Predicate<T> filter){
+        BiFunction<Integer, T, Integer> counter = (number, t) -> {
+            if(filter.test(t)){
+                return number + 1;
+            }
+            return number;
+        };
+
+        int runningTotal = counter.apply(0, this.data);
+        for(TreeNode<T> child : this.children){
+            runningTotal += child.countIf(filter);
+        }
+        return runningTotal;
+    }
+
+    @Override
+    public int countAll(){
+        Predicate<T> countAll = (t) -> true;
+        return countIf(countAll);
+    }
+
+    @Override
+    protected List<T> toList() {
+        Predicate<T> all = (t) -> true;
+        return filterToList(all);
+    }
+
+    @Override
+    public List<T> filterToList(Predicate<T> filter) {
+        List<T> result = super.filterToList(filter);
+        for (TreeNode<T> child : children) {
+            result.addAll(child.filterToList(filter));
+        }
+        return result;
     }
 
     @Override
@@ -93,15 +130,6 @@ public class BranchNode<T> extends LeafNode<T> {
         List<R> result = super.mapToList(converter);
         for (TreeNode<T> child : children) {
             result.addAll(child.mapToList(converter));
-        }
-        return result;
-    }
-
-    @Override
-    public List<T> filterToList(Predicate<T> filter) {
-        List<T> result = super.filterToList(filter);
-        for (TreeNode<T> child : children) {
-            result.addAll(child.filterToList(filter));
         }
         return result;
     }
