@@ -1,10 +1,5 @@
-package model.personnel;
+package model;
 
-import model.Department;
-import model.Rank;
-import model.Rotation;
-import model.Species;
-import model.scheduling.Shift;
 import org.junit.Before;
 import org.junit.Test;
 

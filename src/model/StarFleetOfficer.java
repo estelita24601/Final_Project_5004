@@ -1,10 +1,4 @@
-package model.personnel;
-
-import model.Department;
-import model.Rank;
-import model.Rotation;
-import model.Species;
-import model.scheduling.Shift;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;

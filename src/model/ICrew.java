@@ -1,9 +1,9 @@
-package model.personnel;
+package model;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.List;
 
 public interface ICrew<ICrewMember> {
     //folding to an integer

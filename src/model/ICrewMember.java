@@ -1,10 +1,7 @@
-package model.personnel;
-
-import model.scheduling.Shift;
+package model;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
-import model.*;
 
 public interface ICrewMember {
     void promote(Rank newRank);

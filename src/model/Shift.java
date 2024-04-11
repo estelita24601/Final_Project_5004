@@ -1,7 +1,5 @@
-package model.scheduling;
+package model;
 
-import model.Department;
-import model.Rotation;
 import java.time.Duration;
 import java.time.LocalTime;
 //

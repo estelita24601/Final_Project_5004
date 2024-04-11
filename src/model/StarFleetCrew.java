@@ -1,6 +1,5 @@
-package model.personnel;
+package model;
 
-import model.Rank;
 import treeADT.BranchNode;
 import treeADT.TreeNode;
 
@@ -14,7 +13,6 @@ public class StarFleetCrew implements ICrew<StarFleetOfficer> {
     //lambda for the starfleet requirement for being a commanding officer
     private final Predicate<StarFleetOfficer> canCommand = (officer) -> officer.getRank().compareTo(Rank.PETTY_OFFICER) > 0;
     private BranchNode<StarFleetOfficer> root;
-
 
     public StarFleetCrew(StarFleetOfficer commandingOfficer) {
         if (canCommand.test(commandingOfficer)) {

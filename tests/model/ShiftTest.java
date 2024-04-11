@@ -1,10 +1,11 @@
-package model.scheduling;
+package model;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.time.LocalTime;
-import static org.junit.Assert.*;
-import model.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class ShiftTest {
     Shift alpha;
