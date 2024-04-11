@@ -4,7 +4,9 @@ import model.StarFleetOfficer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Function;
 
+//note: default commands will either be integer cgiuces
 public class StarfleetCommand implements ICrewController {
     final Readable in;
     private Scanner scanner;
@@ -27,19 +29,19 @@ public class StarfleetCommand implements ICrewController {
         createCaptain();
 
         while (wantToContinue) {
-            view.displayMainMenu();
-            int choice = getMainMenuChoice(); //this method has a loop that continues until valid input is given
-            if (choice == 1) {
+            Function<String, Integer> choiceConverter = (str) -> Integer.parseInt(str);
+            ViewDisplayer mainMenuPrompt = () -> view.displayMainMenu();
+            int menuChoice = getValidInput(choiceConverter, mainMenuPrompt);
+
+            if (menuChoice == 1) {
                 runCrewCountingMenu();
-            } else if (choice == 2) {
+            } else if (menuChoice == 2) {
                 runMemberInformationMenu();
-            } else if (choice == 3) {
-                runListNamesMenu();
-            } else if (choice == 4) {
+            } else if (menuChoice == 3) {
                 runScheduleMenu();
-            } else if (choice == 5) {
+            } else if (menuChoice == 4) {
                 runCrewEditorMenu();
-            } else if (choice == -1) {
+            } else if (menuChoice == -1) {
                 wantToContinue = false;
             }
             //if they didn't decide to exit go back to main menu after they finished what they were doing
@@ -49,25 +51,53 @@ public class StarfleetCommand implements ICrewController {
 
     }
 
-    private void runCrewEditorMenu() {
-
+    /**
+     * @param userInput       (String)
+     * @param expectedCommand (String)
+     * @return true <- if user input matches the expected command
+     * false <- if the user input does not match the expected command
+     */
+    private boolean commandDetected(String userInput, String expectedCommand) {
+        userInput = userInput.strip();
+        return userInput.compareToIgnoreCase(expectedCommand) == 0;
     }
 
-    private void runScheduleMenu() {
+    /**
+     * @param converter    (Function<String,T>) - lambda that will take user input and attempt to convert it to desired data type
+     * @param viewPrompter (ViewDisplayer) - lambda that will call the correct view methods for the given context
+     * @return T - the user input converted to desired type
+     * @return null - if the user decided to quit and we were unable to get valid value from them
+     */
+    private <T> T getValidInput(Function<String, T> converter, ViewDisplayer viewPrompter
+    ) {
+        boolean validInput = false;
+        T result;
+
+        while (!validInput) {
+            viewPrompter
+                    .display(); //get the view to show whatever message we need
+            String input = scanner.nextLine(); //get the user's input
+            input = input.strip();
+
+            //first make sure they don't want to leave
+            if (commandDetected(input, "quit")) {
+                result = null;
+                validInput = true;
+            }
+
+            try {
+                result = converter.apply(input);
+                validInput = true; //leave loop we were able to convert the input to correct data type
+            } catch (IllegalArgumentException e) {
+                this.view.displayError(e);
+                this.view.displayTryAgainMessage();
+            }
+        }
+
+        return result;
     }
 
-    private void runListNamesMenu() {
-    }
-
-    private void runMemberInformationMenu() {
-    }
-
-    private void runCrewCountingMenu() {
-    }
-
-    private int getMainMenuChoice() {
-    }
-
+    //todo: in progress
     private void createCaptain() {
         boolean invalidInput = true;
 
@@ -85,7 +115,7 @@ public class StarfleetCommand implements ICrewController {
 
             view.askToDiscloseSpecies();
             String disclosureDecision = scanner.nextLine();
-            if (yesDetected(disclosureDecision)) {
+            if (commandDetected(disclosureDecision, "yes")) {
                 ArrayList<String> species = runSpeciesSelectionMenu();
             }
 
@@ -99,17 +129,26 @@ public class StarfleetCommand implements ICrewController {
         }
     }
 
-    private Rank convertRank(String rankName) {
-
-    }
-
+    //todo:
     private ArrayList<String> runSpeciesSelectionMenu() {
     }
 
+    //todo:
+    private void runCrewEditorMenu() {
 
-    private boolean yesDetected(String userInput) {
-        userInput = userInput.strip();
-        return userInput.compareToIgnoreCase("yes") == 0;
     }
+
+    //todo:
+    private void runScheduleMenu() {
+    }
+
+    //todo:
+    private void runMemberInformationMenu() {
+    }
+
+    //todo:
+    private void runCrewCountingMenu() {
+    }
+
 
 }
