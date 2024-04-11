@@ -48,7 +48,6 @@ public class StarfleetCommand implements ICrewController {
         }
 
         view.goodbyeMessage();
-
     }
 
     /**
@@ -106,6 +105,7 @@ public class StarfleetCommand implements ICrewController {
 
             view.askForNewCrewMembersName();
             String name = scanner.nextLine();
+
 
             view.askForNewCrewMembersRank();
             String rank = scanner.nextLine();
