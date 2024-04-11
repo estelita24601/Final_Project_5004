@@ -37,14 +37,17 @@ public abstract class TreeNode<T> {
 
     public TreeNode<T> getParent() {
         if (this.parent != null) {
-            return this.parent.deepCopy();
+            return this.parent;
         } else {
             return this.parent;
         }
     }
 
     public void setParent(TreeNode<T> newParent) {
-        this.parent = newParent.deepCopy();
+        Predicate<T> findChildToDelete = (t) -> {return t.equals(this);};
+        this.parent.deleteChild(findChildToDelete); // remove ourselves from the parent's list of children
+        this.parent = newParent; //change our parent
+        this.parent.addChild(this); //add ourselves to new parent's list of children
     }
 
     public ArrayList<TreeNode<T>> getChildren() {
@@ -53,6 +56,8 @@ public abstract class TreeNode<T> {
 
 
     //ABSTRACT METHODS//////////////////////////////////////////////////////////////////
+    public abstract void moveChildren(Predicate<T> findChildrenToReassign, BranchNode<T> newParent);
+    public abstract void moveChildren(BranchNode<T> newParent);
 
     public abstract int countIf(Predicate<T> filter);
 
@@ -61,8 +66,10 @@ public abstract class TreeNode<T> {
     public abstract List<T> toList();
 
     public abstract boolean addChild(TreeNode<T> newChild);
+    public abstract boolean addChild(T newChildData, Predicate<T> canBeBranch);
 
-    public abstract boolean removeChild(Predicate<T> identifier);
+    public abstract boolean deleteChild(Predicate<T> findChildToDelete);
+    public abstract boolean deleteChild(TreeNode<T> childToDelete);
 
     public abstract TreeNode<T> deepCopy();
 

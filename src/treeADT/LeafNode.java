@@ -47,9 +47,30 @@ public class LeafNode<T> extends TreeNode<T> {
         return false;
     }
 
-    @Override //leaf nodes don't have children
-    public boolean removeChild(Predicate<T> identifier) {
+    @Override
+    public boolean addChild(T newChildData, Predicate<T> canBeBranch) {
         return false;
+    }
+
+
+    @Override //leaf nodes don't have children
+    public boolean deleteChild(Predicate<T> findChildToDelete) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteChild(TreeNode<T> childToDelete) {
+        return false;
+    }
+
+    @Override
+    public void moveChildren(Predicate<T> findChildrenToReassign, BranchNode<T> newParent){
+        return;
+    }
+
+    @Override
+    public void moveChildren(BranchNode<T> newParent) {
+
     }
 
     @Override

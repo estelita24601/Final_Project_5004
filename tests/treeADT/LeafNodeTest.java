@@ -38,7 +38,7 @@ public class LeafNodeTest extends TestCase {
     public void testAddChild() {
     }
 
-    public void testRemoveChild() {
+    public void testDeleteChild() {
     }
 
     public void testDeepCopy() {

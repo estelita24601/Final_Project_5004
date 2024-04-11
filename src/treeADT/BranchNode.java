@@ -33,6 +33,34 @@ public class BranchNode<T> extends LeafNode<T> {
     }
 
     @Override
+    public int countIf(Predicate<T> filter) {
+        BiFunction<Integer, T, Integer> counter = (number, t) -> {
+            if (filter.test(t)) {
+                return number + 1;
+            }
+            return number;
+        };
+
+        int runningTotal = counter.apply(0, this.data);
+        for (TreeNode<T> child : this.children) {
+            runningTotal += child.countIf(filter);
+        }
+        return runningTotal;
+    }
+
+    @Override
+    public int countAll() {
+        Predicate<T> countAll = (t) -> true;
+        return countIf(countAll);
+    }
+
+    @Override
+    public List<T> toList() {
+        Predicate<T> all = (t) -> true;
+        return filterToList(all);
+    }
+
+    @Override
     public boolean addChild(TreeNode<T> newChild) {
         if (newChild == null) {
             return false;
@@ -43,14 +71,47 @@ public class BranchNode<T> extends LeafNode<T> {
     }
 
     @Override
-    public boolean removeChild(Predicate<T> identifier) {
+    public boolean addChild(T newChildData, Predicate<T> canBeBranch) {
+        TreeNode<T> newChild;
+        if (canBeBranch.test(newChildData)) {
+            newChild = new BranchNode(newChildData);
+        } else {
+            newChild = new LeafNode(newChildData);
+        }
+        addChild(newChild);
+        return true;
+    }
+
+    @Override
+    public boolean deleteChild(Predicate<T> findChildToDelete) {
         for (TreeNode<T> child : children) {
-            if (identifier.test(child.getData())) {
+            if (findChildToDelete.test(child.getData())) {
                 this.children.remove(child);
                 return true;
             }
         }
         return false; //wasn't able to find child to remove
+    }
+
+    @Override
+    public boolean deleteChild(TreeNode<T> childToDelete) {
+        Predicate<T> findChildToDelete = (t) -> t.equals(childToDelete.getData());
+        return deleteChild(findChildToDelete);
+    }
+
+    @Override
+    public void moveChildren(Predicate<T> findChildrenToReassign, BranchNode<T> newParent) {
+        for (TreeNode<T> child : children) {
+            if (findChildrenToReassign.test(child.getData())) {
+                child.setParent(newParent);
+            }
+        }
+    }
+
+    @Override
+    public void moveChildren(BranchNode<T> newParent) {
+        Predicate<T> allChildren = (t) -> true;
+        moveChildren(allChildren, newParent);
     }
 
     @Override
@@ -75,34 +136,6 @@ public class BranchNode<T> extends LeafNode<T> {
             initial = child.fold(initial, combiner);
         }
         return initial;
-    }
-
-    @Override
-    public int countIf(Predicate<T> filter){
-        BiFunction<Integer, T, Integer> counter = (number, t) -> {
-            if(filter.test(t)){
-                return number + 1;
-            }
-            return number;
-        };
-
-        int runningTotal = counter.apply(0, this.data);
-        for(TreeNode<T> child : this.children){
-            runningTotal += child.countIf(filter);
-        }
-        return runningTotal;
-    }
-
-    @Override
-    public int countAll(){
-        Predicate<T> countAll = (t) -> true;
-        return countIf(countAll);
-    }
-
-    @Override
-    public List<T> toList() {
-        Predicate<T> all = (t) -> true;
-        return filterToList(all);
     }
 
     @Override

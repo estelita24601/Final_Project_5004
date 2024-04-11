@@ -47,7 +47,7 @@ public class BranchNodeTest {
     }
 
     @Test
-    public void removeChild() {
+    public void deleteChild() {
     }
 
     @Test
