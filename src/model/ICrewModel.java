@@ -15,6 +15,8 @@ public interface ICrewModel<ICrewMember> {
 
     Department[] getDepartmentOptions();
 
+    public void setRoot(ICrewMember root);
+
     //folding to an integer
     int countAll();
     int countFilter(Predicate<ICrewMember> filter);

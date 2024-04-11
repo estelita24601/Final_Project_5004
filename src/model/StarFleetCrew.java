@@ -17,7 +17,8 @@ public class StarFleetCrew<StarFleetOfficer> implements ICrewModel<StarFleetOffi
     public StarFleetCrew() {
     }
 
-    public void setCommandingOfficer(StarFleetOfficer officer) {
+    @Override
+    public void setRoot(StarFleetOfficer officer) {
         if (canCommand.test(officer)) {
             this.root = new BranchNode<StarFleetOfficer>(officer);
         } else {
