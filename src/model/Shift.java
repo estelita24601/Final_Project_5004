@@ -64,8 +64,8 @@ public class Shift {
 
     @Override
     public String toString() {
-        return String.format("%s Shift (%s)\n\t%s - %s\n", this.name, this.location, this.startTime.toString(),
-                this.endTime.toString());
+        return String.format("%s (%s)\n\t%s - %s\n", name, location, startTime.toString(),
+                endTime.toString());
     }
 
     public Department getDepartment() {
