@@ -5,7 +5,16 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public interface ICrew<ICrewMember> {
+public interface ICrewModel<ICrewMember> {
+    //enum values for menu options
+    Rank[] getRankOptions();
+
+    Species[] getSpeciesOptions();
+
+    Rotation[] getShiftRotationOptions();
+
+    Department[] getDepartmentOptions();
+
     //folding to an integer
     int countAll();
     int countFilter(Predicate<ICrewMember> filter);

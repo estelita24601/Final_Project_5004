@@ -1,0 +1,188 @@
+welcome_message()
+
+choose_crew()
+    if response == load_from_file
+        while NOT file_loaded:
+            ask_for_file_name() -> filename string
+            if filename valid:
+                success_message()
+                continue
+            else:
+                error_message()
+
+    if response == make_new
+        while NOT captain_created:
+            create_member_prompt() -> string info
+            if string info valid:
+                success_message()
+                continue
+            else:
+                error_message()
+
+============================================================
+welcome!
+
+do you want to load from file or make new crew?
+    user input: load from file
+
+please give file name:
+    user input: voyager.csv
+
+successfully loaded in file
+OR
+unable to load in file, please provide file name:
+    user input: enterprise.csv
+
+============================================================
+welcome!
+make new crew or load from file?
+    -- new crew
+
+Please create the commanding officer for this new crew
+What is their name?
+    -- Katheryn Janeway
+What is their rank?
+    -- captain
+Assign them to alpha, beta, gamma or delta
+    -- beta
+Do they wish to disclose their heritage? Yes/No
+    -- Yes
+Give species name or type No to stop
+    -- human
+Give species name or type No to stop
+    -- No
+Successfully created commanding officer for this crew!
+    (prints crew member info)
+OR
+Unable to create commanding officer with information provided.
+type yes to try again, type no to load crew from file instead
+    -- Yes
+
+==============================================================
+(now that a crew has been loaded in or initialized)
+
+What do you want to do with your crew?
+    1. count crew members
+    2. get full information on crew members
+    3. list crew members
+    4. scheduling
+    5. edit crew
+
+    Count crew members:
+        0. all members of crew
+        1. filter by rank
+        2. filter by department
+        3. filter by rotation
+        4. filter by species
+
+        What rank/department/rotation/species do you want to count?
+            1. option 1
+            2. option 2
+            etc...
+
+    There are __ crew members that fit specifications
+
+=====================================================================
+
+What do you want to do with your crew?
+    1. count crew members
+    2. get full information on crew members
+    3. list crew members
+    4. scheduling
+    5. edit crew
+
+    Which crew members do you want information on?
+        1. all crew members
+        2. one specific crew member
+        3. crew members of a certain rank
+        4. all crew in certain department
+        5. all crew that work certain shift
+        6. all crew of specific species
+
+        Rank
+            1. all members with this exact rank
+            2. all members this rank or higher
+            3. all members lower than this rank
+
+            Rank Options
+                1. ensign
+                2. lieutenant
+                etc...
+
+        Department Options
+            1. department 1
+            2. department 2
+            etc..
+
+        Shift Options
+            1. alpha
+            2. beta
+            etc...
+
+        Species Options
+            1. human
+            2. vulcan
+            etc...
+
+    print list of information on crew members that fit criteria
+
+=================================================================
+
+What do you want to do with your crew?
+    1. count crew members
+    2. get full information on crew members
+    3. list crew members
+    4. scheduling
+    5. edit crew
+
+    Do you want to list crew members by
+        1. Rank
+        2. Department
+        3. Shift
+        4. Species
+
+        (show options for whatever category they chose)
+
+    print list of names of all crew members that fit criteria
+
+============================================================
+
+What do you want to do with your crew?
+    1. count crew members
+    2. get full information on crew members
+    3. list crew members
+    4. scheduling
+    5. edit crew
+
+    Choose rotation to edit
+        1. alpha
+        2. beta
+        3. gamma
+        4. delta
+
+        choose department:
+            1. bridge
+            2. engineering
+            etc...
+
+    prints info on shift and name list of all members in that shift
+
+            Do you want to
+                1. edit parameters for this shift?
+                2. move crew members to a different shift?
+
+                Edit Parameters:
+                    1. name
+                    3. start time
+                    4. end time
+
+                (print if successful or not)
+
+                Move crew members: what is the name of member you want to move?
+
+                    What rotation do you want them on?
+                        1. alpha
+                        2. beta
+                        etc...
+
+                (print if successful or not)
