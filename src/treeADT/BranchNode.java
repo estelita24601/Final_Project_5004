@@ -74,9 +74,9 @@ public class BranchNode<T> extends LeafNode<T> {
     public boolean addChild(T newChildData, Predicate<T> canBeBranch) {
         TreeNode<T> newChild;
         if (canBeBranch.test(newChildData)) {
-            newChild = new BranchNode(newChildData);
+            newChild = new BranchNode<T>(newChildData);
         } else {
-            newChild = new LeafNode(newChildData);
+            newChild = new LeafNode<T>(newChildData);
         }
         addChild(newChild);
         return true;
