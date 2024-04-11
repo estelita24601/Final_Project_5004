@@ -20,4 +20,6 @@ public interface ICrewView {
     void goodbyeMessage();
 
     void displayError(Exception e);
+
+    void displayTryAgainMessage();
 }
