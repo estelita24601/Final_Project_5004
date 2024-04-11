@@ -9,18 +9,40 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class StarFleetCrew implements ICrew<StarFleetOfficer> {
+public class StarFleetCrew<StarFleetOfficer> implements ICrewModel<StarFleetOfficer> {
     //lambda for the starfleet requirement for being a commanding officer
     private final Predicate<StarFleetOfficer> canCommand = (officer) -> officer.getRank().compareTo(Rank.PETTY_OFFICER) > 0;
     private BranchNode<StarFleetOfficer> root;
 
-    public StarFleetCrew(StarFleetOfficer commandingOfficer) {
-        if (canCommand.test(commandingOfficer)) {
-            this.root = new BranchNode<StarFleetOfficer>(commandingOfficer);
+    public StarFleetCrew() {
+    }
+
+    public void setCommandingOfficer(StarFleetOfficer officer) {
+        if (canCommand.test(officer)) {
+            this.root = new BranchNode<StarFleetOfficer>(officer);
         } else {
             throw new IllegalArgumentException("this officer is ineligible to command a starfleet crew");
-
         }
+    }
+
+    @Override
+    public Rank[] getRankOptions() {
+        return Rank.values();
+    }
+
+    @Override
+    public Species[] getSpeciesOptions() {
+        return Species.values();
+    }
+
+    @Override
+    public Rotation[] getShiftRotationOptions() {
+        return Rotation.values();
+    }
+
+    @Override
+    public Department[] getDepartmentOptions() {
+        return Department.values();
     }
 
     @Override
