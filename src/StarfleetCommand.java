@@ -25,11 +25,9 @@ public class StarfleetCommand implements ICrewController {
         createCaptain();
 
         while (!exit) {
-            // Function<String, Integer> choiceConverter = (str) -> Integer.parseInt(str);
-            // ViewDisplayer mainMenuPrompt = () -> view.displayMainMenu();
-            // int menuChoice = getValidInput(choiceConverter, mainMenuPrompt);
             ViewDisplayer mainMenu = () -> view.displayMainMenu();
             ViewDisplayer invalidChoiceMessage = () -> view.displayTryAgainMessage();
+            int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 4);
 
             if (menuChoice == 0) {
                 runCrewCountingMenu();
@@ -83,7 +81,6 @@ public class StarfleetCommand implements ICrewController {
     //NOTE: trying to replace getValidInput with this instead
     //view will present numbered options and we just need to make sure we got valid number, no more words
     //IDEA: maybe return object from options list that was selected instead? and return null for exit command
-    //TODO: override method so it doesn't have to display options list
     private int getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse){
         boolean receivedValidChoice = false;
         while(!receivedValidChoice){
@@ -98,6 +95,29 @@ public class StarfleetCommand implements ICrewController {
                 invalidResponse.display();
             }
             if(choice == -1 || choice < options.length){
+                receivedValidChoice = true;
+            }else{
+                //number received wasn't one of the options
+                invalidResponse.display(); //todo: improve how this fits with try catch
+                //IDEA: maybe try to access an array with the choice # and use index out of bounds error for too big #
+            }
+        }    
+        return choice;   
+    }
+
+    private int getValidChoice(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse, int numOptions){
+        boolean receivedValidChoice = false;
+        while(!receivedValidChoice){
+            choicePrompt.display();
+            String userInput = scanner.nextLine().strip();
+            int choice; 
+            try{
+                choice = Integer.valueOf(userInput);
+            }catch (){ //todo: look up exact name of error
+                //didn't even receive a number
+                invalidResponse.display();
+            }
+            if(choice == -1 || choice < numOptions){
                 receivedValidChoice = true;
             }else{
                 //number received wasn't one of the options
