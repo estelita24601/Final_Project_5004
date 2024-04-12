@@ -20,7 +20,7 @@ public class StarFleetCrew<StarFleetOfficer> implements ICrewModel<StarFleetOffi
     @Override
     public void setRoot(StarFleetOfficer officer) {
         if (canCommand.test(officer)) {
-            this.root = new BranchNode<StarFleetOfficer>(officer);
+            this.root = new BranchNode<>(officer);
         } else {
             throw new IllegalArgumentException("this officer is ineligible to command a starfleet crew");
         }
@@ -106,7 +106,7 @@ public class StarFleetCrew<StarFleetOfficer> implements ICrewModel<StarFleetOffi
 
         //there are children so need to move them before removing their parent
         ArrayList<TreeNode<StarFleetOfficer>> memberChildren = memberNode.getChildren();
-        if (!memberChildren.isEmpty() && memberChildren != null) {
+        if (!memberChildren.isEmpty()) {
             BranchNode<StarFleetOfficer> newSuperior = (BranchNode<StarFleetOfficer>) memberNode.getParent();
             memberNode.moveChildren((t) -> true, newSuperior);
         }
@@ -122,9 +122,9 @@ public class StarFleetCrew<StarFleetOfficer> implements ICrewModel<StarFleetOffi
         BranchNode<StarFleetOfficer> newSuperior = (BranchNode<StarFleetOfficer>) root.findNode(findNewSuperior);
         memberNode.setParent(newSuperior);
 
-        //if needed move children to grandparent
+        //move children to grandparent if needed
         ArrayList<TreeNode<StarFleetOfficer>> oldChildren = memberNode.getChildren();
-        if (!oldChildren.isEmpty() && oldChildren != null) {
+        if (!oldChildren.isEmpty()) {
             BranchNode<StarFleetOfficer> oldSuperior = (BranchNode<StarFleetOfficer>) memberNode.getParent();
             memberNode.moveChildren(oldSuperior);
         }
