@@ -22,4 +22,8 @@ public interface ICrewView {
     void displayError(Exception e);
 
     void displayTryAgainMessage();
+
+    void askForSpecies();
+
+    void askIfFinishedGivingHeritage();
 }
