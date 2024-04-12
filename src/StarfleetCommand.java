@@ -28,6 +28,8 @@ public class StarfleetCommand implements ICrewController {
             // Function<String, Integer> choiceConverter = (str) -> Integer.parseInt(str);
             // ViewDisplayer mainMenuPrompt = () -> view.displayMainMenu();
             // int menuChoice = getValidInput(choiceConverter, mainMenuPrompt);
+            ViewDisplayer mainMenu = () -> view.displayMainMenu();
+            ViewDisplayer invalidChoiceMessage = () -> view.displayTryAgainMessage();
 
             if (menuChoice == 0) {
                 runCrewCountingMenu();
@@ -37,7 +39,7 @@ public class StarfleetCommand implements ICrewController {
                 runCrewEditorMenu();
             } else if (menuChoice == 3) {
                 runScheduleMenu();
-            } else if (menuChoice == 4) {
+            } else if (menuChoice == -1) {
                 exit = true;
             }
             //if they didn't decide to exit go back to main menu after they finished what they were doing
@@ -81,6 +83,7 @@ public class StarfleetCommand implements ICrewController {
     //NOTE: trying to replace getValidInput with this instead
     //view will present numbered options and we just need to make sure we got valid number, no more words
     //IDEA: maybe return object from options list that was selected instead? and return null for exit command
+    //TODO: override method so it doesn't have to display options list
     private int getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse){
         boolean receivedValidChoice = false;
         while(!receivedValidChoice){
