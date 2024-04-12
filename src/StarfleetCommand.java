@@ -17,62 +17,33 @@ public class StarfleetCommand implements ICrewController {
     public void go(ICrewModel<ICrewMember> model, ICrewView view) {
         this.model = model;
         this.view = view;
-        boolean wantToContinue = true;
+        boolean exit = false;
         scanner = new Scanner(in);
 
         view.welcomeMessage();
 
         createCaptain();
 
-        while (wantToContinue) {
-            Function<String, Integer> choiceConverter = (str) -> Integer.parseInt(str);
-            ViewDisplayer mainMenuPrompt = () -> view.displayMainMenu();
-            int menuChoice = getValidInput(choiceConverter, mainMenuPrompt);
-            //"Determine crew demographics", "Obtain crew member information", "Edit Crew","Scheduling"
+        while (!exit) {
+            // Function<String, Integer> choiceConverter = (str) -> Integer.parseInt(str);
+            // ViewDisplayer mainMenuPrompt = () -> view.displayMainMenu();
+            // int menuChoice = getValidInput(choiceConverter, mainMenuPrompt);
 
-            if (menuChoice == 1) {
+            if (menuChoice == 0) {
                 runCrewCountingMenu();
-            } else if (menuChoice == 2) {
+            } else if (menuChoice == 1) {
                 runMemberInformationMenu();
-            } else if (menuChoice == 3) {
+            } else if (menuChoice == 2) {
                 runCrewEditorMenu();
-            } else if (menuChoice == 4) {
+            } else if (menuChoice == 3) {
                 runScheduleMenu();
-            } else if (menuChoice == -1) {
-                wantToContinue = false;
+            } else if (menuChoice == 4) {
+                exit = true;
             }
             //if they didn't decide to exit go back to main menu after they finished what they were doing
         }
 
         view.goodbyeMessage();
-    }
-
-    /**
-     * @param userInput       (String)
-     * @param expectedCommand (String)
-     * @return true <- if user input matches the expected command
-     * false <- if the user input does not match the expected command
-     */
-    private boolean commandDetected(String userInput, String expectedCommand) {
-        userInput = userInput.strip();
-        return userInput.compareToIgnoreCase(expectedCommand) == 0;
-    }
-
-    /**
-     * @param userInput (str)
-     * @return (boolean)
-     * true if user input was "yes"
-     * false if user input was "no"
-     * @throws IllegalArgumentException if user input was not "yes" or "no"
-     */
-    private boolean checkYesOrNo(String userInput) {
-        if (commandDetected(userInput, "yes")) {
-            return true;
-        } else if (commandDetected(userInput, "no")) {
-            return false;
-        }
-        throw new IllegalArgumentException("must answer yes or no");
-
     }
 
     /**
@@ -107,20 +78,19 @@ public class StarfleetCommand implements ICrewController {
         return result;
     }
 
-    /**
-     * @param input       (String) - input from the user
-     * @param enumOptions (T[]) - a list of every option for a given enum
-     * @return (T) - the enum that matches the user input
-     * @throws IllegalArgumentException - if the user input doesn't match any of the enum options
-     */
-    private <T> T convertInputToEnum(String input, T[] enumOptions) {
-        for (T option : enumOptions) {
-            if (option.toString().equalsIgnoreCase(input)) {
-                return option;
-            }
-        }
-        throw new IllegalArgumentException(String.format("%s is not a valid value", input));
+    //NOTE: trying to replace getValidInput with this instead
+    //view will present numbered options and we just need to make sure we got valid number, no more words
+    private int getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse){
+        //1. display choice prompt to user
+        //2. display options to user using view.displayOptions
+        //3. scan in the user's response
+        //4. try to convert to integer
+            //a. if successful then check value
+                //if value == -1 then they want to quit, exit loop and return value
+                //if value < number of options then exit loop and return value
+            //b. otherwise it was invalid, display invalid response message and loop back to top        
     }
+
 
     private void createCaptain() {
         boolean invalidInput = true;
@@ -199,24 +169,4 @@ public class StarfleetCommand implements ICrewController {
 
         return heritage;
     }
-
-    /////////////////////////////////////////////
-
-    //todo:
-    private void runCrewCountingMenu() {
-    }
-
-    //todo:
-    private void runCrewEditorMenu() {
-
-    }
-
-    //todo: ONLY IF TIME
-    private void runScheduleMenu() {
-    }
-
-    //todo:
-    private void runMemberInformationMenu() {
-    }
-
 }
