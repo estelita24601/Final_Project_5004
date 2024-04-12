@@ -1,62 +1,96 @@
-import model.Species;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+//SPECIFY __ parameters
+//specify
+//I'm sorry I can't do that
+//warning:
+//computer activate ____ program
+//computer resume
+//
+
 
 public class TextView implements ICrewView {
-    private Appendable out;
+    byte[] byteMessage;
+    private OutputStream out; //.write(byte array) and .flush() to display
 
-    public TextView(Appendable outputStream) {
-        this.out = outputStream;
+    public TextView(OutputStream outputDestination) {
+        this.out = outputDestination;
+    }
+
+    private void printToTerminal(String newMessage) {
+        byteMessage = newMessage.getBytes(StandardCharsets.UTF_8);
+        try {
+            out.write(byteMessage);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void welcomeMessage() {
-
+        printToTerminal("Welcome to Starfleet Crew Management Simulator\n");
     }
 
     @Override
     public void askForCaptain() {
-        //please create the commanding officer for this crew
+        printToTerminal("Specify parameters for commanding officer\n");
     }
 
     @Override
-    public void askForNewCrewMembersName() {
-        //what is the name of this new crew member?
-
+    public void askForName() {
+        printToTerminal("Specify first and last name\n");
     }
 
     @Override
-    public void askForNewCrewMembersRank() {
-        //what is the rank of this new crew member?
-
+    public void askForRank() {
+        printToTerminal("Specify rank\n");
     }
 
     @Override
-    public void askForMembersNewRotation() {
-        //what rotation do you want to assign this crew member to?
+    public void askForRotation() {
+        printToTerminal("Specify rotation\n");
+    }
 
+    @Override
+    public void askForDepartment() {
+        printToTerminal("Specify department\n");
     }
 
     @Override
     public void askToDiscloseSpecies() {
-        //do you wish to disclose their heritage?
-        //YES or NO
+        printToTerminal("Do you wish to specify crew member's heritage?\n");
     }
 
     @Override
-    public void displaySpeciesOptions(Species[] speciesOptions) {
-        //You may select from the following species:
-        //for i in range length of speciesOptions
-        //String.format("%d. %s", i, speciesOptions[i]);
+    public void askIfFinishedGivingHeritage() {
+        printToTerminal("");
+    }
+
+    @Override
+    public void askForSpecies() {
+        printToTerminal("Specify species\n");
+    }
+
+    @Override
+    public void displayOptions(Object[] optionsList) {
+        for (int i = 0; i < optionsList.length; i++) {
+            printToTerminal(String.format("\t%d. %s\n", i, optionsList[i]));
+        }
     }
 
     @Override
     public void displayMainMenu() {
-//        What do you want to do with your crew?
-//            1. count crew members
-//            2. get full information on crew members
-//            3. list crew members
-//            4. scheduling
-//            5. edit crew
+        printToTerminal("Specify crew operation");
+        String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew", "Scheduling"};
+        displayOptions(mainMenuOptions);
+    }
 
+    @Override
+    public void displayError(Exception e) {
+        String errorMessage = String.format("WARNING:\n\t%s\n", e.getMessage());
+        printToTerminal(errorMessage);
     }
 
     @Override
@@ -65,12 +99,13 @@ public class TextView implements ICrewView {
     }
 
     @Override
-    public void displayError(Exception e) {
-
+    public void displayTryAgainMessage() {
+        printToTerminal("Directions unclear. Please repeat command.");
     }
 
     @Override
-    public void displayTryAgainMessage() {
-
+    public void displayYesOrNo() {
+        String[] yesOrNo = {"YES", "NO"};
+        displayOptions(yesOrNo);
     }
 }
