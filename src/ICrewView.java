@@ -13,11 +13,11 @@ public interface ICrewView {
 
     void askForDepartment();
 
+    void askForSpecies();
+
     void askToDiscloseSpecies();
 
     void askIfFinishedGivingHeritage();
-
-    void askForSpecies();
 
     void displayOptions(Object[] optionsList);
 
