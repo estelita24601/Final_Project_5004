@@ -69,7 +69,7 @@ public class StarfleetCommand implements ICrewController {
     private <T> T getValidInput(Function<String, T> converter, ViewDisplayer viewPrompter
     ) {
         boolean validInput = false;
-        T result;
+        T result = null;
 
         while (!validInput) {
             viewPrompter
@@ -79,7 +79,6 @@ public class StarfleetCommand implements ICrewController {
 
             //first make sure they don't want to leave
             if (commandDetected(input, "quit")) {
-                result = null;
                 validInput = true;
             }
 
@@ -131,6 +130,7 @@ public class StarfleetCommand implements ICrewController {
 
     //todo:
     private ArrayList<String> runSpeciesSelectionMenu() {
+        return new ArrayList<>();
     }
 
     //todo:
