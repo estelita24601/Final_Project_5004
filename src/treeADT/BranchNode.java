@@ -6,7 +6,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class BranchNode<T> extends LeafNode<T> {
+public class BranchNode<T> extends TreeNode<T> {
     public BranchNode(T initData) {
         super(initData);
         this.children = new ArrayList<TreeNode<T>>();
