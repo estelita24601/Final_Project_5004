@@ -80,15 +80,28 @@ public class StarfleetCommand implements ICrewController {
 
     //NOTE: trying to replace getValidInput with this instead
     //view will present numbered options and we just need to make sure we got valid number, no more words
+    //IDEA: maybe return object from options list that was selected instead? and return null for exit command
     private int getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse){
-        //1. display choice prompt to user
-        //2. display options to user using view.displayOptions
-        //3. scan in the user's response
-        //4. try to convert to integer
-            //a. if successful then check value
-                //if value == -1 then they want to quit, exit loop and return value
-                //if value < number of options then exit loop and return value
-            //b. otherwise it was invalid, display invalid response message and loop back to top        
+        boolean receivedValidChoice = false;
+        while(!receivedValidChoice){
+            choicePrompt.display();
+            view.displayOptions(options);
+            String userInput = scanner.nextLine().strip();
+            int choice; 
+            try{
+                choice = Integer.valueOf(userInput);
+            }catch (){ //todo: look up exact name of error
+                //didn't even receive a number
+                invalidResponse.display();
+            }
+            if(choice == -1 || choice < options.length){
+                receivedValidChoice = true;
+            }else{
+                //number received wasn't one of the options
+                invalidResponse.display(); //todo: improve how this fits with try catch
+            }
+        }    
+        return choice;   
     }
 
 
