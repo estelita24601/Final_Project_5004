@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOfficer> {
     private String fullName;
     private Rank rank;
-    private Boolean canCommand;
     private Department job;
     private Shift shift;
     private ArrayList<Species> heritage;
@@ -18,7 +17,6 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
         this.job = department;
         this.heritage = new ArrayList<Species>();
         this.shift = new Shift(department, shifRotation);
-        this.setCommandAbility();
     }
 
     public StarFleetOfficer(String name, Rank rank, Department department, Rotation shifRotation,
@@ -32,18 +30,6 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
         this.heritage.add(heritage);
     }
 
-    private void setCommandAbility() {
-        if (this.rank == Rank.TECHNICIAN) {
-            this.canCommand = false;
-        } else {
-            this.canCommand = true;
-        }
-    }
-
-    // TODO: maybe remove this field + method if I dont end up using it
-    public boolean canBeCommandingOfficer() {
-        return this.canCommand;
-    }
 
     @Override
     public int compareTo(StarFleetOfficer otherOfficer) {
