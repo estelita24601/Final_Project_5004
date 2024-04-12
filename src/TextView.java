@@ -75,6 +75,7 @@ public class TextView implements ICrewView {
 
     @Override
     public void displayOptions(Object[] optionsList) {
+        printToTerminal(String.format("\t-1. Terminate Current Operation\n"));
         for (int i = 0; i < optionsList.length; i++) {
             printToTerminal(String.format("\t%d. %s\n", i, optionsList[i]));
         }
