@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 public class BranchNode<T> extends TreeNode<T> {
     public BranchNode(T initData) {
         super(initData);
-        this.children = new ArrayList<TreeNode<T>>();
+        this.children = new ArrayList<>();
     }
 
     public BranchNode(T initData, TreeNode<T> initParent) {
@@ -25,11 +25,6 @@ public class BranchNode<T> extends TreeNode<T> {
     public BranchNode(T initData, ArrayList<TreeNode<T>> initChildren) {
         this(initData);
         this.children = initChildren;
-    }
-
-    @Override
-    public ArrayList<TreeNode<T>> getChildren() {
-        return this.children;
     }
 
     @Override
@@ -74,9 +69,9 @@ public class BranchNode<T> extends TreeNode<T> {
     public boolean addChild(T newChildData, Predicate<T> canBeBranch) {
         TreeNode<T> newChild;
         if (canBeBranch.test(newChildData)) {
-            newChild = new BranchNode<T>(newChildData);
+            newChild = new BranchNode<>(newChildData);
         } else {
-            newChild = new LeafNode<T>(newChildData);
+            newChild = new LeafNode<>(newChildData);
         }
         addChild(newChild);
         return true;
@@ -116,7 +111,7 @@ public class BranchNode<T> extends TreeNode<T> {
 
     @Override
     public TreeNode<T> deepCopy() {
-        return new BranchNode<T>(this.data, this.parent, this.children);
+        return new BranchNode<>(this.data, this.parent, this.children);
     }
 
     @Override
