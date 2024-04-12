@@ -1,5 +1,3 @@
-package model;
-
 public enum Rotation {
     ALPHA("Alpha Shift"), BETA("Beta Shift"), GAMMA("Gamma Shift"), DELTA("Delta Shift");
 

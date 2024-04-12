@@ -1,5 +1,3 @@
-import model.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -30,15 +28,16 @@ public class StarfleetCommand implements ICrewController {
             Function<String, Integer> choiceConverter = (str) -> Integer.parseInt(str);
             ViewDisplayer mainMenuPrompt = () -> view.displayMainMenu();
             int menuChoice = getValidInput(choiceConverter, mainMenuPrompt);
+            //"Determine crew demographics", "Obtain crew member information", "Edit Crew","Scheduling"
 
             if (menuChoice == 1) {
                 runCrewCountingMenu();
             } else if (menuChoice == 2) {
                 runMemberInformationMenu();
             } else if (menuChoice == 3) {
-                runScheduleMenu();
-            } else if (menuChoice == 4) {
                 runCrewEditorMenu();
+            } else if (menuChoice == 4) {
+                runScheduleMenu();
             } else if (menuChoice == -1) {
                 wantToContinue = false;
             }
@@ -130,11 +129,11 @@ public class StarfleetCommand implements ICrewController {
         while (invalidInput) {
             view.askForCaptain();
 
-            view.askForNewCrewMembersName();
+            view.askForName();
             String name = scanner.nextLine().strip();
 
             Function<String, Rank> rankConverter = (str) -> convertInputToEnum(str, model.getRankOptions()); //lambda that tries to convert input to rank enum
-            ViewDisplayer askForRank = () -> view.askForNewCrewMembersRank(); //lambda that gets the view to ask for a rank
+            ViewDisplayer askForRank = () -> view.askForRank(); //lambda that gets the view to ask for a rank
             Rank rank = getValidInput(rankConverter, askForRank); //give two lambdas to helper that will run loop until receiving valid input or until user quits
             //if getValidInput returned null then user wants to exit early
             if (rank == null) {
@@ -143,7 +142,7 @@ public class StarfleetCommand implements ICrewController {
             }
 
             Function<String, Rotation> rotationConverter = (str) -> convertInputToEnum(str, model.getShiftRotationOptions());
-            ViewDisplayer askForRotation = () -> view.askForMembersNewRotation();
+            ViewDisplayer askForRotation = () -> view.askForRotation();
             Rotation rotation = getValidInput(rotationConverter, askForRotation);
             // if getValidInput returned null then user wants to exit early
             if (rotation == null) {

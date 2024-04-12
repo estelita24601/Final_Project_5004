@@ -1,5 +1,3 @@
-package model;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -15,12 +13,12 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
         this.fullName = name;
         this.rank = rank;
         this.job = department;
-        this.heritage = new ArrayList<>();
+        this.heritage = new ArrayList<Species>();
         this.shift = new Shift(department, shifRotation);
     }
 
     public StarFleetOfficer(String name, Rank rank, Department department, Rotation shifRotation,
-            List<Species> heritage) {
+                            List<Species> heritage) {
         this(name, rank, department, shifRotation);
         this.heritage.addAll(heritage);
     }

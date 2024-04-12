@@ -1,29 +1,32 @@
-import model.Species;
-
 public interface ICrewView {
     void welcomeMessage();
 
+    void goodbyeMessage();
+
     void askForCaptain();
 
-    void askForNewCrewMembersName();
+    void askForName();
 
-    void askForNewCrewMembersRank();
+    void askForRank();
 
-    void askForMembersNewRotation();
+    void askForRotation();
+
+    void askForDepartment();
 
     void askToDiscloseSpecies();
 
-    void displaySpeciesOptions(Species[] speciesOptions);
+    void askIfFinishedGivingHeritage();
+
+    void askForSpecies();
+
+    void displayOptions(Object[] optionsList);
 
     void displayMainMenu();
-
-    void goodbyeMessage();
 
     void displayError(Exception e);
 
     void displayTryAgainMessage();
 
-    void askForSpecies();
+    void displayYesOrNo();
 
-    void askIfFinishedGivingHeritage();
 }

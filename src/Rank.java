@@ -1,5 +1,3 @@
-package model;
-
 public enum Rank {
     TECHNICIAN("Technician"),
     PETTY_OFFICER("Petty Officer"),

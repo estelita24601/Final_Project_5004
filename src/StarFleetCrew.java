@@ -1,5 +1,3 @@
-package model;
-
 import treeADT.BranchNode;
 import treeADT.TreeNode;
 
