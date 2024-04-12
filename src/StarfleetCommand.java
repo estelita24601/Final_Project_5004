@@ -1,6 +1,5 @@
 import model.ICrewMember;
 import model.ICrewModel;
-import model.StarFleetOfficer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -120,8 +119,9 @@ public class StarfleetCommand implements ICrewController {
             }
 
             try {
-                StarFleetOfficer captain = new StarFleetOfficer(name, rank, rotation);
-                this.model.setRoot(captain);
+                //TODO: fixme
+                //StarFleetOfficer captain = new StarFleetOfficer(name, rank, rotation);
+                //this.model.setRoot(captain);
                 invalidInput = false;
             } catch (IllegalArgumentException e) {
                 view.displayError(e);

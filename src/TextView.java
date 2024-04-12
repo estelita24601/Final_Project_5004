@@ -63,4 +63,14 @@ public class TextView implements ICrewView {
     public void goodbyeMessage() {
 
     }
+
+    @Override
+    public void displayError(Exception e) {
+
+    }
+
+    @Override
+    public void displayTryAgainMessage() {
+
+    }
 }

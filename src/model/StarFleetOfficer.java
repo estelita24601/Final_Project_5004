@@ -15,7 +15,7 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
         this.fullName = name;
         this.rank = rank;
         this.job = department;
-        this.heritage = new ArrayList<Species>();
+        this.heritage = new ArrayList<>();
         this.shift = new Shift(department, shifRotation);
     }
 
@@ -42,7 +42,6 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
             throw new IllegalArgumentException(String.format("%s is not a promotion from %s", newRank, this.rank));
         }
         this.rank = newRank;
-        this.setCommandAbility();
     }
 
     @Override
@@ -51,7 +50,6 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
             throw new IllegalArgumentException(String.format("%s is not a demotion from %s", newRank, this.rank));
         }
         this.rank = newRank;
-        this.setCommandAbility();
     }
 
     @Override
