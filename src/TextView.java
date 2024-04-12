@@ -63,9 +63,11 @@ public class TextView implements ICrewView {
         printToTerminal("Do you wish to specify crew member's heritage?\n");
     }
 
+    //NOTE: creating a double negative in my controller
+    //TODO: rename this and the code using it in controller
     @Override
     public void askIfFinishedGivingHeritage() {
-        printToTerminal("");
+        printToTerminal("Do you wish to continue specifying species?\n");
     }
 
     @Override
