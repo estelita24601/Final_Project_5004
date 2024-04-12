@@ -11,8 +11,8 @@ import java.nio.charset.StandardCharsets;
 
 
 public class TextView implements ICrewView {
-    byte[] byteMessage;
-    private OutputStream out; //.write(byte array) and .flush() to display
+    private final OutputStream out;
+    private byte[] byteMessage; //output stream needs to receive array of bytes
 
     public TextView(OutputStream outputDestination) {
         this.out = outputDestination;
@@ -84,7 +84,7 @@ public class TextView implements ICrewView {
     @Override
     public void displayMainMenu() {
         printToTerminal("Specify crew operation");
-        String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew", "Scheduling"};
+        String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew", "Scheduling", "Terminate Program"};
         displayOptions(mainMenuOptions);
     }
 
@@ -101,7 +101,7 @@ public class TextView implements ICrewView {
 
     @Override
     public void displayTryAgainMessage() {
-        printToTerminal("Directions unclear. Please repeat command.");
+        printToTerminal("Directions unclear. Please repeat command.\n");
     }
 
     @Override
