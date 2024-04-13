@@ -1,0 +1,27 @@
+NAME, RANK, DEPARTMENT, SUPERIORS_NAME, SPECIES
+Kathryn Janeway, captain, Bridge, null, human
+Chakotay, commander, Bridge, Kathryn Janeway, human
+Tuvok, lieutenant commander, Security, Kathryn Janeway, vulcan
+B'Elanna Torres, lieutenant, Engineering, Kathryn Janeway, human klingon
+Tom Paris, lieutenant, Bridge, Kathryn Janeway, human
+Harry Kim, ensign, Bridge, Kathryn Janeway, human
+Seven of Nine, technician, Science, Kathryn Janeway, human borg
+Vorik, ensign, Engineering, B'Elanna Torres, vulcan
+Samantha Wildman, ensign, Science, Kathryn Janeway, human
+Pablo Baytart, ensign, Bridge, Tom Paris, human
+Joe Carey, lieutenant, Engineering, B'Elanna Torres, human
+Jenny Delany, ensign, Science, Samantha Wildman, human
+Megan Delany, ensign, Science, Samantha Wildman, human
+Chell, technician, Engineering, B'Elanna Torres, bolian
+Freddy Bristow, ensign, Engineering, B'Elanna Torres, human
+Williard Chapman, lieutenant, Engineering, B'Elanna Torres, human
+Culhane, ensign, Bridge, Tom Paris, human
+Dalby, technician, Engineering, B'Elanna Torres, human
+Durst, lieutenant, Security, Tuvok, human
+Foster, technician, Security, Tuvok, human
+Gerron, technician, Science, Samantha Wildman, bajoran
+Hogan, ensign, Engineering, B'Elanna Torres, human
+Emergency Medical Hologram, chief petty officer, Medical Bay, Kathryn Janeway, hologram
+Kes, technician, Medical Bay, Emergency Medical Hologram, ocampan
+Lon Sudor, technician, Engineering, B'Elanna Torres, betazoid
+Kaplan, ensign, Security, Tuvok, human
