@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Function;
 
 public class StarfleetCommand implements ICrewController {
-    \
     final Readable in;
     private Scanner scanner;
     private ICrewModel<ICrewMember> model;
@@ -30,13 +28,13 @@ public class StarfleetCommand implements ICrewController {
             int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 4);
 
             if (menuChoice == 0) {
-                runCrewCountingMenu();
+                //runCrewCountingMenu(); TODO
             } else if (menuChoice == 1) {
-                runMemberInformationMenu();
+                //runMemberInformationMenu(); TODO
             } else if (menuChoice == 2) {
-                runCrewEditorMenu();
+                //runCrewEditorMenu(); TODO
             } else if (menuChoice == 3) {
-                runScheduleMenu();
+                //runScheduleMenu(); TODO
             } else if (menuChoice == -1) {
                 exit = true;
             }
@@ -47,12 +45,8 @@ public class StarfleetCommand implements ICrewController {
         this.view.goodbyeMessage();
     }
 
-    // view will present numbered options and we just need to make sure we got valid
-    // number, no more words
-    // IDEA: maybe return object from options list that was selected instead? and
-    // return null for exit command
     private Object getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
-        int choiceNumber;
+        int choiceNumber = -1000; //initializing with something that will never be an option
         Object chosenOption = null;
         boolean receivedValidChoice = false;
 
@@ -83,7 +77,7 @@ public class StarfleetCommand implements ICrewController {
     }
 
     private int getValidChoice(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse, int numOptions) {
-        int choice;
+        int choice = -1000; //initializing with something that will never be an option
         boolean receivedValidChoice = false;
 
         while (!receivedValidChoice) {
@@ -105,6 +99,54 @@ public class StarfleetCommand implements ICrewController {
         return choice;
     }
 
+    private boolean getYesOrNo(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
+        int menuSelection = -1000;
+        boolean receivedValidChoice = false;
+
+        while (!receivedValidChoice) {
+            choicePrompt.display();
+            view.displayYesOrNo();
+            String userInput = scanner.nextLine().strip();
+
+            //make sure user gave a number for the menu item they chose
+            try {
+                menuSelection = Integer.valueOf(userInput);
+            } catch (NumberFormatException e) {
+                // didn't even receive a number
+                invalidResponse.display();
+            }
+
+            //make sure the number received was one of the options
+            if (menuSelection == 0 || menuSelection == 1) {
+                receivedValidChoice = true;
+            } else {
+                // number received wasn't one of the options
+                invalidResponse.display();
+            }
+        }
+
+        return (menuSelection == 1);
+    }
+
+    private Rank getRank() {
+        ViewDisplayer askForRank = () -> view.askForRank();
+        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
+        return (Rank) getValidChoice(model.getRankOptions(), askForRank, askToTryAgain);
+    }
+
+    private Species getSpecies() {
+        ViewDisplayer askForSpecies = () -> view.askForSpecies();
+        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
+        return (Species) getValidChoice(model.getSpeciesOptions(), askForSpecies, askToTryAgain);
+    }
+
+    private Rotation getShiftRotation() {
+        ViewDisplayer askForRotation = () -> view.askForRotation();
+        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
+        return (Rotation) getValidChoice(model.getShiftRotationOptions(), askForRotation, askToTryAgain);
+    }
+
+
     private void createCaptain() {
         boolean invalidInput = true;
         boolean quitEarly = false;
@@ -116,39 +158,37 @@ public class StarfleetCommand implements ICrewController {
             view.askForName();
             String name = scanner.nextLine().strip();
 
-            //todo: fix rank
-            Function<String, Rank> rankConverter = (str) -> convertInputToEnum(str, model.getRankOptions());
-            ViewDisplayer askForRank = () -> view.askForRank(); // lambda that gets the view to ask for a rank
-            Rank rank = getValidInput(rankConverter, askForRank); // give two lambdas to helper that will run loop until
-            // receiving valid input or until user quits
-            // if getValidInput returned null then user wants to exit early
+            Rank rank = getRank();
+            // if rank is null then user wants to exit early
             if (rank == null) {
                 quitEarly = true;
                 break;
             }
 
-            //todo: fix rotation
-            Function<String, Rotation> rotationConverter = (str) -> convertInputToEnum(str, model.getShiftRotationOptions());
-            ViewDisplayer askForRotation = () -> view.askForRotation();
-            Rotation rotation = getValidInput(rotationConverter, askForRotation);
-            // if getValidInput returned null then user wants to exit early
+            Rotation rotation = getShiftRotation();
+            // if rotation is null then user wants to exit early
             if (rotation == null) {
                 quitEarly = true;
                 break;
             }
 
             ViewDisplayer askForSpecies = () -> view.askToDiscloseSpecies();
-            Boolean[] yesOrNo = {true, false};
-            boolean discloseSpecies = (Boolean) getValidChoice(yesOrNo, askForSpecies, askToTryAgain);
+            boolean discloseSpecies = getYesOrNo(askForSpecies, askToTryAgain);
 
-            ArrayList<Species> heritage;
+
+            ArrayList<Species> heritage = new ArrayList<>();
             if (discloseSpecies) {
+                view.debugDisplay("going to enter species disclosure menu");
                 heritage = runSpeciesSelectionMenu(); // allow them to continue adding species until they stop or quit
+                view.debugDisplay("exited species disclosure menu");
             }
 
             try {
+                view.debugDisplay("attempting to create officer with provided information");
                 StarFleetOfficer captain = new StarFleetOfficer(name, rank, Department.BRIDGE, rotation, heritage);
                 this.model.setRoot(captain);
+                view.debugDisplay("created officer with provided information");
+                view.displayCrewMember(captain);
                 invalidInput = false; // only break out of the loop if succesfully able to set root for the crew
             } catch (IllegalArgumentException e) {
                 view.displayError(e);
@@ -161,22 +201,21 @@ public class StarfleetCommand implements ICrewController {
 
         boolean wantToContinue = true;
         while (wantToContinue) {
-            ViewDisplayer askForSpecies = () -> view.askForSpecies();
-            ViewDisplayer errorMessage = () -> view.displayTryAgainMessage();
-            Species currentSpecies = (Species) getValidChoice(model.getSpeciesOptions(), askForSpecies, errorMessage);
+            Species currentSpecies = getSpecies();
 
+            // check if they want to quit early
             if (currentSpecies == null) {
-                // they want to quit early
-                break;
+                view.debugDisplay("chose to exit species selection menu early");
+                return heritage;
             }
             heritage.add(currentSpecies);
 
             //check if they want to continue or want to stop
-            Boolean[] yesOrNo = {true, false};
             ViewDisplayer askIfContinue = () -> view.askIfWantToContinueGivingSpecies();
-            wantToContinue = (Boolean) getValidChoice(yesOrNo, askIfContinue, errorMessage);
+            wantToContinue = getYesOrNo(askIfContinue, () -> view.displayTryAgainMessage());
         }
 
+        view.debugDisplay("finished getting species now returning array");
         return heritage;
     }
 }

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 //SPECIFY __ parameters
 //specify
 //I'm sorry I can't do that
@@ -84,9 +85,9 @@ public class TextView implements ICrewView {
 
     @Override
     public void displayMainMenu() {
-        printToTerminal("Specify crew operation");
+        printToTerminal("Specify crew operation\n");
         String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew",
-                "Scheduling", "Terminate Program"};
+                "Scheduling"};
         displayOptions(mainMenuOptions);
     }
 
@@ -109,6 +110,29 @@ public class TextView implements ICrewView {
     @Override
     public void displayYesOrNo() {
         String[] yesOrNo = {"YES", "NO"};
-        displayOptions(yesOrNo);
+        printToTerminal(String.format("0. NO\n"));
+        printToTerminal(String.format("1. YES\n"));
+    }
+
+    @Override
+    public void displayCrewMember(ICrewMember crewMember) {
+        printToTerminal(crewMember.toString());
+    }
+
+    @Override
+    public void displayEntireCrew(ICrewModel entireCrew) {
+        printToTerminal(entireCrew.toString());
+    }
+
+    @Override
+    public void displayListOfCrewMembers(ArrayList<ICrewMember> crewMembers) {
+        for (ICrewMember crewMember : crewMembers) {
+            printToTerminal(crewMember.toString());
+        }
+    }
+
+    @Override
+    public void debugDisplay(String debugMessage) {
+        printToTerminal(String.format("DEBUG:\t%s\n", debugMessage));
     }
 }

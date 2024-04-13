@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public interface ICrewView {
     void welcomeMessage();
 
@@ -29,4 +31,11 @@ public interface ICrewView {
 
     void displayYesOrNo();
 
+    void displayCrewMember(ICrewMember crewMember);
+
+    void displayEntireCrew(ICrewModel entireCrew);
+
+    void displayListOfCrewMembers(ArrayList<ICrewMember> crewMembers);
+
+    void debugDisplay(String debugMessage);
 }
