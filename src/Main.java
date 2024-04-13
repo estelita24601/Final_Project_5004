@@ -5,7 +5,7 @@ public class Main {
         ICrewModel<ICrewMember> crewModel = new StarFleetCrew();
 
         ICrewView textBasedUI = new TextView(System.out);
-        ICrewController controller = new StarfleetCommand(new InputStreamReader(System.in));
+        ICrewController controller = new StarFleetCommand(new InputStreamReader(System.in));
 
         controller.go(crewModel, textBasedUI);
     }
