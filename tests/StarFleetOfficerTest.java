@@ -26,6 +26,15 @@ public class StarFleetOfficerTest {
     }
 
     @Test
+    public void testToString() {
+        System.out.println(janeway.toString());
+        System.out.println(sisko.toString());
+        System.out.println(dax.toString());
+        System.out.println(belanna.toString());
+    }
+
+
+    @Test
     public void compareTo() {
         assertEquals(janeway.compareTo(sisko), 0); //both are the same rank
         assertEquals(janeway.compareTo(belanna) > 0, true); //janeway outranks belanna
