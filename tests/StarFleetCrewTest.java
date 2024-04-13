@@ -1,14 +1,16 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+
 public class StarFleetCrewTest {
+    StarFleetCrew voyagerCrew;
+    StarFleetCrew deepSpaceNineCrew;
 
     @Before
-    public void setUp() {
-    }
+    public void setUp() throws Exception {
+        voyagerCrew = new StarFleetCrew();
 
-    @Test
-    public void setRoot() {
     }
 
     @Test
@@ -20,11 +22,25 @@ public class StarFleetCrewTest {
     }
 
     @Test
+    public void setRoot() {
+    }
+
+    @Test
     public void getShiftRotationOptions() {
     }
 
     @Test
     public void getDepartmentOptions() {
+    }
+
+    @Test
+    public void loadFromFile() throws FileNotFoundException {
+        voyagerCrew.loadFromFile("resources/VoyagerCrew.csv");
+        System.out.println(voyagerCrew);
+    }
+
+    @Test
+    public void testToString() {
     }
 
     @Test
@@ -73,5 +89,9 @@ public class StarFleetCrewTest {
 
     @Test
     public void putInCommandOf() {
+    }
+
+    @Test
+    public void getRoot() {
     }
 }
