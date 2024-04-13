@@ -66,6 +66,17 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
     }
 
     @Override
+    public String toString() {
+        StringBuilder heritageString = new StringBuilder();
+        for (Species s : this.heritage) {
+            heritageString.append(s.toString());
+            heritageString.append(" ");
+        }
+
+        return String.format("%s %s\n\tDepartment: %s\n\tHeritage: %s\n", rank, fullName, job, heritageString);
+    }
+
+    @Override
     public void setHeritage(ArrayList<Species> heritage) {
         this.heritage = heritage;
     }
@@ -122,4 +133,6 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
     public void setJob(Department newDepartment) {
         this.job = newDepartment;
     }
+
+
 }

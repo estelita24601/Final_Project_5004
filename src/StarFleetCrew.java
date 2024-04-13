@@ -135,4 +135,9 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
 
         thisMember.addChild(newSubordinate);
     }
+
+    @Override
+    public String toString() {
+        return root.toString();
+    }
 }
