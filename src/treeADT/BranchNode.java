@@ -128,9 +128,9 @@ public class BranchNode<T> extends TreeNode<T> {
     }
 
     @Override
-    public boolean addChild(T newChildData, Predicate<T> canBeBranch) {
+    public boolean addChild(T newChildData, Predicate<T> canChildBeBranch) {
         TreeNode<T> newChild;
-        if (canBeBranch.test(newChildData)) {
+        if (canChildBeBranch.test(newChildData)) {
             newChild = new BranchNode<>(newChildData);
         } else {
             newChild = new LeafNode<>(newChildData);
