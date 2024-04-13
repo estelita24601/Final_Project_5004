@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StarfleetCommand implements ICrewController {
+public class StarFleetCommand implements ICrewController {
     final Readable in;
     private Scanner scanner;
     private ICrewModel<ICrewMember> model;
     private ICrewView view;
 
-    public StarfleetCommand(Readable inputStream) {
+    public StarFleetCommand(Readable inputStream) {
         this.in = inputStream;
     }
 
