@@ -1,6 +1,8 @@
 import treeADT.BranchNode;
+import treeADT.ITree;
 import treeADT.TreeNode;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -13,15 +15,6 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     private BranchNode<ICrewMember> root;
 
     public StarFleetCrew() {
-    }
-
-    @Override
-    public void setRoot(ICrewMember officer) {
-        if (canCommand.test(officer)) {
-            this.root = new BranchNode<>(officer);
-        } else {
-            throw new IllegalArgumentException("this officer is ineligible to command a starfleet crew");
-        }
     }
 
     @Override
@@ -40,8 +33,28 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     }
 
     @Override
+    public String toString() {
+        return root.toString();
+    }    @Override
+    public void setRoot(ICrewMember officer) {
+        if (canCommand.test(officer)) {
+            this.root = new BranchNode<>(officer);
+        } else {
+            throw new IllegalArgumentException("this officer is ineligible to command a starfleet crew");
+        }
+    }
+
+    @Override
     public Department[] getDepartmentOptions() {
         return Department.values();
+    }
+
+
+
+    @Override
+    public void loadFromFile(String filename) throws FileNotFoundException {
+        StarFleetCSVReader reader = new StarFleetCSVReader();
+        this.root = (BranchNode<ICrewMember>) reader.loadRootFromFile(filename);
     }
 
     @Override
@@ -94,8 +107,13 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
 
     @Override
     public void addCrewMember(ICrewMember newCrewMember, Predicate<ICrewMember> findNewSuperior) {
+        //find the superior officer using the predicate
         BranchNode<ICrewMember> newSuperior = (BranchNode<ICrewMember>) root.findNode(findNewSuperior);
-        newSuperior.addChild(newCrewMember, canCommand);
+
+        if (newSuperior != null) {
+            //assign the new crew member to the superior
+            newSuperior.addChild(newCrewMember, canCommand);
+        }
     }
 
     @Override
@@ -137,7 +155,9 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     }
 
     @Override
-    public String toString() {
-        return root.toString();
+    public ITree<ICrewMember> getRoot() {
+        return this.root;
     }
+
+
 }
