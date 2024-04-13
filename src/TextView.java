@@ -9,10 +9,9 @@ import java.nio.charset.StandardCharsets;
 //computer resume
 //
 
-
 public class TextView implements ICrewView {
     private final OutputStream out;
-    private byte[] byteMessage; //output stream needs to receive array of bytes
+    private byte[] byteMessage; // output stream needs to receive array of bytes
 
     public TextView(OutputStream outputDestination) {
         this.out = outputDestination;
@@ -63,10 +62,10 @@ public class TextView implements ICrewView {
         printToTerminal("Do you wish to specify crew member's heritage?\n");
     }
 
-    //NOTE: creating a double negative in my controller
-    //TODO: rename this and the code using it in controller
+    // NOTE: creating a double negative in my controller
+    // TODO: rename this and the code using it in controller
     @Override
-    public void askIfFinishedGivingHeritage() {
+    public void askIfWantToContinueGivingSpecies() {
         printToTerminal("Do you wish to continue specifying species?\n");
     }
 
@@ -86,7 +85,8 @@ public class TextView implements ICrewView {
     @Override
     public void displayMainMenu() {
         printToTerminal("Specify crew operation");
-        String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew", "Scheduling", "Terminate Program"};
+        String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew",
+                "Scheduling", "Terminate Program"};
         displayOptions(mainMenuOptions);
     }
 

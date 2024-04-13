@@ -17,7 +17,7 @@ public interface ICrewView {
 
     void askToDiscloseSpecies();
 
-    void askIfFinishedGivingHeritage();
+    void askIfWantToContinueGivingSpecies();
 
     void displayOptions(Object[] optionsList);
 
