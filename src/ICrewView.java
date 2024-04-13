@@ -38,4 +38,6 @@ public interface ICrewView {
     void displayListOfCrewMembers(ArrayList<ICrewMember> crewMembers);
 
     void debugDisplay(String debugMessage);
+
+    void displaySuccessfullyCreatedMember(ICrewMember newCrewMember);
 }

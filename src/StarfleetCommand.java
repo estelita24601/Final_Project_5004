@@ -146,7 +146,6 @@ public class StarfleetCommand implements ICrewController {
         return (Rotation) getValidChoice(model.getShiftRotationOptions(), askForRotation, askToTryAgain);
     }
 
-
     private void createCaptain() {
         boolean invalidInput = true;
         boolean quitEarly = false;
@@ -184,12 +183,11 @@ public class StarfleetCommand implements ICrewController {
             }
 
             try {
-                view.debugDisplay("attempting to create officer with provided information");
+                //make sure we can create the crew member and assign them as the commander of entire crew
                 StarFleetOfficer captain = new StarFleetOfficer(name, rank, Department.BRIDGE, rotation, heritage);
                 this.model.setRoot(captain);
-                view.debugDisplay("created officer with provided information");
-                view.displayCrewMember(captain);
-                invalidInput = false; // only break out of the loop if succesfully able to set root for the crew
+                view.displaySuccessfullyCreatedMember(captain); //give feedback so user know it worked
+                invalidInput = false;
             } catch (IllegalArgumentException e) {
                 view.displayError(e);
             }

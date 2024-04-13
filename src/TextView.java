@@ -85,7 +85,7 @@ public class TextView implements ICrewView {
 
     @Override
     public void displayMainMenu() {
-        printToTerminal("Specify crew operation\n");
+        printToTerminal("\nSpecify crew operation\n");
         String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew",
                 "Scheduling"};
         displayOptions(mainMenuOptions);
@@ -134,5 +134,11 @@ public class TextView implements ICrewView {
     @Override
     public void debugDisplay(String debugMessage) {
         printToTerminal(String.format("DEBUG:\t%s\n", debugMessage));
+    }
+
+    @Override
+    public void displaySuccessfullyCreatedMember(ICrewMember newCrewMember) {
+        printToTerminal("Successfully Initialized Crew Member:\n");
+        displayCrewMember(newCrewMember);
     }
 }
