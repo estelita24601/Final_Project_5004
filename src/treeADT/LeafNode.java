@@ -53,4 +53,6 @@ public class LeafNode<T> extends TreeNode<T> {
     public <R> TreeNode<R> map(Function<T, R> converter) {
         return new LeafNode<>(converter.apply(this.data));
     }
+
+
 }
