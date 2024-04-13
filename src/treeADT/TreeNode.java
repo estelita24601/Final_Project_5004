@@ -105,4 +105,9 @@ public abstract class TreeNode<T> implements ITree<T> {
         mappedList.add(converter.apply(this.data));
         return mappedList;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s\n", this.data);
+    }
 }
