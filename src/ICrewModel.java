@@ -1,3 +1,6 @@
+import treeADT.ITree;
+
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -14,6 +17,8 @@ public interface ICrewModel<ICrewMember> {
     Department[] getDepartmentOptions();
 
     public void setRoot(ICrewMember root);
+
+    public void loadFromFile(String filename) throws FileNotFoundException;
 
     //folding to an integer
     int countAll();
@@ -34,4 +39,6 @@ public interface ICrewModel<ICrewMember> {
     void removeCrewMember(Predicate<ICrewMember> findMemberToRemove);
     void reAssignTo(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> findNewSuperior);
     void putInCommandOf(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> findNewSubordinate);
+
+    ITree<ICrewMember> getRoot();
 }
