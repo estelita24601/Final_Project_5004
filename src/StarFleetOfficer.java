@@ -68,9 +68,13 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
     @Override
     public String toString() {
         StringBuilder heritageString = new StringBuilder();
-        for (Species s : this.heritage) {
-            heritageString.append(s.toString());
-            heritageString.append(" ");
+        if (heritage.size() == 0) {
+            heritageString.append("Undisclosed");
+        } else {
+            for (Species s : this.heritage) {
+                heritageString.append(s.toString());
+                heritageString.append(" ");
+            }
         }
 
         return String.format("%s %s\n\tDepartment: %s\n\tHeritage: %s\n", rank, fullName, job, heritageString);
