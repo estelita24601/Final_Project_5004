@@ -7,7 +7,11 @@ public enum Species {
     ANDORIAN("Andorian"),
     FERENGI("Ferengi"),
     TRILL("Trill"),
-    BETAZOID("Betazoid");
+    BETAZOID("Betazoid"),
+    BOLIAN("Bolian"),
+    HOLOGRAM("Hologram"),
+    OCAMPAN("Ocampan"),
+    BORG("Borg");
 
     public final String name;
 
