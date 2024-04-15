@@ -1,3 +1,5 @@
+package model;
+
 import treeADT.ITree;
 
 import java.io.File;

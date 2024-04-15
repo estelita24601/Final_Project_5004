@@ -1,3 +1,5 @@
+package model;
+
 import java.time.Duration;
 import java.time.LocalTime;
 //
@@ -50,7 +52,7 @@ public class Shift {
             start = midnight;
             end = sixAM;
         }else{
-            throw new IllegalArgumentException("Rotation given does not have default values");
+            throw new IllegalArgumentException("model.Rotation given does not have default values");
         }
 
         this.location = department;
