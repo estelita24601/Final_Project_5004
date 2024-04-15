@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class StarFleetCrewTest {
     StarFleetOfficer testOfficer;
@@ -127,8 +126,29 @@ public class StarFleetCrewTest {
         assertTrue(!engineeringSuboordinates.contains(joeCarey));
     }
 
-    @Test //TODO
+    @Test
     public void reAssignTo() {
+        Predicate<ICrewMember> findLonSudor = (officer) -> officer.getName().equalsIgnoreCase("Lon Sudor");
+        Predicate<ICrewMember> findVorik = (officer) -> officer.getName().equalsIgnoreCase("Vorik");
+        Predicate<ICrewMember> findBelanna = (officer) -> officer.getName().equalsIgnoreCase("B'Elanna Torres");
+
+        //re-assign lon sudor to vorik
+        voyagerCrew.reAssignTo(findLonSudor, findVorik);
+
+        //now check if lon sudor, vorik and belanna were updated correctly
+        ICrewMember lonSudor = voyagerCrew.getCrewMember(findLonSudor);
+        ICrewMember vorik = voyagerCrew.getCrewMember(findVorik);
+        ICrewMember chiefEngineer = voyagerCrew.getCrewMember(findBelanna);
+
+        //make sure lon sudor's superior is listed as vorik
+        assertEquals(vorik, voyagerCrew.getDirectSuperiorOf(findLonSudor));
+        //vice versa make sure vorik's list of suboordinates now includes lon suder
+        List<ICrewMember> voriksSuboordinates = voyagerCrew.getDirectSuboordinatesOf(findVorik);
+        System.out.println(voriksSuboordinates);
+        assertTrue(voriksSuboordinates.contains(lonSudor));
+        //now make sure lon sudor is no longer directly under b'elanna
+        List<ICrewMember> belannasSuboordiantes = voyagerCrew.getDirectSuboordinatesOf(findBelanna);
+        assertFalse(belannasSuboordiantes.contains(lonSudor));
     }
 
     @Test //TODO
