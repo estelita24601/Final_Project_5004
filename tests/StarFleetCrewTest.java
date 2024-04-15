@@ -21,20 +21,25 @@ public class StarFleetCrewTest {
 
     @Before
     public void setUp() throws Exception {
-        testOfficer = new StarFleetOfficer("Jane Doe", Rank.ENSIGN, Department.SECURITY, Rotation.DELTA);
-        voyagerCrew = new StarFleetCrew();
+        //making crew members
         janeway = new StarFleetOfficer("Kathryn Janeway", Rank.CAPTAIN, Department.BRIDGE, Rotation.ALPHA, Species.HUMAN);
+        sisko = new StarFleetOfficer("Benjamin Sisko", Rank.CAPTAIN, Department.BRIDGE, Rotation.ALPHA, Species.HUMAN);
         ArrayList<Species> belannaHeritage = new ArrayList<>(List.of(Species.HUMAN, Species.KLINGON));
         belanna = new StarFleetOfficer("B'Elanna Torres", Rank.LIEUTENANT_JR_GRADE, Department.ENGINEERING, Rotation.BETA, belannaHeritage);
-        deepSpaceNineCrew = new StarFleetCrew();
-        sisko = new StarFleetOfficer("Benjamin Sisko", Rank.CAPTAIN, Department.BRIDGE, Rotation.ALPHA, Species.HUMAN);
         dax = new StarFleetOfficer("Jadzia Dax", Rank.LIEUTENANT_COMMANDER, Department.SCIENCE, Rotation.GAMMA, Species.TRILL);
+        testOfficer = new StarFleetOfficer("Jane Doe", Rank.ENSIGN, Department.SECURITY, Rotation.DELTA);
+
+        //making voyager crew and loading in from file
+        voyagerCrew = new StarFleetCrew();
+        voyagerCrew.loadFromFile("resources/VoyagerCrew.csv");
+        //making ds9 crew empty
+        deepSpaceNineCrew = new StarFleetCrew();
     }
 
     @Test
     public void setRoot() {
-        voyagerCrew.setRoot(janeway);
-        assertEquals(janeway, voyagerCrew.getRoot().getData());
+        deepSpaceNineCrew.setRoot(sisko);
+        assertEquals(sisko, deepSpaceNineCrew.getRoot());
     }
 
     @Test
@@ -45,18 +50,33 @@ public class StarFleetCrewTest {
 
     @Test
     public void countAll() {
+        assertEquals(26, voyagerCrew.countAll());
+        assertEquals(0, deepSpaceNineCrew.countAll());
+        deepSpaceNineCrew.setRoot(sisko);
+        assertEquals(1, deepSpaceNineCrew.countAll());
+        deepSpaceNineCrew.addCrewMember(dax, (o) -> o.getName().equalsIgnoreCase(sisko.getName()));
+        assertEquals(2, deepSpaceNineCrew.countAll());
     }
 
     @Test
     public void countFilter() {
+        Predicate<ICrewMember> isEngineer = (officer) -> officer.getJob() == Department.ENGINEERING;
+        assertEquals(9, voyagerCrew.countFilter(isEngineer));
+
+        Predicate<ICrewMember> isLieutenant = (officer) -> officer.getRank() == Rank.LIEUTENANT;
+        assertEquals(5, voyagerCrew.countFilter(isLieutenant));
+
+        Predicate<ICrewMember> isVulcan = (officer) -> officer.getHeritage().contains(Species.VULCAN);
+        assertEquals(2, voyagerCrew.countFilter(isVulcan));
     }
 
     @Test
     public void getMemberList() {
-    }
+        List<ICrewMember> allVoyagerCrew = voyagerCrew.getMemberList();
+        assertEquals(26, allVoyagerCrew.size());
 
-    @Test
-    public void testGetMemberList() {
+        List<ICrewMember> voyagerBridgeCrew = voyagerCrew.getMemberList((c) -> c.getJob() == Department.BRIDGE);
+        assertEquals(6, voyagerBridgeCrew.size());
     }
 
     @Test
@@ -65,6 +85,10 @@ public class StarFleetCrewTest {
 
     @Test
     public void getCrewMember() {
+        Predicate<ICrewMember> findSeven = (officer) -> officer.getHeritage().contains(Species.BORG);
+        ICrewMember sevenOfNine = voyagerCrew.getCrewMember(findSeven);
+        assertEquals(sevenOfNine.getName(), "Seven of Nine");
+        assertEquals(sevenOfNine.getJob(), Department.SCIENCE);
     }
 
     @Test
@@ -88,6 +112,13 @@ public class StarFleetCrewTest {
 
     @Test
     public void removeCrewMember() {
+        Predicate<ICrewMember> findJoeCarey = (officer) -> officer.getName().equalsIgnoreCase("joe carey");
+        ICrewMember superiorOfficer = voyagerCrew.getDirectSuperiorOf(findJoeCarey);
+        System.out.println(superiorOfficer);
+
+
+        voyagerCrew.removeCrewMember(findJoeCarey);
+        assertEquals(25, voyagerCrew.countAll());
     }
 
     @Test
