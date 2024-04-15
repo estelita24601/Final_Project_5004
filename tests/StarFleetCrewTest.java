@@ -1,3 +1,4 @@
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 import treeADT.TreeNode;
@@ -113,12 +114,17 @@ public class StarFleetCrewTest {
     @Test
     public void removeCrewMember() {
         Predicate<ICrewMember> findJoeCarey = (officer) -> officer.getName().equalsIgnoreCase("joe carey");
-        ICrewMember superiorOfficer = voyagerCrew.getDirectSuperiorOf(findJoeCarey);
-        System.out.println(superiorOfficer);
+        ICrewMember joeCarey = voyagerCrew.getCrewMember(findJoeCarey); //find joe
+        ICrewMember superiorOfficer = voyagerCrew.getDirectSuperiorOf(findJoeCarey); //find his superior
+        assertEquals(superiorOfficer.getName(), "B'Elanna Torres"); //make sure superior has correct name
+        List<ICrewMember> engineeringSuboordinates = voyagerCrew.getDirectSuboordinatesOf((o) -> o.equals(superiorOfficer));
+        assertTrue(engineeringSuboordinates.contains(joeCarey)); //make sure he is also listed as suboordinate for his superior
 
-
-        voyagerCrew.removeCrewMember(findJoeCarey);
-        assertEquals(25, voyagerCrew.countAll());
+        voyagerCrew.removeCrewMember(findJoeCarey); //finally remove him
+        assertEquals(25, voyagerCrew.countAll()); //make sure crew count went down
+        //make sure he isn't listed as a suboordinate of b'elanna anymore
+        engineeringSuboordinates = voyagerCrew.getDirectSuboordinatesOf((o) -> o.equals(superiorOfficer));
+        assertTrue(!engineeringSuboordinates.contains(joeCarey));
     }
 
     @Test //TODO
