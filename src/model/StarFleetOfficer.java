@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -58,9 +60,21 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
         if (this.rank != otherOfficer.getRank()) {
             return false;
         }
-        if (this.heritage != otherOfficer.getHeritage()) {
-            return false;
+
+        //now compare items in heritage array one by one since direct comparison of array list didn't work
+        for (Species ourSpecies : this.heritage) {
+            if (!otherOfficer.getHeritage().contains(ourSpecies)) {
+                //if there's a species in our list that isn't in their list
+                return false;
+            }
         }
+        for (Species othersSpecies : otherOfficer.getHeritage()) {
+            if (!this.getHeritage().contains(othersSpecies)) {
+                //if there's a species in their list that isn't in our list
+                return false;
+            }
+        }
+
         return true; //if all that differs is their job and shift they're basically the same person
     }
 
