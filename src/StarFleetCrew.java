@@ -36,6 +36,7 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     public String toString() {
         return root.toString();
     }    @Override
+
     public void setRoot(ICrewMember officer) {
         if (canCommand.test(officer)) {
             this.root = new BranchNode<>(officer);
@@ -48,8 +49,6 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     public Department[] getDepartmentOptions() {
         return Department.values();
     }
-
-
 
     @Override
     public void loadFromFile(String filename) throws FileNotFoundException {
