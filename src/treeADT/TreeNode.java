@@ -44,10 +44,12 @@ public abstract class TreeNode<T> implements ITree<T> {
 
     @Override
     public void setParent(TreeNode<T> newParent) {
-        Predicate<T> findChildToDelete = (t) -> t.equals(this);
-        this.parent.deleteChild(findChildToDelete); // remove ourselves from the parent's list of children
+        //if we have a parent already make sure to remove ourselves from their list of children
+        if (this.parent != null) {
+            Predicate<T> findChildToDelete = (t) -> t.equals(this);
+            this.parent.deleteChild(findChildToDelete); // remove ourselves from the parent's list of children
+        }
         this.parent = newParent; //change our parent
-        this.parent.addChild(this); //add ourselves to new parent's list of children
     }
 
     @Override
@@ -75,6 +77,8 @@ public abstract class TreeNode<T> implements ITree<T> {
         Predicate<T> getAll = (t) -> true;
         return filterToList(getAll);
     }
+
+    public abstract boolean addChild(T newChildData);
 
     @Override
     public TreeNode<T> findNode(Predicate<T> identifier) {
@@ -110,6 +114,4 @@ public abstract class TreeNode<T> implements ITree<T> {
     public String toString() {
         return String.format("%s\n", this.data);
     }
-
-    public abstract boolean addChild(T newChildData);
 }
