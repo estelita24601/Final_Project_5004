@@ -110,4 +110,6 @@ public abstract class TreeNode<T> implements ITree<T> {
     public String toString() {
         return String.format("%s\n", this.data);
     }
+
+    public abstract boolean addChild(T newChildData);
 }

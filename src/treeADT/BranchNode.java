@@ -57,11 +57,20 @@ public class BranchNode<T> extends TreeNode<T> {
 
     @Override
     public TreeNode<T> findNode(Predicate<T> identifier) {
+        //first check if the current node is the one we're looking for
+        if (super.findNode(identifier) != null) {
+            return this;
+        }
+
+        //then search all the children
         for (TreeNode<T> child : this.children) {
-            if (identifier.test(child.getData())) {
-                return child;
+            //if the child checked itself and all it's children and found the node then return it
+            if (child.findNode(identifier) != null) {
+                return child.findNode(identifier);
             }
         }
+
+        //if that didn't work then unable to find the node
         return null;
     }
 
@@ -137,6 +146,11 @@ public class BranchNode<T> extends TreeNode<T> {
         }
         addChild(newChild);
         return true;
+    }
+
+    @Override
+    public boolean addChild(T newChildData) {
+        return this.addChild(newChildData, (data) -> true);
     }
 
     @Override

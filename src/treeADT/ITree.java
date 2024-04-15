@@ -35,6 +35,8 @@ public interface ITree<T> {
 
     boolean addChild(T newChildData, Predicate<T> canBeBranch);
 
+    boolean addChild(T newChildData);
+
     boolean deleteChild(Predicate<T> findChildToDelete);
 
     boolean deleteChild(TreeNode<T> childToDelete);
