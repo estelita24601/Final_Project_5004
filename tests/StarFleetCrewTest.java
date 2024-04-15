@@ -6,6 +6,8 @@ import treeADT.TreeNode;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
@@ -167,19 +169,50 @@ public class StarFleetCrewTest {
         assertFalse(belannaSuboordinates.contains(chell));
     }
 
-    @Test //TODO
+    @Test
     public void testToString() {
+        System.out.println(voyagerCrew);
     }
 
-    @Test //TODO
+    @Test
     public void getMemberInfoList() {
+//        List<String> getMemberInfoList(Predicate<ICrewMember> filter, Function<ICrewMember, String> convertInfoToStr)
+        //lets get a list of all members names + departments only
+        Predicate<ICrewMember> getAllCrewMembers = (o) -> true;
+        Function<ICrewMember, String> memberNameAndDepartment = (crewMember) -> {
+            return String.format("%s - %s\n", crewMember.getName(), crewMember.getJob());
+        };
+        List<String> crewNamesAndDepartments = voyagerCrew.getMemberInfoList(getAllCrewMembers, memberNameAndDepartment);
+        System.out.println(crewNamesAndDepartments);
+
+        //lets get a list of name + rank for everyone in engineering
+        Predicate<ICrewMember> getEngineeringCrew = (o) -> o.getJob() == Department.ENGINEERING;
+        Function<ICrewMember, String> memberNameAndRank = (crewMember) -> {
+            return String.format("%s %s\n", crewMember.getRank(), crewMember.getName());
+        };
+        List<String> engineeringNamesAndRanks = voyagerCrew.getMemberInfoList(getEngineeringCrew, memberNameAndRank);
+        System.out.println(engineeringNamesAndRanks);
     }
 
-    @Test //TODO
+    @Test
     public void getCrewMemberInfo() {
+        Predicate<ICrewMember> findHarryKim = new FindByName("Harry Kim");
+        Function<ICrewMember, String> getAbbrviatedInfo = (crewMember) -> {
+            return String.format("%s %s - %s\n", crewMember.getRank(), crewMember.getName(), crewMember.getJob());
+        };
+        String harryAbbreviatedInfo = voyagerCrew.getCrewMemberInfo(findHarryKim, getAbbrviatedInfo);
+        assertEquals("Ensign Harry Kim - Bridge\n", harryAbbreviatedInfo);
     }
 
-    @Test //TODO
+    @Test
     public void editCrewMember() {
+        Consumer<ICrewMember> promote = (starfleetOfficer) -> {
+            starfleetOfficer.promote(Rank.LIEUTENANT_JR_GRADE);
+        };
+        Predicate<ICrewMember> findHarryKim = new FindByName("Harry Kim");
+        ICrewMember harryKim = voyagerCrew.getCrewMember(findHarryKim);
+
+        voyagerCrew.editCrewMember(findHarryKim, promote);
+        assertEquals(Rank.LIEUTENANT_JR_GRADE, harryKim.getRank());
     }
 }
