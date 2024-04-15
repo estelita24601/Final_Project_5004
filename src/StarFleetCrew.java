@@ -127,19 +127,22 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     @Override
     public void removeCrewMember(Predicate<ICrewMember> findMemberToRemove) {
         //get the node of the member we're removing
-        TreeNode<ICrewMember> memberNode = root.findNode(findMemberToRemove);
+        TreeNode<ICrewMember> memberToRemove = root.findNode(findMemberToRemove);
+        if (memberToRemove == null) {
+            throw new IllegalStateException("Unable to find crew member that fits given specifications");
+        }
 
         //if there are children move them all to new superior so we don't lose them as well
-        ArrayList<TreeNode<ICrewMember>> memberChildren = memberNode.getChildren();
+        ArrayList<TreeNode<ICrewMember>> memberChildren = memberToRemove.getChildren();
         if (!memberChildren.isEmpty()) {
-            BranchNode<ICrewMember> newSuperior = (BranchNode<ICrewMember>) memberNode.getParent();
-            memberNode.moveChildren((t) -> true, newSuperior); //move every single child to the new superior
+            BranchNode<ICrewMember> newSuperior = (BranchNode<ICrewMember>) memberToRemove.getParent();
+            memberToRemove.moveChildren((t) -> true, newSuperior); //move every single child to the new superior
         }
 
         //get the parent of the node we're removing
-        BranchNode<ICrewMember> parent = (BranchNode<ICrewMember>) memberNode.getParent();
+        BranchNode<ICrewMember> parent = (BranchNode<ICrewMember>) memberToRemove.getParent();
         //remove them from the parent
-        parent.deleteChild(memberNode);
+        parent.deleteChild(memberToRemove);
     }
 
     @Override
