@@ -1,3 +1,6 @@
+import model.ICrewMember;
+import model.ICrewModel;
+
 import java.util.ArrayList;
 
 public interface ICrewView {

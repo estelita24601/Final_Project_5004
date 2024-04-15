@@ -1,3 +1,4 @@
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +18,6 @@ public class TextViewTest {
         rotationOptions = model.getShiftRotationOptions();
         departmentOptions = model.getDepartmentOptions();
     }
-
 
     @Test
     public void welcomeMessage() {

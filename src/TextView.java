@@ -1,3 +1,6 @@
+import model.ICrewMember;
+import model.ICrewModel;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
