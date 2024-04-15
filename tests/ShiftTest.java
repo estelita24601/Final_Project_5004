@@ -1,3 +1,6 @@
+import model.Department;
+import model.Rotation;
+import model.Shift;
 import org.junit.Before;
 import org.junit.Test;
 

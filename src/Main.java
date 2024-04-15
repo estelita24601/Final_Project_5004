@@ -1,3 +1,7 @@
+import model.ICrewMember;
+import model.ICrewModel;
+import model.StarFleetCrew;
+
 import java.io.InputStreamReader;
 
 public class Main {
