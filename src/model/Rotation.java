@@ -1,5 +1,7 @@
+package model;
+
 public enum Rotation {
-    ALPHA("Alpha Shift"), BETA("Beta Shift"), GAMMA("Gamma Shift"), DELTA("Delta Shift");
+    ALPHA("Alpha model.Shift"), BETA("Beta model.Shift"), GAMMA("Gamma model.Shift"), DELTA("Delta model.Shift");
 
     public final String name;
 

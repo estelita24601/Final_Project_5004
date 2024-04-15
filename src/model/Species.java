@@ -1,3 +1,5 @@
+package model;
+
 public enum Species {
     HUMAN("Human"),
     VULCAN("Vulcan"),

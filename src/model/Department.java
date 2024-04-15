@@ -1,3 +1,5 @@
+package model;
+
 public enum Department {
     ENGINEERING("Engineering"),
     BRIDGE("Bridge"),
