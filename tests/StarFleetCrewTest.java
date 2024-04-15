@@ -39,7 +39,7 @@ public class StarFleetCrewTest {
     @Test
     public void setRoot() {
         deepSpaceNineCrew.setRoot(sisko);
-        assertEquals(sisko, deepSpaceNineCrew.getRoot());
+        assertEquals(sisko, deepSpaceNineCrew.getRoot().getData());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class StarFleetCrewTest {
         assertEquals(6, voyagerBridgeCrew.size());
     }
 
-    @Test
+    @Test //TODO
     public void getMemberInfoList() {
     }
 
@@ -91,11 +91,11 @@ public class StarFleetCrewTest {
         assertEquals(sevenOfNine.getJob(), Department.SCIENCE);
     }
 
-    @Test
+    @Test //TODO
     public void getCrewMemberInfo() {
     }
 
-    @Test
+    @Test //TODO
     public void editCrewMember() {
     }
 
@@ -121,15 +121,15 @@ public class StarFleetCrewTest {
         assertEquals(25, voyagerCrew.countAll());
     }
 
-    @Test
+    @Test //TODO
     public void reAssignTo() {
     }
 
-    @Test
+    @Test //TODO
     public void putInCommandOf() {
     }
 
-    @Test
+    @Test //TODO
     public void testToString() {
     }
 }
