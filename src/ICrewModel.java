@@ -41,4 +41,8 @@ public interface ICrewModel<ICrewMember> {
     void putInCommandOf(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> findNewSubordinate);
 
     ITree<ICrewMember> getRoot();
+
+    ICrewMember getDirectSuperiorOf(Predicate<ICrewMember> findCrewMember);
+
+    List<ICrewMember> getDirectSuboordinatesOf(Predicate<ICrewMember> findCrewMember);
 }
