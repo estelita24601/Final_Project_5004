@@ -169,5 +169,25 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
         return this.root;
     }
 
+    @Override
+    public ICrewMember getDirectSuperiorOf(Predicate<ICrewMember> findCrewMember) {
+        TreeNode<ICrewMember> crewMember = root.findNode(findCrewMember);
+        return crewMember.getParent().getData();
+    }
+
+    @Override
+    public List<ICrewMember> getDirectSuboordinatesOf(Predicate<ICrewMember> findCrewMember) {
+        //find the crew member we want to get information on
+        TreeNode<ICrewMember> crewMember = root.findNode(findCrewMember);
+        //get all the suboordinates of that crew member
+        List<TreeNode<ICrewMember>> suboordinateCrewNodes = crewMember.getChildren();
+
+        //extract just the crew member data from the child tree nodes
+        ArrayList<ICrewMember> suboordinateCrew = new ArrayList<>();
+        for (TreeNode<ICrewMember> node : suboordinateCrewNodes) {
+            suboordinateCrew.add(node.getData());
+        }
+        return suboordinateCrew;
+    }
 
 }
