@@ -79,9 +79,6 @@ public class StarFleetCrewTest {
         assertEquals(6, voyagerBridgeCrew.size());
     }
 
-    @Test //TODO
-    public void getMemberInfoList() {
-    }
 
     @Test
     public void getCrewMember() {
@@ -89,14 +86,6 @@ public class StarFleetCrewTest {
         ICrewMember sevenOfNine = voyagerCrew.getCrewMember(findSeven);
         assertEquals(sevenOfNine.getName(), "Seven of Nine");
         assertEquals(sevenOfNine.getJob(), Department.SCIENCE);
-    }
-
-    @Test //TODO
-    public void getCrewMemberInfo() {
-    }
-
-    @Test //TODO
-    public void editCrewMember() {
     }
 
     @Test
@@ -151,11 +140,46 @@ public class StarFleetCrewTest {
         assertFalse(belannasSuboordiantes.contains(lonSudor));
     }
 
-    @Test //TODO
+    @Test
     public void putInCommandOf() {
+        //instead of having chell as b'elanna's direct suboordinate he will first report to joe carey who then reports to b'elanna
+        Predicate<ICrewMember> findChell = (officer) -> officer.getName().equalsIgnoreCase("Chell");
+        Predicate<ICrewMember> findCarey = (officer) -> officer.getName().equalsIgnoreCase("Joe Carey");
+        Predicate<ICrewMember> findBelanna = (officer) -> officer.getName().equalsIgnoreCase("B'Elanna Torres");
+
+        //put joe carey in command of chell
+        voyagerCrew.putInCommandOf(findCarey, findChell);
+
+        //now make sure everyone was updated correctly
+        ICrewMember chell = voyagerCrew.getCrewMember(findChell);
+        ICrewMember carey = voyagerCrew.getCrewMember(findCarey);
+        ICrewMember chiefEngineer = voyagerCrew.getCrewMember(findBelanna);
+
+        //make sure chell's superior is carey
+        assertEquals(carey, voyagerCrew.getDirectSuperiorOf(findChell));
+
+        //make sure carey's suboordinates include chell
+        List<ICrewMember> careySuboordinates = voyagerCrew.getDirectSuboordinatesOf(findCarey);
+        assertTrue(careySuboordinates.contains(chell));
+
+        //make sure belanna's direct suboordinates don't include chell anymore
+        List<ICrewMember> belannaSuboordinates = voyagerCrew.getDirectSuboordinatesOf(findBelanna);
+        assertFalse(belannaSuboordinates.contains(chell));
     }
 
     @Test //TODO
     public void testToString() {
+    }
+
+    @Test //TODO
+    public void getMemberInfoList() {
+    }
+
+    @Test //TODO
+    public void getCrewMemberInfo() {
+    }
+
+    @Test //TODO
+    public void editCrewMember() {
     }
 }
