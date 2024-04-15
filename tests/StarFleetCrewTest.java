@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class StarFleetCrewTest {
     StarFleetOfficer testOfficer;
@@ -79,6 +80,7 @@ public class StarFleetCrewTest {
     public void addCrewMember() {
         voyagerCrew.setRoot(janeway);
         Predicate<ICrewMember> findJaneway = (officer) -> "Kathryn Janeway".equalsIgnoreCase(officer.getName());
+        assertTrue(findJaneway.test(janeway)); //make sure the predicate will find janeway
         voyagerCrew.addCrewMember(belanna, findJaneway);
 
         ArrayList<TreeNode<ICrewMember>> janewaySubordinates = voyagerCrew.getRoot().getChildren();
