@@ -16,6 +16,11 @@ public class LeafNode<T> extends TreeNode<T> {
     }
 
     @Override
+    public boolean addChild(T newChildData) {
+        return false;
+    }
+
+    @Override
     public void moveChildren(Predicate<T> findChildrenToReassign, BranchNode<T> newParent) {
     }
 
