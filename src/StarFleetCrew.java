@@ -126,17 +126,19 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
 
     @Override
     public void removeCrewMember(Predicate<ICrewMember> findMemberToRemove) {
+        //get the node of the member we're removing
         TreeNode<ICrewMember> memberNode = root.findNode(findMemberToRemove);
 
-        //there are children so need to move them before removing their parent
+        //if there are children move them all to new superior so we don't lose them as well
         ArrayList<TreeNode<ICrewMember>> memberChildren = memberNode.getChildren();
         if (!memberChildren.isEmpty()) {
             BranchNode<ICrewMember> newSuperior = (BranchNode<ICrewMember>) memberNode.getParent();
-            memberNode.moveChildren((t) -> true, newSuperior);
+            memberNode.moveChildren((t) -> true, newSuperior); //move every single child to the new superior
         }
 
-        //now just remove ourselves from our parent
+        //get the parent of the node we're removing
         BranchNode<ICrewMember> parent = (BranchNode<ICrewMember>) memberNode.getParent();
+        //remove them from the parent
         parent.deleteChild(memberNode);
     }
 
