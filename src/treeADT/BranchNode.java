@@ -131,7 +131,8 @@ public class BranchNode<T> extends TreeNode<T> {
         if (newChild == null) {
             return false;
         } else {
-            this.children.add(newChild);
+            this.children.add(newChild); //add the child to the parent's list of children
+            newChild.setParent(this); //add the parent to the child //FIXME: INFINITE LOOP
             return true;
         }
     }
