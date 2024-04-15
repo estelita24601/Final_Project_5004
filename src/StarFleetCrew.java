@@ -35,8 +35,9 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     @Override
     public String toString() {
         return root.toString();
-    }    @Override
+    }
 
+    @Override
     public void setRoot(ICrewMember officer) {
         if (canCommand.test(officer)) {
             this.root = new BranchNode<>(officer);
@@ -58,11 +59,19 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
 
     @Override
     public int countAll() {
+        //make sure we even have a root crew member
+        if (root == null) {
+            return 0;
+        }
         return root.countAll();
     }
 
     @Override
     public int countFilter(Predicate<ICrewMember> filter) {
+        //make sure we even have a root crew member
+        if (root == null) {
+            return 0;
+        }
         return root.countIf(filter);
     }
 
