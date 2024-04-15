@@ -167,10 +167,7 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
 
     @Override
     public void putInCommandOf(Predicate<ICrewMember> findThisMember, Predicate<ICrewMember> findNewSubordinate) {
-        BranchNode<ICrewMember> thisMember = (BranchNode<ICrewMember>) root.findNode(findThisMember);
-        TreeNode<ICrewMember> newSubordinate = root.findNode(findNewSubordinate);
-
-        thisMember.addChild(newSubordinate);
+        reAssignTo(findNewSubordinate, findThisMember); // put the new suboordinate underneath this member w/o affecting grandchildren
     }
 
     @Override
