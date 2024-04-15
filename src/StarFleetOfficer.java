@@ -28,10 +28,55 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
         this.heritage.add(heritage);
     }
 
-
     @Override
     public int compareTo(StarFleetOfficer otherOfficer) {
         return this.rank.compareTo(otherOfficer.getRank());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 31;
+        result = 31 * result + fullName.hashCode();
+        result = 31 * result + rank.hashCode();
+        result = 31 * result + heritage.hashCode();
+        //making the hashcode result only dependent on name, rank and heritage
+        //same as our equals method is only dependent on those three attributes
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof StarFleetOfficer)) {
+            return false; //object given isn't even from right interface
+        }
+        //now that we know its safe we can typecast
+        StarFleetOfficer otherOfficer = (StarFleetOfficer) o;
+
+        if (!this.getName().equals(otherOfficer.getName())) {
+            return false;
+        }
+        if (this.rank != otherOfficer.getRank()) {
+            return false;
+        }
+        if (this.heritage != otherOfficer.getHeritage()) {
+            return false;
+        }
+        return true; //if all that differs is their job and shift they're basically the same person
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder heritageString = new StringBuilder();
+        if (heritage.size() == 0) {
+            heritageString.append("Undisclosed");
+        } else {
+            for (Species s : this.heritage) {
+                heritageString.append(s.toString());
+                heritageString.append(" ");
+            }
+        }
+
+        return String.format("%s %s\n\tDepartment: %s\n\tSpecies: %s\n", rank, fullName, job, heritageString);
     }
 
     @Override
@@ -63,21 +108,6 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
     @Override
     public String getName() {
         return this.fullName;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder heritageString = new StringBuilder();
-        if (heritage.size() == 0) {
-            heritageString.append("Undisclosed");
-        } else {
-            for (Species s : this.heritage) {
-                heritageString.append(s.toString());
-                heritageString.append(" ");
-            }
-        }
-
-        return String.format("%s %s\n\tDepartment: %s\n\tSpecies: %s\n", rank, fullName, job, heritageString);
     }
 
     @Override
