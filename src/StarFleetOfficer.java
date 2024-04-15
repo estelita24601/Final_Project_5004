@@ -77,7 +77,7 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
             }
         }
 
-        return String.format("%s %s\n\tDepartment: %s\n\tHeritage: %s\n", rank, fullName, job, heritageString);
+        return String.format("%s %s\n\tDepartment: %s\n\tSpecies: %s\n", rank, fullName, job, heritageString);
     }
 
     @Override

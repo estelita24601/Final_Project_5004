@@ -101,7 +101,7 @@ public class BranchNode<T> extends TreeNode<T> {
         return result;
     }
 
-    @Override //TODO: write test
+    @Override
     public String toString() {
         String initial = "";
         BiFunction<String, T, String> foldToString;
