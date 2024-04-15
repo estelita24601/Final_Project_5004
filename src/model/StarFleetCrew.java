@@ -151,14 +151,18 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     public void reAssignTo(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> findNewSuperior) {
         TreeNode<ICrewMember> memberNode = root.findNode(thisMember);
         BranchNode<ICrewMember> newSuperior = (BranchNode<ICrewMember>) root.findNode(findNewSuperior);
-        memberNode.setParent(newSuperior);
 
         //move children to grandparent if needed
         ArrayList<TreeNode<ICrewMember>> oldChildren = memberNode.getChildren();
+        BranchNode<ICrewMember> grandparent = (BranchNode) memberNode.getParent();
         if (!oldChildren.isEmpty()) {
-            BranchNode<ICrewMember> oldSuperior = (BranchNode<ICrewMember>) memberNode.getParent();
-            memberNode.moveChildren(oldSuperior);
+            memberNode.moveChildren(grandparent);
         }
+
+        //now we can re-assign to the new superior
+        grandparent.deleteChild(memberNode); //remove member node from old parent
+        newSuperior.addChild(memberNode); //add member node to the new parent
+        memberNode.setParent(newSuperior); //update the member node with it's new parent
     }
 
     @Override
