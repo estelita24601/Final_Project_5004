@@ -30,7 +30,7 @@ public class StarFleetCommand implements ICrewController {
         this.view.welcomeMessage();
         boolean createdCrew = initializeCrew(); //try to get user to create the crew from a file or by hand
         //check if user succesfulyl created crew or if they decided to quit entire program
-        if (createdCrew == false) {
+        if (!createdCrew) {
             //they declined to initialize a crew so there's nothing left to do
             view.goodbyeMessage();
             return;
@@ -38,11 +38,10 @@ public class StarFleetCommand implements ICrewController {
 
         boolean exit = false;
         while (!exit) {
-            ViewDisplayer mainMenu =
-                    () -> {
-                        view.displayMainMenu();
-                        view.debugDisplay("NOTE: only options 0 and 8 are functional\n");
-                    };
+            ViewDisplayer mainMenu = () -> {
+                view.displayMainMenu();
+                view.debugDisplay("NOTE: only options 0 and 8 are functional\n");
+            };
             ViewDisplayer invalidChoiceMessage = () -> view.displayTryAgainMessage();
             //use helper to loop until user gives us a valid choice from the main menu
             int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 8);
@@ -82,151 +81,6 @@ public class StarFleetCommand implements ICrewController {
         this.view.goodbyeMessage();
     }
 
-    //TODO
-    private void scheduleEditingMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
-        /* psuedocode:
-        while finishedEditing == false:
-            get view to display different editing options (edit name, rank, department, species)
-            int choice = getValidChoice()
-
-            if choice == -1
-                quit early
-            else if choice == 0
-                finishedEditing = try to edit name method //returns true if successfully edited name
-            else if choice == 1
-                finished editting = try to edit rank method //returns true if successful
-            etc for all the other options...
-
-         outside of loop:
-         display success message
-         display crew member with updated info
-         */
-    }
-
-    //TODO
-    private void scheduleDisplayMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
-        /* psuedocode:
-        while finished == false
-            Predicate<ICrewMember> memberIsOnDesiredShift
-
-            desiredRotation = getValidChoice(rotation_options_list, choose_rotation_prompt, try_again_message)
-            if desiredRotation == null
-                finished == true; //aka quit early
-            memberIsOnDesiredShift = member.shift.rotation == desiredRotation //update predicate with desired shift
-
-            boolean wantToSpecifyDepartment = getYesOrNo(ask_about_department, try_again_message)
-
-            if wantToSpecifyDepartment:
-                desiredDepartment = getValidChoice()
-                if desiredDepartment == null
-                    //they want to quit specifying the department
-                    break
-                else
-                    memberIsOnDesiredShift = (member) -> {
-                        member.shift.rotation == desiredRotation && member.shift.department ==
-                        desiredDepartment
-                    }
-
-            //now that we've defined our predicate
-            //create a list of crew members that are working the shift use wants to see
-            List<ICrewMember> membersOnDesiredShift = model.getMemberList(memberIsOnDesiredShift)
-
-            model.display desired shift
-            model.display members on desired shift
-         */
-    }
-
-    //TODO
-    private void countCrewMemberMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
-        /* psuedocode:
-
-        Predicate<ICrewMember> givenFilter = getPredicate(ask how to count, try again message)
-        if givenFilter == null
-            they want to quit early
-            return
-
-        int numCounted = model.countFilter(givenFilter)
-        view.displayNumberCounted(numCounted)
-
-        HELPER METHOD:
-        Predicate<ICrewMember> getPredicate(ViewDisplayer prompt, ViewDisplayer errorMessage)
-            String[] parameterOptions = [rank, department, shift rotation, species] //idea: maybe refactor enums to objects so I can put them in this array?
-            String userChoice = getValidChoice(parameter options)
-
-            Predicate<ICrewMember> filter = null
-            switch userChoice
-                case rank:
-                    filter = make rank predicate helper method()
-                case department:
-                    filter = make department helper method()
-                etc...
-
-             return filter;
-
-         */
-    }
-
-    //TODO
-    private void filterCrewMemberMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
-        /* psuedocode:
-
-        Predicate<ICrewMember> givenFilter = getPredicate(ask how to filter, try again message)
-        if givenFilter == null: quit
-
-        List<ICrewMember> filteredCrewMembers = model.getMemberList(givenFilter);
-        view.displayCrewList(filteredCrewMembers)
-         */
-    }
-
-    //TODO
-    private void findCrewMemberMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
-        //code will be very similar to filterCrewMemberMenu and count menu
-        //just different ViewDisplayers and at the end use a different method from the model
-        /*
-         * getPredicate()
-         * if predicate == null: quit
-         *
-         * ICrewMember = model.getCrewMember(predicate)
-         * view.displayCrewMember
-         */
-    }
-
-    //TODO
-    private void removeCrewMemberMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
-        /*
-         * getPredicate()
-         * if predicate == null then quit
-         *
-         * model.removeCrewMember(predicate) //idea: maybe refactor this to return boolean so we know if predicate found someone to remove
-         * view.display completion message
-         *
-         */
-    }
-
-    //TODO
-    private void crewEditorMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
-        /*
-         * 1st ask who they want to edit
-         *      ask for a name or ask them to choose someone from a list of all crew members
-         *      either way create a predicate that will find the crew member they want to edit
-         *
-         * 2nd ask how they want to edit them
-         *      helper method that returns Consumer<ICrewMember>
-         *          ask what parameter they want to edit
-         *          get new value for what they want to change (using getRank, getDepartment etc)
-         *
-         * model.editCrewMember(findPersonPredicate, editPersonConsumer)
-         * ICrewMember = model.getCrewMember(findPersonPredicate)
-         * view.displayCrewMember()
-         */
-    }
 
     /**
      * helper method for when the user wants to add a new person to the crew
@@ -241,8 +95,7 @@ public class StarFleetCommand implements ICrewController {
 
 
         //list of crew members that are valid options
-        Function<ICrewMember, String> abbreviatedInfo = (person) -> String.format("%s %s (%s)", person.getRank(),
-                person.getName(), person.getJob());
+        Function<ICrewMember, String> abbreviatedInfo = (person) -> String.format("%s %s (%s)", person.getRank(), person.getName(), person.getJob());
         List<String> superiorOfficerList = model.getMemberInfoList(model.getCommandingOfficerRequirement(), abbreviatedInfo);
 
         //specify the prompt and error message user gets when giving invalid input
@@ -275,7 +128,7 @@ public class StarFleetCommand implements ICrewController {
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
 
         boolean crewSuccessfullyInitialized = false;
-        while (crewSuccessfullyInitialized == false) {
+        while (!crewSuccessfullyInitialized) {
             //prompt the user for input until we get valid response
             int initializationMethod = getValidChoice(askToInitializeCrew, askToTryAgain, 2);
 
@@ -301,7 +154,7 @@ public class StarFleetCommand implements ICrewController {
     private boolean loadFile() {
         boolean validFile = false;
 
-        while (validFile == false) {
+        while (!validFile) {
             String filename = getStringData(() -> view.askForFileName());
             if (filename == null) {
                 //they want to quit
@@ -552,6 +405,31 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
+     * runs a menu that asks the user to provide on or more species
+     *
+     * @return (ArrayList < Species >) list of the species the user gave, could be empty if user decided to quit early
+     */
+    private ArrayList<Species> runSpeciesSelectionMenu() {
+        ArrayList<Species> speciesArray = new ArrayList<>();
+
+        boolean wantToContinue = true;
+        while (wantToContinue) {
+            Species currentSpecies = getSpecies();
+
+            // check if they want to quit early
+            if (currentSpecies == null) {
+                return speciesArray; //return whatever we have
+            }
+            speciesArray.add(currentSpecies);
+
+            //check if they want to continue or want to stop
+            ViewDisplayer askIfContinue = () -> view.askIfWantToContinueGivingSpecies();
+            wantToContinue = getYesOrNo(askIfContinue, () -> view.displayTryAgainMessage());
+        }
+        return speciesArray;
+    }
+
+    /**
      * runs a menu that asks the user to choose a species
      *
      * @return (Species) the species the user chose
@@ -562,7 +440,6 @@ public class StarFleetCommand implements ICrewController {
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
         return (Species) getValidChoice(model.getSpeciesOptions(), askForSpecies, askToTryAgain);
     }
-
 
     /**
      * runs a menu that asks the user to choose a shift rotation
@@ -588,28 +465,149 @@ public class StarFleetCommand implements ICrewController {
         return (Department) getValidChoice(model.getDepartmentOptions(), askForDepartment, askToTryAgain);
     }
 
-    /**
-     * runs a menu that asks the user to provide on or more species
-     *
-     * @return (ArrayList < Species >) list of the species the user gave, could be empty if user decided to quit early
-     */
-    private ArrayList<Species> runSpeciesSelectionMenu() {
-        ArrayList<Species> speciesArray = new ArrayList<>();
+    //TODO
+    private void scheduleEditingMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+        while finishedEditing == false:
+            get view to display different editing options (edit name, rank, department, species)
+            int choice = getValidChoice()
 
-        boolean wantToContinue = true;
-        while (wantToContinue) {
-            Species currentSpecies = getSpecies();
+            if choice == -1
+                quit early
+            else if choice == 0
+                finishedEditing = try to edit name method //returns true if successfully edited name
+            else if choice == 1
+                finished editting = try to edit rank method //returns true if successful
+            etc for all the other options...
 
-            // check if they want to quit early
-            if (currentSpecies == null) {
-                return speciesArray; //return whatever we have
-            }
-            speciesArray.add(currentSpecies);
+         outside of loop:
+         display success message
+         display crew member with updated info
+         */
+    }
 
-            //check if they want to continue or want to stop
-            ViewDisplayer askIfContinue = () -> view.askIfWantToContinueGivingSpecies();
-            wantToContinue = getYesOrNo(askIfContinue, () -> view.displayTryAgainMessage());
-        }
-        return speciesArray;
+    //TODO
+    private void scheduleDisplayMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+        while finished == false
+            Predicate<ICrewMember> memberIsOnDesiredShift
+
+            desiredRotation = getValidChoice(rotation_options_list, choose_rotation_prompt, try_again_message)
+            if desiredRotation == null
+                finished == true; //aka quit early
+            memberIsOnDesiredShift = member.shift.rotation == desiredRotation //update predicate with desired shift
+
+            boolean wantToSpecifyDepartment = getYesOrNo(ask_about_department, try_again_message)
+
+            if wantToSpecifyDepartment:
+                desiredDepartment = getValidChoice()
+                if desiredDepartment == null
+                    //they want to quit specifying the department
+                    break
+                else
+                    memberIsOnDesiredShift = (member) -> {
+                        member.shift.rotation == desiredRotation && member.shift.department ==
+                        desiredDepartment
+                    }
+
+            //now that we've defined our predicate
+            //create a list of crew members that are working the shift use wants to see
+            List<ICrewMember> membersOnDesiredShift = model.getMemberList(memberIsOnDesiredShift)
+
+            model.display desired shift
+            model.display members on desired shift
+         */
+    }
+
+    //TODO
+    private void countCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+
+        Predicate<ICrewMember> givenFilter = getPredicate(ask how to count, try again message)
+        if givenFilter == null
+            they want to quit early
+            return
+
+        int numCounted = model.countFilter(givenFilter)
+        view.displayNumberCounted(numCounted)
+
+        HELPER METHOD:
+        Predicate<ICrewMember> getPredicate(ViewDisplayer prompt, ViewDisplayer errorMessage)
+            String[] parameterOptions = [rank, department, shift rotation, species] //idea: maybe refactor enums to objects so I can put them in this array?
+            String userChoice = getValidChoice(parameter options)
+
+            Predicate<ICrewMember> filter = null
+            switch userChoice
+                case rank:
+                    filter = make rank predicate helper method()
+                case department:
+                    filter = make department helper method()
+                etc...
+
+             return filter;
+
+         */
+    }
+
+    //TODO
+    private void filterCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+
+        Predicate<ICrewMember> givenFilter = getPredicate(ask how to filter, try again message)
+        if givenFilter == null: quit
+
+        List<ICrewMember> filteredCrewMembers = model.getMemberList(givenFilter);
+        view.displayCrewList(filteredCrewMembers)
+         */
+    }
+
+    //TODO
+    private void findCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        //code will be very similar to filterCrewMemberMenu and count menu
+        //just different ViewDisplayers and at the end use a different method from the model
+        /*
+         * getPredicate()
+         * if predicate == null: quit
+         *
+         * ICrewMember = model.getCrewMember(predicate)
+         * view.displayCrewMember
+         */
+    }
+
+    //TODO
+    private void removeCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /*
+         * getPredicate()
+         * if predicate == null then quit
+         *
+         * model.removeCrewMember(predicate) //idea: maybe refactor this to return boolean so we know if predicate found someone to remove
+         * view.display completion message
+         *
+         */
+    }
+
+    //TODO
+    private void crewEditorMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /*
+         * 1st ask who they want to edit
+         *      ask for a name or ask them to choose someone from a list of all crew members
+         *      either way create a predicate that will find the crew member they want to edit
+         *
+         * 2nd ask how they want to edit them
+         *      helper method that returns Consumer<ICrewMember>
+         *          ask what parameter they want to edit
+         *          get new value for what they want to change (using getRank, getDepartment etc)
+         *
+         * model.editCrewMember(findPersonPredicate, editPersonConsumer)
+         * ICrewMember = model.getCrewMember(findPersonPredicate)
+         * view.displayCrewMember()
+         */
     }
 }
