@@ -13,10 +13,15 @@ import java.util.function.Predicate;
 
 public class StarFleetCrew implements ICrewModel<ICrewMember> {
     //lambda for the starfleet requirement for being a commanding officer
-    private final Predicate<ICrewMember> canCommand = (officer) -> officer.getRank().compareTo(Rank.PETTY_OFFICER) > 0;
+    public final Predicate<ICrewMember> canCommand = (officer) -> officer.getRank().compareTo(Rank.PETTY_OFFICER) > 0;
     private BranchNode<ICrewMember> root;
 
     public StarFleetCrew() {
+    }
+
+    @Override
+    public Predicate<ICrewMember> getCommandingOfficerRequirement() {
+        return this.canCommand;
     }
 
     @Override

@@ -5,13 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-//SPECIFY __ parameters
-//specify
-//I'm sorry I can't do that
-//warning:
-//computer activate ____ program
-//computer resume
-//
+
 
 public class TextView implements ICrewView {
     private final OutputStream out;
@@ -162,5 +156,10 @@ public class TextView implements ICrewView {
     @Override
     public void displayQuitOption() {
         printToTerminal("or enter \"-1\" to terminate current operation\n");
+    }
+
+    @Override
+    public void askForSuperiorOfficer() {
+        printToTerminal("Please specify superior officer for this crew member\n");
     }
 }

@@ -9,6 +9,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public interface ICrewModel<ICrewMember> {
+    Predicate<model.ICrewMember> getCommandingOfficerRequirement();
+
     //enum values for menu options
     Rank[] getRankOptions();
 
