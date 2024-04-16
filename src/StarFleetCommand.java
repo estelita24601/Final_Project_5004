@@ -16,22 +16,27 @@ public class StarFleetCommand implements ICrewController {
         this.in = inputStream;
     }
 
+    /**
+     * @param model (ICrewModel) the model we're using for this run of the program
+     * @param view  (ICrewView) the view we're using for this run of the program
+     */
     @Override
     public void go(ICrewModel<ICrewMember> model, ICrewView view) {
+        //load in the model and view
         this.model = model;
         this.view = view;
-        boolean exit = false;
-        scanner = new Scanner(in);
+        this.scanner = new Scanner(in); //create scanner to get input
 
         this.view.welcomeMessage();
-        boolean createdCrew = initializeCrew();
-
+        boolean createdCrew = initializeCrew(); //try to get user to create the crew from a file or by hand
+        //check if user succesfulyl created crew or if they decided to quit entire program
         if (createdCrew == false) {
             //they declined to initialize a crew so there's nothing left to do
             view.goodbyeMessage();
             return;
         }
 
+        boolean exit = false;
         while (!exit) {
             ViewDisplayer mainMenu =
                     () -> {
@@ -39,54 +44,48 @@ public class StarFleetCommand implements ICrewController {
                         view.debugDisplay("NOTE: only options 0 and 8 are functional\n");
                     };
             ViewDisplayer invalidChoiceMessage = () -> view.displayTryAgainMessage();
+            //use helper to loop until user gives us a valid choice from the main menu
             int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 8);
 
             if (menuChoice == 0) {
                 //add new crew member
                 addNewCrewMember();
-            }
-            else if (menuChoice == 1) {
+            } else if (menuChoice == 1) {
                 //remove crew member
                 removeCrewMemberMenu();
-            }
-            else if (menuChoice == 2) {
+            } else if (menuChoice == 2) {
                 //edit crew member
                 crewEditorMenu();
-            }
-            else if (menuChoice == 3) {
+            } else if (menuChoice == 3) {
                 //find crew member
                 findCrewMemberMenu();
-            }
-            else if (menuChoice == 4) {
+            } else if (menuChoice == 4) {
                 //filter crew members
                 filterCrewMemberMenu();
-            }
-            else if (menuChoice == 5) {
+            } else if (menuChoice == 5) {
                 //count crew members
                 countCrewMemberMenu();
-            }
-            else if (menuChoice == 6) {
+            } else if (menuChoice == 6) {
                 //view schedule
                 scheduleDisplayMenu();
-            }
-            else if (menuChoice == 7) {
+            } else if (menuChoice == 7) {
                 //edit schedule
                 scheduleEditingMenu();
-            }
-            else if (menuChoice == 8) {
+            } else if (menuChoice == 8) {
                 view.displayEntireCrew(model);
+            } else if (menuChoice == -1) {
+                exit = true; //they want to leave so end the loop
             }
-            else if (menuChoice == -1) {
-                exit = true;
-            }
-            // if they didn't decide to exit go back to main menu after they finished what
-            // they were doing
+            // if they didn't decide to exit go back to main menu after they finished what they were doing
         }
 
         this.view.goodbyeMessage();
     }
 
-    //TODO
+    /**
+     * Menu that lets user choose how they want to edit the schedule and then prints the results
+     * will either keep going until it successfully edits the schedule or will until user asks to exit
+     */
     private void scheduleEditingMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
         /* psuedocode:
@@ -167,29 +166,31 @@ public class StarFleetCommand implements ICrewController {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
     }
 
+    /**
+     * helper method for when the user wants to add a new person to the crew
+     */
     private void addNewCrewMember() {
         ViewDisplayer askForNewMemberInfo = () -> view.displayCreatNewCrewMemberMessage();
-        ICrewMember newCrewMember = createCrewMember(askForNewMemberInfo);
+        ICrewMember newCrewMember = createCrewMember(askForNewMemberInfo); //keep on asking user to give info for new crew member
         if (newCrewMember == null) {
-            //the want to quit
+            // if they didn't create a crew member and it's just null that means they want to quit
             return;
         }
 
-        ViewDisplayer askForSuperiorOfficer = () -> {
-            view.askForSuperiorOfficer();
-            view.displayQuitOption();
-        };
-        ViewDisplayer tryAgain = () -> view.displayTryAgainMessage();
 
         //list of crew members that are valid options
         Function<ICrewMember, String> abbreviatedInfo = (person) -> String.format("%s %s (%s)", person.getRank(),
                 person.getName(), person.getJob());
         List<String> superiorOfficerList = model.getMemberInfoList(model.getCommandingOfficerRequirement(), abbreviatedInfo);
 
-        //the crew member user chose to be the superior
-        String nameOfSuperior = (String) getValidChoice(superiorOfficerList.toArray(),
-                askForSuperiorOfficer, tryAgain);
-
+        //specify the prompt and error message user gets when giving invalid input
+        ViewDisplayer askForSuperiorOfficer = () -> {
+            view.askForSuperiorOfficer();
+            view.displayQuitOption();
+        };
+        ViewDisplayer tryAgain = () -> view.displayTryAgainMessage();
+        //use view displayers to get the name of the superior officer
+        String nameOfSuperior = (String) getValidChoice(superiorOfficerList.toArray(), askForSuperiorOfficer, tryAgain);
         //double check they don't want to quit
         if (nameOfSuperior == null) {
             //they want to quit
@@ -200,31 +201,41 @@ public class StarFleetCommand implements ICrewController {
         view.displaySuccessfullyCreatedMember(newCrewMember);
     }
 
+    /**
+     * @return (boolean)
+     * true if user successfully initialized the crew
+     * false if the user asked to quit before initializing the crew
+     */
     private boolean initializeCrew() {
-        boolean crewSuccessfullyInitialized = false;
+        //what we want the view to do while we're trying to get valid input
         ViewDisplayer askToInitializeCrew = () -> view.askToCreateCrew();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
 
+        boolean crewSuccessfullyInitialized = false;
         while (crewSuccessfullyInitialized == false) {
+            //prompt the user for input until we get valid response
             int initializationMethod = getValidChoice(askToInitializeCrew, askToTryAgain, 2);
 
             if (initializationMethod == 0) {
                 //then they want to create a crew by hand
                 crewSuccessfullyInitialized = createCaptain(); //will be true when we successfully create a captain for the crew
 
-            }
-            else if (initializationMethod == 1) {
+            } else if (initializationMethod == 1) {
                 //then they want to load in from a file
                 crewSuccessfullyInitialized = loadFile(); //will be true when we successfully load in a file
-            }
-            else if (initializationMethod == -1) {
+            } else if (initializationMethod == -1) {
                 //then they want to quit
                 break;
             }
         }
-        return crewSuccessfullyInitialized;
+        return crewSuccessfullyInitialized; //will only be true if createCaptain() or loadFile() returned true
     }
 
+    /**
+     * @return (boolean)
+     * true if program was able to open the file and read in it's data
+     * false if program was unable to open a file and the user decided to qui
+     */
     private boolean loadFile() {
         boolean validFile = false;
 
@@ -246,6 +257,12 @@ public class StarFleetCommand implements ICrewController {
         return validFile; //we made it out of the loops so they must've successfully loaded a file
     }
 
+    /**
+     * '
+     * TODO
+     *
+     * @return
+     */
     private boolean createCaptain() {
         ViewDisplayer askForCaptainParameters = () -> view.askForCaptain();
         boolean captainNotCreated = true;
@@ -270,6 +287,12 @@ public class StarFleetCommand implements ICrewController {
         return captainNotCreated;
     }
 
+    /**
+     * TODO
+     *
+     * @param createMemberPrompt (ViewDisplayer)
+     * @return
+     */
     private ICrewMember createCrewMember(ViewDisplayer createMemberPrompt) {
         boolean tryingToCreateNewMember = true;
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
@@ -325,6 +348,12 @@ public class StarFleetCommand implements ICrewController {
         return newOfficer;
     }
 
+    /**
+     * @param options
+     * @param choicePrompt
+     * @param invalidResponse
+     * @return
+     */
     private Object getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int choiceNumber = -1000; //initializing with something that will never be an option
         Object chosenOption = null;
@@ -347,8 +376,7 @@ public class StarFleetCommand implements ICrewController {
                 // check if they tried to exit
                 if (choiceNumber == -1) {
                     receivedValidChoice = true;
-                }
-                else {
+                } else {
                     // otherwise number given was just wrong
                     invalidResponse.display();
                 }
@@ -357,6 +385,12 @@ public class StarFleetCommand implements ICrewController {
         return chosenOption;
     }
 
+    /**
+     * @param choicePrompt
+     * @param invalidResponse
+     * @param numOptions
+     * @return
+     */
     private int getValidChoice(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse, int numOptions) {
         int choice = -1000; //initializing with something that will never be an option
         boolean receivedValidChoice = false;
@@ -372,8 +406,7 @@ public class StarFleetCommand implements ICrewController {
             }
             if (choice == -1 || choice <= numOptions) {
                 receivedValidChoice = true;
-            }
-            else {
+            } else {
                 // number received wasn't one of the options
                 invalidResponse.display();
             }
@@ -381,6 +414,11 @@ public class StarFleetCommand implements ICrewController {
         return choice;
     }
 
+    /**
+     * @param choicePrompt
+     * @param invalidResponse
+     * @return
+     */
     private boolean getYesOrNo(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int menuSelection = -1000;
         boolean receivedValidChoice = false;
@@ -401,8 +439,7 @@ public class StarFleetCommand implements ICrewController {
             //make sure the number received was one of the options
             if (menuSelection == 0 || menuSelection == 1) {
                 receivedValidChoice = true;
-            }
-            else {
+            } else {
                 // number received wasn't one of the options
                 invalidResponse.display();
             }
@@ -411,6 +448,10 @@ public class StarFleetCommand implements ICrewController {
         return (menuSelection == 1);
     }
 
+    /**
+     * @param userPrompt
+     * @return
+     */
     private String getStringData(ViewDisplayer userPrompt) {
         String userInput = null;
 
@@ -456,6 +497,9 @@ public class StarFleetCommand implements ICrewController {
         return (Department) getValidChoice(model.getDepartmentOptions(), askForDepartment, askToTryAgain);
     }
 
+    /**
+     * @return
+     */
     private ArrayList<Species> runSpeciesSelectionMenu() {
         ArrayList<Species> speciesArray = new ArrayList<>();
 
@@ -465,7 +509,7 @@ public class StarFleetCommand implements ICrewController {
 
             // check if they want to quit early
             if (currentSpecies == null) {
-                return speciesArray;
+                return speciesArray; //return whatever we have
             }
             speciesArray.add(currentSpecies);
 
