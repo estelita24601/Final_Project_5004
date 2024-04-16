@@ -31,6 +31,11 @@ public class TextView implements ICrewView {
     }
 
     @Override
+    public void goodbyeMessage() {
+        printToTerminal("Goodbye\n");
+    }
+
+    @Override
     public void askForCaptain() {
         printToTerminal("Specify parameters for commanding officer\n");
     }
@@ -56,6 +61,11 @@ public class TextView implements ICrewView {
     }
 
     @Override
+    public void askForSpecies() {
+        printToTerminal("Specify species\n");
+    }
+
+    @Override
     public void askToDiscloseSpecies() {
         printToTerminal("Do you wish to specify crew member's heritage?\n");
     }
@@ -63,11 +73,6 @@ public class TextView implements ICrewView {
     @Override
     public void askIfWantToContinueGivingSpecies() {
         printToTerminal("Do you wish to continue specifying species?\n");
-    }
-
-    @Override
-    public void askForSpecies() {
-        printToTerminal("Specify species\n");
     }
 
     @Override
@@ -81,7 +86,9 @@ public class TextView implements ICrewView {
     @Override
     public void displayMainMenu() {
         printToTerminal("\nSpecify crew operation\n");
-        String[] mainMenuOptions = {"Add New Crew Member", "Remove Crew Member", "Edit Crew Member", "Find Crew Member", "Filter Crew Members", "Count Crew Members", "View Shift Schedule", "Edit Shift Schedule"};
+        String[] mainMenuOptions = {"Add New Crew Member", "Remove Crew Member", "Edit Crew Member", "Find Crew " +
+                "Member", "Filter Crew Members", "Count Crew Members", "View Shift Schedule", "Edit Shift Schedule",
+                "List All Crew Members"};
         displayOptions(mainMenuOptions);
     }
 
@@ -89,11 +96,6 @@ public class TextView implements ICrewView {
     public void displayError(Exception e) {
         String errorMessage = String.format("WARNING:\n\t%s\n", e.getMessage());
         printToTerminal(errorMessage);
-    }
-
-    @Override
-    public void goodbyeMessage() {
-        printToTerminal("Goodbye\n");
     }
 
     @Override
