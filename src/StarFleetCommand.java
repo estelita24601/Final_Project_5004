@@ -21,8 +21,13 @@ public class StarFleetCommand implements ICrewController {
         scanner = new Scanner(in);
 
         this.view.welcomeMessage();
+        boolean createdCrew = initializeCrew();
 
-        createCaptain();
+        if (createdCrew == false) {
+            //they declined to initialize a crew so there's nothing left to do
+            view.goodbyeMessage();
+            return;
+        }
 
         while (!exit) {
             ViewDisplayer mainMenu = () -> view.displayMainMenu();
@@ -168,29 +173,59 @@ public class StarFleetCommand implements ICrewController {
         return (Rotation) getValidChoice(model.getShiftRotationOptions(), askForRotation, askToTryAgain);
     }
 
-    private void createCaptain() {
-        boolean invalidInput = true;
-        boolean quitEarly = false;
+    private boolean initializeCrew() {
+        boolean crewSuccessfullyInitialized = false;
+        ViewDisplayer askToInitializeCrew = () -> view.displayCreateCrewMessage();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
 
-        while (invalidInput) {
-            view.askForCaptain();
+        while (crewSuccessfullyInitialized == false) {
+            int initializationMethod = getValidChoice(askToInitializeCrew, askToTryAgain, 2);
 
-            view.askForName();
-            String name = scanner.nextLine().strip();
+            if (initializationMethod == 0) {
+                //then they want to create a crew by hand
+                crewSuccessfullyInitialized = createCaptain(); //will be true when we successfully create a captain for the crew
 
-            Rank rank = getRank();
-            // if rank is null then user wants to exit early
-            if (rank == null) {
-                quitEarly = true;
+            } else if (initializationMethod == 1) {
+                //then they want to load in from a file
+                crewSuccessfullyInitialized = loadFile(); //will be true when we successfully load in a file
+            } else if (initializationMethod == -1) {
+                //then they want to quit
                 break;
             }
+        }
+        return crewSuccessfullyInitialized;
+    }
 
-            Rotation rotation = getShiftRotation();
-            // if rotation is null then user wants to exit early
-            if (rotation == null) {
-                quitEarly = true;
-                break;
+    private boolean loadFile() {
+        boolean validFile = false;
+
+        while (validFile == false) {
+            String filename = getStringData(() -> view.askForFileName());
+            if (filename == null) {
+                //they want to quit
+                return validFile;
+            }
+
+            try {
+                model.loadFromFile(filename);
+                validFile = true; //leave the loop
+            } catch (FileNotFoundException e) {
+                view.displayError(e); //loading file didn't work, continue to loop
+            }
+        }
+
+        return validFile; //we made it out of the loops so they must've successfully loaded a file
+    }
+
+    private boolean createCaptain() {
+        ViewDisplayer askForCaptainParameters = () -> view.askForCaptain();
+        boolean captainNotCreated = true;
+
+        while (captainNotCreated) {
+            ICrewMember captain = createCrewMember(askForCaptainParameters);
+            if (captain == null) {
+                //they want to quit early
+                return false;
             }
 
             ViewDisplayer askForSpecies = () -> view.askToDiscloseSpecies();
