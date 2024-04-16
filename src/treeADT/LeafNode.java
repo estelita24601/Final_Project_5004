@@ -17,36 +17,37 @@ public class LeafNode<T> extends TreeNode<T> {
 
     @Override
     public boolean addChild(T newChildData) {
-        return false;
+        return false; //have no children so can't be successful in adding a new child
     }
 
     @Override
     public void moveChildren(Predicate<T> findChildrenToReassign, BranchNode<T> newParent) {
+        //have no children so do nothing
     }
 
     @Override
     public void moveChildren(BranchNode<T> newParent) {
-
+        //have no children so do nothing
     }
 
-    @Override //leaf nodes can't have children
+    @Override
     public boolean addChild(TreeNode<T> newChild) {
-        return false;
+        return false; //leaf nodes can't have children
     }
 
     @Override
     public boolean addChild(T newChildData, Predicate<T> canBeBranch) {
-        return false;
+        return false; //leaf nodes can't have children
     }
 
-    @Override //leaf nodes don't have children
+    @Override
     public boolean deleteChild(Predicate<T> findChildToDelete) {
-        return false;
+        return false; //leaf nodes don't have children
     }
 
     @Override
     public boolean deleteChild(TreeNode<T> childToDelete) {
-        return false;
+        return false; //leaf nodes don't have children
     }
 
     @Override
@@ -54,6 +55,13 @@ public class LeafNode<T> extends TreeNode<T> {
         return new LeafNode<>(this.data, this.parent.deepCopy());
     }
 
+    /**
+     * one of the base cases for our map function
+     *
+     * @param <R>       the data type we want to map to
+     * @param converter function that converts data to the desired type
+     * @return a leaf node with the data mapped to the desired data type
+     */
     @Override
     public <R> TreeNode<R> map(Function<T, R> converter) {
         return new LeafNode<>(converter.apply(this.data));
