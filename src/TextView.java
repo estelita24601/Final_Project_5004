@@ -87,8 +87,7 @@ public class TextView implements ICrewView {
     @Override
     public void displayMainMenu() {
         printToTerminal("\nSpecify crew operation\n");
-        String[] mainMenuOptions = {"Determine crew demographics", "Obtain crew member information", "Edit Crew",
-                "Scheduling"};
+        String[] mainMenuOptions = {"Add New Crew Member", "Remove Crew Member", "Edit Crew Member", "Find Crew Member", "Filter Crew Members", "Count Crew Members", "View Shift Schedule", "Edit Shift Schedule"};
         displayOptions(mainMenuOptions);
     }
 
