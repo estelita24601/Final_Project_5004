@@ -1,5 +1,6 @@
 import model.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,6 +52,7 @@ public class StarFleetCommand implements ICrewController {
 
         this.view.goodbyeMessage();
     }
+
 
     private Object getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int choiceNumber = -1000; //initializing with something that will never be an option
@@ -228,6 +230,45 @@ public class StarFleetCommand implements ICrewController {
                 return false;
             }
 
+            //make sure we can set the crew member they created as the root of the crew
+            try {
+                this.model.setRoot(captain);
+                view.displaySuccessfullyCreatedMember(captain); //give feedback so user know it worked
+                return true;
+            } catch (IllegalArgumentException e) {
+                view.displayError(e); //let user know there was an issue
+                //loop again to get info
+            }
+        }
+    }
+
+    private ICrewMember createCrewMember(ViewDisplayer createMemberPrompt) {
+        boolean tryingToCreateNewMember = true;
+        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
+        StarFleetOfficer newOfficer = null;
+
+        while (tryingToCreateNewMember) {
+            createMemberPrompt.display();
+
+            String name = getStringData(() -> view.askForName());
+            //if name is null that means user wants to exit early
+            if (name == null) {
+                return newOfficer;
+            }
+
+
+            Rank rank = getRank();
+            // if rank is null then user wants to exit early
+            if (rank == null) {
+                return newOfficer;
+            }
+
+            Rotation rotation = getShiftRotation();
+            // if rotation is null then user wants to exit early
+            if (rotation == null) {
+                return newOfficer;
+            }
+
             ViewDisplayer askForSpecies = () -> view.askToDiscloseSpecies();
             boolean discloseSpecies = getYesOrNo(askForSpecies, askToTryAgain);
 
@@ -239,20 +280,20 @@ public class StarFleetCommand implements ICrewController {
                 view.debugDisplay("exited species disclosure menu");
             }
 
+            //make sure we can create the crew member without errors
             try {
-                //make sure we can create the crew member and assign them as the commander of entire crew
-                StarFleetOfficer captain = new StarFleetOfficer(name, rank, Department.BRIDGE, rotation, heritage);
-                this.model.setRoot(captain);
-                view.displaySuccessfullyCreatedMember(captain); //give feedback so user know it worked
-                invalidInput = false;
+                newOfficer = new StarFleetOfficer(name, rank, Department.BRIDGE, rotation, heritage);
+                view.displaySuccessfullyCreatedMember(newOfficer); //give feedback so user know it worked
+                tryingToCreateNewMember = false;
             } catch (IllegalArgumentException e) {
                 view.displayError(e);
             }
         }
+        return newOfficer;
     }
 
     private ArrayList<Species> runSpeciesSelectionMenu() {
-        ArrayList<Species> heritage = new ArrayList<>();
+        ArrayList<Species> speciesArray = new ArrayList<>();
 
         boolean wantToContinue = true;
         while (wantToContinue) {
@@ -261,9 +302,9 @@ public class StarFleetCommand implements ICrewController {
             // check if they want to quit early
             if (currentSpecies == null) {
                 view.debugDisplay("chose to exit species selection menu early");
-                return heritage;
+                return speciesArray;
             }
-            heritage.add(currentSpecies);
+            speciesArray.add(currentSpecies);
 
             //check if they want to continue or want to stop
             ViewDisplayer askIfContinue = () -> view.askIfWantToContinueGivingSpecies();
@@ -271,6 +312,7 @@ public class StarFleetCommand implements ICrewController {
         }
 
         view.debugDisplay("finished getting species now returning array");
-        return heritage;
+        return speciesArray;
+
     }
 }
