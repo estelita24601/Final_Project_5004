@@ -130,6 +130,26 @@ public class StarFleetCommand implements ICrewController {
         return (menuSelection == 1);
     }
 
+    private String getStringData(ViewDisplayer userPrompt) {
+        String userInput = null;
+
+        userPrompt.display();
+        userInput = scanner.nextLine().strip();
+
+        try {
+            int exitChoice = Integer.valueOf(userInput); //see if they gave us a number
+            if (exitChoice == -1) {
+                //if the number was -1 they want to quit
+                return null; //return null so caller knows the user tried to quit
+            }
+            //if input was able to convert to int but didn't equal -1 it wasnt an exit request so just return
+            return userInput;
+        } catch (NumberFormatException e) {
+            //user input wasn't even a number, they don't want to quit so return what they sent
+            return userInput;
+        }
+    }
+
     private Rank getRank() {
         ViewDisplayer askForRank = () -> view.askForRank();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
