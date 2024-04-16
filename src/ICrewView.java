@@ -53,4 +53,6 @@ public interface ICrewView {
     void displayQuitOption();
 
     void askForSuperiorOfficer();
+
+    void displayNumberCounted(int number);
 }
