@@ -19,24 +19,44 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     public StarFleetCrew() {
     }
 
+    /**
+     * @return Predicate<ICrewMember> the predicate used to determine if a crew member can be a commanding officer in this crew
+     */
     @Override
     public Predicate<ICrewMember> getCommandingOfficerRequirement() {
         return this.canCommand;
     }
 
+    /**
+     * @return Rank[] an array of all the possible Rank enum values
+     */
     @Override
     public Rank[] getRankOptions() {
         return Rank.values();
     }
 
+    /**
+     * @return Species[] an array of all the possible Species enum values
+     */
     @Override
     public Species[] getSpeciesOptions() {
         return Species.values();
     }
 
+    /**
+     * @return Rotation[] an array of all the possible shift Rotation enum values
+     */
     @Override
     public Rotation[] getShiftRotationOptions() {
         return Rotation.values();
+    }
+
+    /**
+     * @return Department[] an array of all the possible Department enum values
+     */
+    @Override
+    public Department[] getDepartmentOptions() {
+        return Department.values();
     }
 
     @Override
@@ -53,17 +73,21 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
         }
     }
 
-    @Override
-    public Department[] getDepartmentOptions() {
-        return Department.values();
-    }
-
+    /**
+     * use a CSV file to load in crew members
+     *
+     * @param filename (String) name of the file that has crew information
+     * @throws FileNotFoundException if unable to open/read file given
+     */
     @Override
     public void loadFromFile(String filename) throws FileNotFoundException {
         StarFleetCSVReader reader = new StarFleetCSVReader();
         this.root = (BranchNode<ICrewMember>) reader.loadRootFromFile(filename);
     }
 
+    /**
+     * @return (int) the total number of crew members in this crew
+     */
     @Override
     public int countAll() {
         //make sure we even have a root crew member
@@ -73,6 +97,10 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
         return root.countAll();
     }
 
+    /**
+     * @param filter (Predicate<ICrewMember>) predicate that returns true when you want a crew member to counted
+     * @return (int) the number of crew members in this crew that passed the predicate given
+     */
     @Override
     public int countFilter(Predicate<ICrewMember> filter) {
         //make sure we even have a root crew member
@@ -82,16 +110,33 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
         return root.countIf(filter);
     }
 
+    /**
+     * @return (List < ICrewMember >) a list of all the crew members in this crew
+     */
     @Override
     public List<ICrewMember> getMemberList() {
         return root.toList();
     }
 
+    /**
+     * @param filter (Predicate<ICrewMember>) predicate that determines if we want the crew member to be included in
+     *               the list
+     * @return (List < ICrewMember >) list of the crew members in this crew that passed the filter
+     */
     @Override
     public List<ICrewMember> getMemberList(Predicate<ICrewMember> filter) {
         return root.filterToList(filter);
     }
 
+    /**
+     * Get a list of string information from members of this crew
+     *
+     * @param filter           (Predicate<ICrewMember>) predicate that determines which crew members we want information about
+     * @param convertInfoToStr (Function<ICrewMember, String>) function that takes the information from a crew member
+     *                         and formats it in a string however you want
+     * @return (List < String >) list of information on the crew members that passed the filter. the strings in this
+     * list are formatted however was specified in convertInfoToStr function
+     */
     @Override
     public List<String> getMemberInfoList(Predicate<ICrewMember> filter, Function<ICrewMember, String> convertInfoToStr) {
         List<ICrewMember> memberList = getMemberList(filter);
@@ -102,24 +147,48 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
         return memberInfoList;
     }
 
+    /**
+     * @param findThisMember (Predicate<ICrewMember>) predicate that will return true when it finds the person you're
+     *                       looking for
+     * @return (ICrewMember) the first crew member in the crew that passed the findThisMember predicate
+     */
     @Override
     public ICrewMember getCrewMember(Predicate<ICrewMember> findThisMember) {
         TreeNode<ICrewMember> memberNode = root.findNode(findThisMember);
         return memberNode.getData();
     }
 
+    /**
+     * @param findThisMember   (Predicate<ICrewMember>) predicate that will return true when it finds the person you're
+     *                         looking for
+     * @param convertInfoToStr (Function<ICrewMember, String>) function that takes the information from a crew member
+     *                         and formats it in a string however you want
+     * @return (String) information about the crew member found by the predicate in the form of a string that was
+     * formatted by the convertInfoToStr function
+     */
     @Override
     public String getCrewMemberInfo(Predicate<ICrewMember> findThisMember, Function<ICrewMember, String> convertInfoToStr) {
         TreeNode<ICrewMember> memberNode = root.findNode(findThisMember);
         return convertInfoToStr.apply(memberNode.getData());
     }
 
+    /**
+     * @param findMemberToEdit (Predicate<ICrewMember>) predicate that returns true when it finds the crew member you
+     *                         want to edit
+     * @param crewMemberEditor (Consumer<ICrewMember>) consumer that will accept a crew member then edit it however
+     *                         you specify
+     */
     @Override
     public void editCrewMember(Predicate<ICrewMember> findMemberToEdit, Consumer<ICrewMember> crewMemberEditor) {
         TreeNode<ICrewMember> memberNode = root.findNode(findMemberToEdit);
         crewMemberEditor.accept(memberNode.getData());
     }
 
+    /**
+     * @param newCrewMember   (ICrewMember) the new crew member you want to add to this crew
+     * @param findNewSuperior (Predicate<ICrewMember>) predicate that finds who will be the direct superior of this
+     *                        new crew member
+     */
     @Override
     public void addCrewMember(ICrewMember newCrewMember, Predicate<ICrewMember> findNewSuperior) {
         //find the superior officer using the predicate
@@ -131,6 +200,12 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
         }
     }
 
+    /**
+     * will remove a crew member without affecting anyone under their command
+     *
+     * @param findMemberToRemove (Predicate<ICrewMember>) predicate that returns true when it finds the person you
+     *                           want to remove from the crew
+     */
     @Override
     public void removeCrewMember(Predicate<ICrewMember> findMemberToRemove) {
         //get the node of the member we're removing
@@ -152,6 +227,13 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
         parent.deleteChild(memberToRemove);
     }
 
+    /**
+     * will reassign a crew member to serve under a new commanding officer. any officers commanded by the original
+     * officer will be re-assigned to the next officer in their original chain of command
+     *
+     * @param thisMember      predicate that finds the crew member you are re-assigning
+     * @param findNewSuperior predicate that finds the new superior for the member you're re-assigning
+     */
     @Override
     public void reAssignTo(Predicate<ICrewMember> thisMember, Predicate<ICrewMember> findNewSuperior) {
         TreeNode<ICrewMember> memberNode = root.findNode(thisMember);
