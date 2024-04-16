@@ -144,12 +144,24 @@ public class TextView implements ICrewView {
     }
 
     @Override
-    public void displayCreateCrewMessage() {
+    public void displayCreatNewCrewMemberMessage() {
         printToTerminal("Specify parameters for new crew member\n");
     }
 
     @Override
     public void askForFileName() {
         printToTerminal("Specify filename: ");
+    }
+
+    @Override
+    public void askToCreateCrew() {
+        printToTerminal("Please create crew:\n");
+        String[] crewCreationOptions = {"Create New Commanding Officer", "Load Existing Crew From File"};
+        displayOptions(crewCreationOptions);
+    }
+
+    @Override
+    public void displayQuitOption() {
+        printToTerminal("or enter \"-1\" to terminate current operation\n");
     }
 }
