@@ -51,4 +51,6 @@ public interface ICrewView {
     void askToCreateCrew();
 
     void displayQuitOption();
+
+    void askForSuperiorOfficer();
 }

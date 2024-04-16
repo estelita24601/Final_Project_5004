@@ -2,6 +2,7 @@ import model.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class StarFleetCommand implements ICrewController {
@@ -37,20 +38,28 @@ public class StarFleetCommand implements ICrewController {
 
             if (menuChoice == 0) {
                 //add new crew member
+                addNewCrewMember();
             } else if (menuChoice == 1) {
                 //remove crew member
+                removeCrewMemberMenu();
             } else if (menuChoice == 2) {
                 //edit crew member
+                crewEditorMenu();
             } else if (menuChoice == 3) {
                 //find crew member
+                findCrewMemberMenu();
             } else if (menuChoice == 4) {
                 //filter crew members
+                filterCrewMemberMenu();
             } else if (menuChoice == 5) {
                 //count crew members
+                countCrewMemberMenu();
             } else if (menuChoice == 6) {
                 //view schedule
+                scheduleDisplayMenu();
             } else if (menuChoice == 7) {
                 //edit schedule
+                scheduleEditingMenu();
             } else if (menuChoice == -1) {
                 exit = true;
             }
@@ -59,6 +68,72 @@ public class StarFleetCommand implements ICrewController {
         }
 
         this.view.goodbyeMessage();
+    }
+
+    //TODO
+    private void scheduleEditingMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+    }
+
+    //TODO
+    private void scheduleDisplayMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+    }
+
+    //TODO
+    private void countCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+    }
+
+    //TODO
+    private void filterCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+    }
+
+    //TODO
+    private void findCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+    }
+
+    //TODO
+    private void crewEditorMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+    }
+
+    //TODO
+    private void removeCrewMemberMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+    }
+
+    private void addNewCrewMember() {
+        ViewDisplayer askForNewMemberInfo = () -> view.displayCreatNewCrewMemberMessage();
+        ICrewMember newCrewMember = createCrewMember(askForNewMemberInfo);
+        if (newCrewMember == null) {
+            //the want to quit
+            return;
+        }
+
+
+        ViewDisplayer askForSuperiorOfficer = () -> {
+            view.askForSuperiorOfficer();
+            view.displayQuitOption();
+        };
+        ViewDisplayer tryAgain = () -> view.displayTryAgainMessage();
+
+        //list of crew members that are valid options
+        List<ICrewMember> superiorOfficerChoices = model.getMemberList(model.getCommandingOfficerRequirement());
+
+        //the crew member user chose to be the superior
+        ICrewMember superiorForNewCrewMember = (ICrewMember) getValidChoice(superiorOfficerChoices.toArray(), askForSuperiorOfficer, tryAgain);
+
+        //double check they don't want to quit
+        if (superiorForNewCrewMember == null) {
+            //they want to quit
+            return;
+        }
+
+        model.addCrewMember(newCrewMember, (officer) -> officer.equals(superiorForNewCrewMember));
+        view.displaySuccessfullyCreatedMember(newCrewMember);
     }
 
     private boolean initializeCrew() {
