@@ -33,7 +33,11 @@ public class StarFleetCommand implements ICrewController {
         }
 
         while (!exit) {
-            ViewDisplayer mainMenu = () -> view.displayMainMenu();
+            ViewDisplayer mainMenu =
+                    () -> {
+                        view.displayMainMenu();
+                        view.debugDisplay("NOTE: only options 0 and 8 are functional\n");
+                    };
             ViewDisplayer invalidChoiceMessage = () -> view.displayTryAgainMessage();
             int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 8);
 
@@ -85,11 +89,57 @@ public class StarFleetCommand implements ICrewController {
     //TODO
     private void scheduleEditingMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+        while finishedEditing == false:
+            get view to display different editing options (edit name, rank, department, species)
+            int choice = getValidChoice()
+
+            if choice == -1
+                quit early
+            else if choice == 0
+                finishedEditing = try to edit name method //returns true if successfully edited name
+            else if choice == 1
+                finished editting = try to edit rank method //returns true if successful
+            etc for all the other options...
+
+         outside of loop:
+         display success message
+         display crew member with updated info
+         */
     }
 
     //TODO
     private void scheduleDisplayMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+        while finished == false
+            Predicate<ICrewMember> memberIsOnDesiredShift
+
+            desiredRotation = getValidChoice(rotation_options_list, choose_rotation_prompt, try_again_message)
+            if desiredRotation == null
+                finished == true; //aka quit early
+            memberIsOnDesiredShift = member.shift.rotation == desiredRotation //update predicate with desired shift
+
+            boolean wantToSpecifyDepartment = getYesOrNo(ask_about_department, try_again_message)
+
+            if wantToSpecifyDepartment:
+                desiredDepartment = getValidChoice()
+                if desiredDepartment == null
+                    //they want to quit specifying the department
+                    break
+                else
+                    memberIsOnDesiredShift = (member) -> {
+                        member.shift.rotation == desiredRotation && member.shift.department ==
+                        desiredDepartment
+                    }
+
+            //now that we've defined our predicate
+            //create a list of crew members that are working the shift use wants to see
+            List<ICrewMember> membersOnDesiredShift = model.getMemberList(memberIsOnDesiredShift)
+
+            model.display desired shift
+            model.display members on desired shift
+         */
     }
 
     //TODO
