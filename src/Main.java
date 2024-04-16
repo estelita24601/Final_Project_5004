@@ -1,6 +1,10 @@
+import controller.ICrewController;
+import controller.StarFleetCommand;
 import model.ICrewMember;
 import model.ICrewModel;
 import model.StarFleetCrew;
+import view.ICrewView;
+import view.TextView;
 
 import java.io.InputStreamReader;
 
