@@ -1,4 +1,8 @@
+package controller;
+
 import model.*;
+import view.ICrewView;
+import view.ViewDisplayer;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ public class StarFleetCommand implements ICrewController {
 
     /**
      * @param model (ICrewModel) the model we're using for this run of the program
-     * @param view  (ICrewView) the view we're using for this run of the program
+     * @param view  (view.ICrewView) the view we're using for this run of the program
      */
     @Override
     public void go(ICrewModel<ICrewMember> model, ICrewView view) {
@@ -205,7 +209,7 @@ public class StarFleetCommand implements ICrewController {
     /**
      * runs the menu that gets information needed from the user to create a new crew member object
      *
-     * @param createMemberPrompt (ViewDisplayer) what you want the view to do to prompt the user to create a crew member
+     * @param createMemberPrompt (view.ViewDisplayer) what you want the view to do to prompt the user to create a crew member
      * @return (ICrewMember) the crew member object created with information the user gave
      * @return null if the user decided to quit early
      */
@@ -266,8 +270,8 @@ public class StarFleetCommand implements ICrewController {
 
     /**
      * @param options         (Object[]) an array of the valid options the user can choose between
-     * @param choicePrompt    (ViewDisplayer) how you want the view to prompt the user to make this choice
-     * @param invalidResponse (ViewDisplayer) how you want the view to react if the user gives invalid input
+     * @param choicePrompt    (view.ViewDisplayer) how you want the view to prompt the user to make this choice
+     * @param invalidResponse (view.ViewDisplayer) how you want the view to react if the user gives invalid input
      * @return (Object) one of the objects in the options array that the user chose
      * @return null if user decided to quit instead of making a valid choice
      */
@@ -303,8 +307,8 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @param choicePrompt    (ViewDisplayer) how you want the view to prompt the user to make this choice
-     * @param invalidResponse (ViewDisplayer) how you want the view to react if the user gives invalid input
+     * @param choicePrompt    (view.ViewDisplayer) how you want the view to prompt the user to make this choice
+     * @param invalidResponse (view.ViewDisplayer) how you want the view to react if the user gives invalid input
      * @param numOptions      (int) the number of options you're presenting to the user, or the valid range of numbers you'll accept from the user
      * @return (int) the number the user chose, returning -1 if user decided to quit instead of making a choice
      */
@@ -332,8 +336,8 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @param choicePrompt    (ViewDisplayer) how you want the view to ask the yes or no question
-     * @param invalidResponse (ViewDisplayer) how you want the view to respond if given invalid input
+     * @param choicePrompt    (view.ViewDisplayer) how you want the view to ask the yes or no question
+     * @param invalidResponse (view.ViewDisplayer) how you want the view to respond if given invalid input
      * @return true if the user selected YES
      * @return false if the user selected NO or to quit
      */
@@ -367,7 +371,7 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @param userPrompt (ViewDisplayer) how you want the view to ask the user for a string
+     * @param userPrompt (view.ViewDisplayer) how you want the view to ask the user for a string
      * @return (String) the string the user gave
      * @return null if the user decided to quit instead
      */
@@ -535,7 +539,7 @@ public class StarFleetCommand implements ICrewController {
         view.displayNumberCounted(numCounted)
 
         HELPER METHOD:
-        Predicate<ICrewMember> getPredicate(ViewDisplayer prompt, ViewDisplayer errorMessage)
+        Predicate<ICrewMember> getPredicate(view.ViewDisplayer prompt, view.ViewDisplayer errorMessage)
             String[] parameterOptions = [rank, department, shift rotation, species] //idea: maybe refactor enums to objects so I can put them in this array?
             String userChoice = getValidChoice(parameter options)
 
