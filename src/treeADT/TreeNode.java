@@ -21,7 +21,6 @@ public abstract class TreeNode<T> implements ITree<T> {
         this.parent = initParent;
     }
 
-
     @Override
     public T getData() {
         return this.data;
