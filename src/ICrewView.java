@@ -36,7 +36,7 @@ public interface ICrewView {
 
     void displayCrewMember(ICrewMember crewMember);
 
-    void displayEntireCrew(ICrewModel entireCrew);
+    void displayEntireCrew(ICrewModel<ICrewMember> entireCrew);
 
     void displayListOfCrewMembers(ArrayList<ICrewMember> crewMembers);
 
