@@ -43,4 +43,8 @@ public interface ICrewView {
     void debugDisplay(String debugMessage);
 
     void displaySuccessfullyCreatedMember(ICrewMember newCrewMember);
+
+    void displayCreateCrewMessage();
+
+    void askForFileName();
 }

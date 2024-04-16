@@ -66,8 +66,6 @@ public class TextView implements ICrewView {
         printToTerminal("Do you wish to specify crew member's heritage?\n");
     }
 
-    // NOTE: creating a double negative in my controller
-    // TODO: rename this and the code using it in controller
     @Override
     public void askIfWantToContinueGivingSpecies() {
         printToTerminal("Do you wish to continue specifying species?\n");
@@ -102,7 +100,7 @@ public class TextView implements ICrewView {
 
     @Override
     public void goodbyeMessage() {
-
+        printToTerminal("Goodbye\n");
     }
 
     @Override
@@ -143,5 +141,15 @@ public class TextView implements ICrewView {
     public void displaySuccessfullyCreatedMember(ICrewMember newCrewMember) {
         printToTerminal("Successfully Initialized Crew Member:\n");
         displayCrewMember(newCrewMember);
+    }
+
+    @Override
+    public void displayCreateCrewMessage() {
+        printToTerminal("Specify parameters for new crew member\n");
+    }
+
+    @Override
+    public void askForFileName() {
+        printToTerminal("Specify filename: ");
     }
 }
