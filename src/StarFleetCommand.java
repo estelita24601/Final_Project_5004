@@ -82,10 +82,7 @@ public class StarFleetCommand implements ICrewController {
         this.view.goodbyeMessage();
     }
 
-    /**
-     * Menu that lets user choose how they want to edit the schedule and then prints the results
-     * will either keep going until it successfully edits the schedule or will until user asks to exit
-     */
+    //TODO
     private void scheduleEditingMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
         /* psuedocode:
@@ -144,26 +141,91 @@ public class StarFleetCommand implements ICrewController {
     //TODO
     private void countCrewMemberMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+
+        Predicate<ICrewMember> givenFilter = getPredicate(ask how to count, try again message)
+        if givenFilter == null
+            they want to quit early
+            return
+
+        int numCounted = model.countFilter(givenFilter)
+        view.displayNumberCounted(numCounted)
+
+        HELPER METHOD:
+        Predicate<ICrewMember> getPredicate(ViewDisplayer prompt, ViewDisplayer errorMessage)
+            String[] parameterOptions = [rank, department, shift rotation, species] //idea: maybe refactor enums to objects so I can put them in this array?
+            String userChoice = getValidChoice(parameter options)
+
+            Predicate<ICrewMember> filter = null
+            switch userChoice
+                case rank:
+                    filter = make rank predicate helper method()
+                case department:
+                    filter = make department helper method()
+                etc...
+
+             return filter;
+
+         */
     }
 
     //TODO
     private void filterCrewMemberMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /* psuedocode:
+
+        Predicate<ICrewMember> givenFilter = getPredicate(ask how to filter, try again message)
+        if givenFilter == null: quit
+
+        List<ICrewMember> filteredCrewMembers = model.getMemberList(givenFilter);
+        view.displayCrewList(filteredCrewMembers)
+         */
     }
 
     //TODO
     private void findCrewMemberMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
-    }
-
-    //TODO
-    private void crewEditorMenu() {
-        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        //code will be very similar to filterCrewMemberMenu and count menu
+        //just different ViewDisplayers and at the end use a different method from the model
+        /*
+         * getPredicate()
+         * if predicate == null: quit
+         *
+         * ICrewMember = model.getCrewMember(predicate)
+         * view.displayCrewMember
+         */
     }
 
     //TODO
     private void removeCrewMemberMenu() {
         view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /*
+         * getPredicate()
+         * if predicate == null then quit
+         *
+         * model.removeCrewMember(predicate) //idea: maybe refactor this to return boolean so we know if predicate found someone to remove
+         * view.display completion message
+         *
+         */
+    }
+
+    //TODO
+    private void crewEditorMenu() {
+        view.debugDisplay("Sorry this feature isn't supported yet\n");
+        /*
+         * 1st ask who they want to edit
+         *      ask for a name or ask them to choose someone from a list of all crew members
+         *      either way create a predicate that will find the crew member they want to edit
+         *
+         * 2nd ask how they want to edit them
+         *      helper method that returns Consumer<ICrewMember>
+         *          ask what parameter they want to edit
+         *          get new value for what they want to change (using getRank, getDepartment etc)
+         *
+         * model.editCrewMember(findPersonPredicate, editPersonConsumer)
+         * ICrewMember = model.getCrewMember(findPersonPredicate)
+         * view.displayCrewMember()
+         */
     }
 
     /**
@@ -202,9 +264,10 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @return (boolean)
-     * true if user successfully initialized the crew
-     * false if the user asked to quit before initializing the crew
+     * Gets the user to initialize the crew model either by loading in a file or by creating the crew's captain from scratch
+     *
+     * @return true if user successfully initialized the crew
+     * @return false if the user asked to quit before initializing the crew
      */
     private boolean initializeCrew() {
         //what we want the view to do while we're trying to get valid input
@@ -232,9 +295,8 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @return (boolean)
-     * true if program was able to open the file and read in it's data
-     * false if program was unable to open a file and the user decided to qui
+     * @return true if program was able to open the file and read in it's data
+     * @return false if program was unable to open a file and the user decided to qui
      */
     private boolean loadFile() {
         boolean validFile = false;
@@ -258,10 +320,10 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * '
-     * TODO
+     * runs the menu that creates a new crew member and sets them to be the root commanding officer of the crew
      *
-     * @return
+     * @return true if successfully able to create a captain for the crew
+     * @return false if unsuccesful or user decided to exit early
      */
     private boolean createCaptain() {
         ViewDisplayer askForCaptainParameters = () -> view.askForCaptain();
@@ -288,10 +350,11 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * TODO
+     * runs the menu that gets information needed from the user to create a new crew member object
      *
-     * @param createMemberPrompt (ViewDisplayer)
-     * @return
+     * @param createMemberPrompt (ViewDisplayer) what you want the view to do to prompt the user to create a crew member
+     * @return (ICrewMember) the crew member object created with information the user gave
+     * @return null if the user decided to quit early
      */
     private ICrewMember createCrewMember(ViewDisplayer createMemberPrompt) {
         boolean tryingToCreateNewMember = true;
@@ -349,10 +412,11 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @param options
-     * @param choicePrompt
-     * @param invalidResponse
-     * @return
+     * @param options         (Object[]) an array of the valid options the user can choose between
+     * @param choicePrompt    (ViewDisplayer) how you want the view to prompt the user to make this choice
+     * @param invalidResponse (ViewDisplayer) how you want the view to react if the user gives invalid input
+     * @return (Object) one of the objects in the options array that the user chose
+     * @return null if user decided to quit instead of making a valid choice
      */
     private Object getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int choiceNumber = -1000; //initializing with something that will never be an option
@@ -386,10 +450,10 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @param choicePrompt
-     * @param invalidResponse
-     * @param numOptions
-     * @return
+     * @param choicePrompt    (ViewDisplayer) how you want the view to prompt the user to make this choice
+     * @param invalidResponse (ViewDisplayer) how you want the view to react if the user gives invalid input
+     * @param numOptions      (int) the number of options you're presenting to the user, or the valid range of numbers you'll accept from the user
+     * @return (int) the number the user chose, returning -1 if user decided to quit instead of making a choice
      */
     private int getValidChoice(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse, int numOptions) {
         int choice = -1000; //initializing with something that will never be an option
@@ -415,9 +479,10 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @param choicePrompt
-     * @param invalidResponse
-     * @return
+     * @param choicePrompt    (ViewDisplayer) how you want the view to ask the yes or no question
+     * @param invalidResponse (ViewDisplayer) how you want the view to respond if given invalid input
+     * @return true if the user selected YES
+     * @return false if the user selected NO or to quit
      */
     private boolean getYesOrNo(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int menuSelection = -1000;
@@ -449,8 +514,9 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @param userPrompt
-     * @return
+     * @param userPrompt (ViewDisplayer) how you want the view to ask the user for a string
+     * @return (String) the string the user gave
+     * @return null if the user decided to quit instead
      */
     private String getStringData(ViewDisplayer userPrompt) {
         String userInput = null;
@@ -473,24 +539,49 @@ public class StarFleetCommand implements ICrewController {
         }
     }
 
+    /**
+     * runs a menu that asks the user to choose a rank
+     *
+     * @return (Rank) the rank the user chose
+     * @return null if the user decided to quit instead of choosing a rank
+     */
     private Rank getRank() {
         ViewDisplayer askForRank = () -> view.askForRank();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
         return (Rank) getValidChoice(model.getRankOptions(), askForRank, askToTryAgain);
     }
 
+    /**
+     * runs a menu that asks the user to choose a species
+     *
+     * @return (Species) the species the user chose
+     * @return null if the user decided to quit instead of choosing a species
+     */
     private Species getSpecies() {
         ViewDisplayer askForSpecies = () -> view.askForSpecies();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
         return (Species) getValidChoice(model.getSpeciesOptions(), askForSpecies, askToTryAgain);
     }
 
+
+    /**
+     * runs a menu that asks the user to choose a shift rotation
+     *
+     * @return (Rotation) the shift rotation the user chose
+     * @return null if the user decided to quit instead of choosing a shift rotation
+     */
     private Rotation getShiftRotation() {
         ViewDisplayer askForRotation = () -> view.askForRotation();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
         return (Rotation) getValidChoice(model.getShiftRotationOptions(), askForRotation, askToTryAgain);
     }
 
+    /**
+     * runs a menu that asks the user to choose a department
+     *
+     * @return (Department) the department the user chose
+     * @return null if the user decided to quit instead of choosing a department
+     */
     private Department getDepartment() {
         ViewDisplayer askForDepartment = () -> view.askForDepartment();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
@@ -498,7 +589,9 @@ public class StarFleetCommand implements ICrewController {
     }
 
     /**
-     * @return
+     * runs a menu that asks the user to provide on or more species
+     *
+     * @return (ArrayList < Species >) list of the species the user gave, could be empty if user decided to quit early
      */
     private ArrayList<Species> runSpeciesSelectionMenu() {
         ArrayList<Species> speciesArray = new ArrayList<>();
