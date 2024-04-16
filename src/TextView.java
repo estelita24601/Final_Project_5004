@@ -9,17 +9,17 @@ import java.util.ArrayList;
 
 public class TextView implements ICrewView {
     private final OutputStream out;
-    private byte[] byteMessage; // output stream needs to receive array of bytes
 
     public TextView(OutputStream outputDestination) {
         this.out = outputDestination;
     }
 
     private void printToTerminal(String newMessage) {
-        byteMessage = newMessage.getBytes(StandardCharsets.UTF_8);
+        // output stream needs to receive array of bytes
+        byte[] byteMessage = newMessage.getBytes(StandardCharsets.UTF_8);
         try {
-            out.write(byteMessage);
-            out.flush();
+            out.write(byteMessage); //try to add array of bytes to our output stream
+            out.flush(); //flush everything in our stream to the terminal
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,7 +77,8 @@ public class TextView implements ICrewView {
 
     @Override
     public void displayOptions(Object[] optionsList) {
-        printToTerminal(String.format("\t-1. Terminate Current Operation\n"));
+        printToTerminal(String.format("\t-1. Terminate Current Operation\n")); //show exit option first
+        //go through every option in the list and print it to terminal with an associated integer
         for (int i = 0; i < optionsList.length; i++) {
             printToTerminal(String.format("\t%d. %s\n", i, optionsList[i]));
         }
@@ -163,5 +164,10 @@ public class TextView implements ICrewView {
     @Override
     public void askForSuperiorOfficer() {
         printToTerminal("Please specify superior officer for this crew member\n");
+    }
+
+    @Override
+    public void displayNumberCounted(int number) {
+        printToTerminal(String.format("Counted %d crew members that fit specifications\n", number));
     }
 }
