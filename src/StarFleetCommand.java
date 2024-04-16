@@ -36,13 +36,21 @@ public class StarFleetCommand implements ICrewController {
             int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 4);
 
             if (menuChoice == 0) {
-                //runCrewCountingMenu(); TODO
+                //add new crew member
             } else if (menuChoice == 1) {
-                //runMemberInformationMenu(); TODO
+                //remove crew member
             } else if (menuChoice == 2) {
-                //runCrewEditorMenu(); TODO
+                //edit crew member
             } else if (menuChoice == 3) {
-                //runScheduleMenu(); TODO
+                //find crew member
+            } else if (menuChoice == 4) {
+                //filter crew members
+            } else if (menuChoice == 5) {
+                //count crew members
+            } else if (menuChoice == 6) {
+                //view schedule
+            } else if (menuChoice == 7) {
+                //edit schedule
             } else if (menuChoice == -1) {
                 exit = true;
             }
