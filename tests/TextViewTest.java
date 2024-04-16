@@ -1,6 +1,8 @@
 import model.*;
 import org.junit.Before;
 import org.junit.Test;
+import view.ICrewView;
+import view.TextView;
 
 public class TextViewTest {
     ICrewView view = new TextView(System.out);

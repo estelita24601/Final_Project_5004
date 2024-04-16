@@ -2,11 +2,6 @@ package model;
 
 import java.time.Duration;
 import java.time.LocalTime;
-//
-//ALPHA("Alpha", LocalTime.of(6, 0), LocalTime.of(12, 0)),
-//BETA("Beta", LocalTime.of(12, 0), LocalTime.of(18, 0)),
-//GAMMA("Gamma", LocalTime.of(18, 0), LocalTime.of(0, 0)),
-//DELTA("Delta", LocalTime.of(0, 0), LocalTime.of(6, 0));
 
 public class Shift {
     //Constants for creating the default shifts
