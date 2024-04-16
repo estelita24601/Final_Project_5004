@@ -44,7 +44,11 @@ public interface ICrewView {
 
     void displaySuccessfullyCreatedMember(ICrewMember newCrewMember);
 
-    void displayCreateCrewMessage();
+    void displayCreatNewCrewMemberMessage();
 
     void askForFileName();
+
+    void askToCreateCrew();
+
+    void displayQuitOption();
 }
