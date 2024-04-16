@@ -34,7 +34,7 @@ public class StarFleetCommand implements ICrewController {
         while (!exit) {
             ViewDisplayer mainMenu = () -> view.displayMainMenu();
             ViewDisplayer invalidChoiceMessage = () -> view.displayTryAgainMessage();
-            int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 4);
+            int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 7);
 
             if (menuChoice == 0) {
                 //add new crew member
@@ -218,10 +218,15 @@ public class StarFleetCommand implements ICrewController {
                 return newOfficer;
             }
 
-
             Rank rank = getRank();
             // if rank is null then user wants to exit early
             if (rank == null) {
+                return newOfficer;
+            }
+
+            Department department = getDepartment();
+            //if department is null then user wants to exit early
+            if (department == null) {
                 return newOfficer;
             }
 
@@ -376,6 +381,12 @@ public class StarFleetCommand implements ICrewController {
         return (Rotation) getValidChoice(model.getShiftRotationOptions(), askForRotation, askToTryAgain);
     }
 
+    private Department getDepartment() {
+        ViewDisplayer askForDepartment = () -> view.askForDepartment();
+        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
+        return (Department) getValidChoice(model.getDepartmentOptions(), askForDepartment, askToTryAgain);
+    }
+
     private ArrayList<Species> runSpeciesSelectionMenu() {
         ArrayList<Species> speciesArray = new ArrayList<>();
 
@@ -385,7 +396,6 @@ public class StarFleetCommand implements ICrewController {
 
             // check if they want to quit early
             if (currentSpecies == null) {
-                view.debugDisplay("chose to exit species selection menu early");
                 return speciesArray;
             }
             speciesArray.add(currentSpecies);
@@ -394,9 +404,6 @@ public class StarFleetCommand implements ICrewController {
             ViewDisplayer askIfContinue = () -> view.askIfWantToContinueGivingSpecies();
             wantToContinue = getYesOrNo(askIfContinue, () -> view.displayTryAgainMessage());
         }
-
-        view.debugDisplay("finished getting species now returning array");
         return speciesArray;
-
     }
 }
