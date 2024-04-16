@@ -53,6 +53,123 @@ public class StarFleetCommand implements ICrewController {
         this.view.goodbyeMessage();
     }
 
+    private boolean initializeCrew() {
+        boolean crewSuccessfullyInitialized = false;
+        ViewDisplayer askToInitializeCrew = () -> view.askToCreateCrew();
+        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
+
+        while (crewSuccessfullyInitialized == false) {
+            int initializationMethod = getValidChoice(askToInitializeCrew, askToTryAgain, 2);
+
+            if (initializationMethod == 0) {
+                //then they want to create a crew by hand
+                crewSuccessfullyInitialized = createCaptain(); //will be true when we successfully create a captain for the crew
+
+            } else if (initializationMethod == 1) {
+                //then they want to load in from a file
+                crewSuccessfullyInitialized = loadFile(); //will be true when we successfully load in a file
+            } else if (initializationMethod == -1) {
+                //then they want to quit
+                break;
+            }
+        }
+        return crewSuccessfullyInitialized;
+    }
+
+    private boolean loadFile() {
+        boolean validFile = false;
+
+        while (validFile == false) {
+            String filename = getStringData(() -> view.askForFileName());
+            if (filename == null) {
+                //they want to quit
+                return validFile;
+            }
+
+            try {
+                model.loadFromFile(filename);
+                validFile = true; //leave the loop
+            } catch (FileNotFoundException e) {
+                view.displayError(e); //loading file didn't work, continue to loop
+            }
+        }
+
+        return validFile; //we made it out of the loops so they must've successfully loaded a file
+    }
+
+    private boolean createCaptain() {
+        ViewDisplayer askForCaptainParameters = () -> view.askForCaptain();
+        boolean captainNotCreated = true;
+
+        while (captainNotCreated) {
+            ICrewMember captain = createCrewMember(askForCaptainParameters);
+            if (captain == null) {
+                //they want to quit early
+                return false;
+            }
+
+            //make sure we can set the crew member they created as the root of the crew
+            try {
+                this.model.setRoot(captain);
+                view.displaySuccessfullyCreatedMember(captain); //give feedback so user know it worked
+                return true;
+            } catch (IllegalArgumentException e) {
+                view.displayError(e); //let user know there was an issue
+                //loop again to get info
+            }
+        }
+        return captainNotCreated;
+    }
+
+    private ICrewMember createCrewMember(ViewDisplayer createMemberPrompt) {
+        boolean tryingToCreateNewMember = true;
+        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
+        StarFleetOfficer newOfficer = null;
+
+        while (tryingToCreateNewMember) {
+            createMemberPrompt.display();
+
+            String name = getStringData(() -> view.askForName());
+            //if name is null that means user wants to exit early
+            if (name == null) {
+                return newOfficer;
+            }
+
+
+            Rank rank = getRank();
+            // if rank is null then user wants to exit early
+            if (rank == null) {
+                return newOfficer;
+            }
+
+            Rotation rotation = getShiftRotation();
+            // if rotation is null then user wants to exit early
+            if (rotation == null) {
+                return newOfficer;
+            }
+
+            ViewDisplayer askForSpecies = () -> view.askToDiscloseSpecies();
+            boolean discloseSpecies = getYesOrNo(askForSpecies, askToTryAgain);
+
+
+            ArrayList<Species> heritage = new ArrayList<>();
+            if (discloseSpecies) {
+                view.debugDisplay("going to enter species disclosure menu");
+                heritage = runSpeciesSelectionMenu(); // allow them to continue adding species until they stop or quit
+                view.debugDisplay("exited species disclosure menu");
+            }
+
+            //make sure we can create the crew member without errors
+            try {
+                newOfficer = new StarFleetOfficer(name, rank, Department.BRIDGE, rotation, heritage);
+                view.displaySuccessfullyCreatedMember(newOfficer); //give feedback so user know it worked
+                tryingToCreateNewMember = false;
+            } catch (IllegalArgumentException e) {
+                view.displayError(e);
+            }
+        }
+        return newOfficer;
+    }
 
     private Object getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int choiceNumber = -1000; //initializing with something that will never be an option
@@ -141,6 +258,7 @@ public class StarFleetCommand implements ICrewController {
         String userInput = null;
 
         userPrompt.display();
+        view.displayQuitOption();
         userInput = scanner.nextLine().strip();
 
         try {
@@ -173,123 +291,6 @@ public class StarFleetCommand implements ICrewController {
         ViewDisplayer askForRotation = () -> view.askForRotation();
         ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
         return (Rotation) getValidChoice(model.getShiftRotationOptions(), askForRotation, askToTryAgain);
-    }
-
-    private boolean initializeCrew() {
-        boolean crewSuccessfullyInitialized = false;
-        ViewDisplayer askToInitializeCrew = () -> view.displayCreateCrewMessage();
-        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
-
-        while (crewSuccessfullyInitialized == false) {
-            int initializationMethod = getValidChoice(askToInitializeCrew, askToTryAgain, 2);
-
-            if (initializationMethod == 0) {
-                //then they want to create a crew by hand
-                crewSuccessfullyInitialized = createCaptain(); //will be true when we successfully create a captain for the crew
-
-            } else if (initializationMethod == 1) {
-                //then they want to load in from a file
-                crewSuccessfullyInitialized = loadFile(); //will be true when we successfully load in a file
-            } else if (initializationMethod == -1) {
-                //then they want to quit
-                break;
-            }
-        }
-        return crewSuccessfullyInitialized;
-    }
-
-    private boolean loadFile() {
-        boolean validFile = false;
-
-        while (validFile == false) {
-            String filename = getStringData(() -> view.askForFileName());
-            if (filename == null) {
-                //they want to quit
-                return validFile;
-            }
-
-            try {
-                model.loadFromFile(filename);
-                validFile = true; //leave the loop
-            } catch (FileNotFoundException e) {
-                view.displayError(e); //loading file didn't work, continue to loop
-            }
-        }
-
-        return validFile; //we made it out of the loops so they must've successfully loaded a file
-    }
-
-    private boolean createCaptain() {
-        ViewDisplayer askForCaptainParameters = () -> view.askForCaptain();
-        boolean captainNotCreated = true;
-
-        while (captainNotCreated) {
-            ICrewMember captain = createCrewMember(askForCaptainParameters);
-            if (captain == null) {
-                //they want to quit early
-                return false;
-            }
-
-            //make sure we can set the crew member they created as the root of the crew
-            try {
-                this.model.setRoot(captain);
-                view.displaySuccessfullyCreatedMember(captain); //give feedback so user know it worked
-                return true;
-            } catch (IllegalArgumentException e) {
-                view.displayError(e); //let user know there was an issue
-                //loop again to get info
-            }
-        }
-    }
-
-    private ICrewMember createCrewMember(ViewDisplayer createMemberPrompt) {
-        boolean tryingToCreateNewMember = true;
-        ViewDisplayer askToTryAgain = () -> view.displayTryAgainMessage();
-        StarFleetOfficer newOfficer = null;
-
-        while (tryingToCreateNewMember) {
-            createMemberPrompt.display();
-
-            String name = getStringData(() -> view.askForName());
-            //if name is null that means user wants to exit early
-            if (name == null) {
-                return newOfficer;
-            }
-
-
-            Rank rank = getRank();
-            // if rank is null then user wants to exit early
-            if (rank == null) {
-                return newOfficer;
-            }
-
-            Rotation rotation = getShiftRotation();
-            // if rotation is null then user wants to exit early
-            if (rotation == null) {
-                return newOfficer;
-            }
-
-            ViewDisplayer askForSpecies = () -> view.askToDiscloseSpecies();
-            boolean discloseSpecies = getYesOrNo(askForSpecies, askToTryAgain);
-
-
-            ArrayList<Species> heritage = new ArrayList<>();
-            if (discloseSpecies) {
-                view.debugDisplay("going to enter species disclosure menu");
-                heritage = runSpeciesSelectionMenu(); // allow them to continue adding species until they stop or quit
-                view.debugDisplay("exited species disclosure menu");
-            }
-
-            //make sure we can create the crew member without errors
-            try {
-                newOfficer = new StarFleetOfficer(name, rank, Department.BRIDGE, rotation, heritage);
-                view.displaySuccessfullyCreatedMember(newOfficer); //give feedback so user know it worked
-                tryingToCreateNewMember = false;
-            } catch (IllegalArgumentException e) {
-                view.displayError(e);
-            }
-        }
-        return newOfficer;
     }
 
     private ArrayList<Species> runSpeciesSelectionMenu() {
