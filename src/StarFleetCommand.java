@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class StarFleetCommand implements ICrewController {
     final Readable in;
@@ -34,33 +35,44 @@ public class StarFleetCommand implements ICrewController {
         while (!exit) {
             ViewDisplayer mainMenu = () -> view.displayMainMenu();
             ViewDisplayer invalidChoiceMessage = () -> view.displayTryAgainMessage();
-            int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 7);
+            int menuChoice = getValidChoice(mainMenu, invalidChoiceMessage, 8);
 
             if (menuChoice == 0) {
                 //add new crew member
                 addNewCrewMember();
-            } else if (menuChoice == 1) {
+            }
+            else if (menuChoice == 1) {
                 //remove crew member
                 removeCrewMemberMenu();
-            } else if (menuChoice == 2) {
+            }
+            else if (menuChoice == 2) {
                 //edit crew member
                 crewEditorMenu();
-            } else if (menuChoice == 3) {
+            }
+            else if (menuChoice == 3) {
                 //find crew member
                 findCrewMemberMenu();
-            } else if (menuChoice == 4) {
+            }
+            else if (menuChoice == 4) {
                 //filter crew members
                 filterCrewMemberMenu();
-            } else if (menuChoice == 5) {
+            }
+            else if (menuChoice == 5) {
                 //count crew members
                 countCrewMemberMenu();
-            } else if (menuChoice == 6) {
+            }
+            else if (menuChoice == 6) {
                 //view schedule
                 scheduleDisplayMenu();
-            } else if (menuChoice == 7) {
+            }
+            else if (menuChoice == 7) {
                 //edit schedule
                 scheduleEditingMenu();
-            } else if (menuChoice == -1) {
+            }
+            else if (menuChoice == 8) {
+                view.displayEntireCrew(model);
+            }
+            else if (menuChoice == -1) {
                 exit = true;
             }
             // if they didn't decide to exit go back to main menu after they finished what
@@ -113,7 +125,6 @@ public class StarFleetCommand implements ICrewController {
             return;
         }
 
-
         ViewDisplayer askForSuperiorOfficer = () -> {
             view.askForSuperiorOfficer();
             view.displayQuitOption();
@@ -121,18 +132,21 @@ public class StarFleetCommand implements ICrewController {
         ViewDisplayer tryAgain = () -> view.displayTryAgainMessage();
 
         //list of crew members that are valid options
-        List<ICrewMember> superiorOfficerChoices = model.getMemberList(model.getCommandingOfficerRequirement());
+        Function<ICrewMember, String> abbreviatedInfo = (person) -> String.format("%s %s (%s)", person.getRank(),
+                person.getName(), person.getJob());
+        List<String> superiorOfficerList = model.getMemberInfoList(model.getCommandingOfficerRequirement(), abbreviatedInfo);
 
         //the crew member user chose to be the superior
-        ICrewMember superiorForNewCrewMember = (ICrewMember) getValidChoice(superiorOfficerChoices.toArray(), askForSuperiorOfficer, tryAgain);
+        String nameOfSuperior = (String) getValidChoice(superiorOfficerList.toArray(),
+                askForSuperiorOfficer, tryAgain);
 
         //double check they don't want to quit
-        if (superiorForNewCrewMember == null) {
+        if (nameOfSuperior == null) {
             //they want to quit
             return;
         }
 
-        model.addCrewMember(newCrewMember, (officer) -> officer.equals(superiorForNewCrewMember));
+        model.addCrewMember(newCrewMember, (officer) -> officer.getName().equalsIgnoreCase(nameOfSuperior));
         view.displaySuccessfullyCreatedMember(newCrewMember);
     }
 
@@ -148,10 +162,12 @@ public class StarFleetCommand implements ICrewController {
                 //then they want to create a crew by hand
                 crewSuccessfullyInitialized = createCaptain(); //will be true when we successfully create a captain for the crew
 
-            } else if (initializationMethod == 1) {
+            }
+            else if (initializationMethod == 1) {
                 //then they want to load in from a file
                 crewSuccessfullyInitialized = loadFile(); //will be true when we successfully load in a file
-            } else if (initializationMethod == -1) {
+            }
+            else if (initializationMethod == -1) {
                 //then they want to quit
                 break;
             }
@@ -281,7 +297,8 @@ public class StarFleetCommand implements ICrewController {
                 // check if they tried to exit
                 if (choiceNumber == -1) {
                     receivedValidChoice = true;
-                } else {
+                }
+                else {
                     // otherwise number given was just wrong
                     invalidResponse.display();
                 }
@@ -303,9 +320,10 @@ public class StarFleetCommand implements ICrewController {
                 // didn't even receive a number
                 invalidResponse.display();
             }
-            if (choice == -1 || choice < numOptions) {
+            if (choice == -1 || choice <= numOptions) {
                 receivedValidChoice = true;
-            } else {
+            }
+            else {
                 // number received wasn't one of the options
                 invalidResponse.display();
             }
@@ -333,7 +351,8 @@ public class StarFleetCommand implements ICrewController {
             //make sure the number received was one of the options
             if (menuSelection == 0 || menuSelection == 1) {
                 receivedValidChoice = true;
-            } else {
+            }
+            else {
                 // number received wasn't one of the options
                 invalidResponse.display();
             }
