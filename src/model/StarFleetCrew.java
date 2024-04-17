@@ -129,7 +129,7 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
     }
 
     /**
-     * Get a list of string information from members of this crew
+     * Get a list of string information from members of this crew that fit the requirements set by the filter
      *
      * @param filter           (Predicate<ICrewMember>) predicate that determines which crew members we want information about
      * @param convertInfoToStr (Function<ICrewMember, String>) function that takes the information from a crew member
@@ -139,12 +139,12 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
      */
     @Override
     public List<String> getMemberInfoList(Predicate<ICrewMember> filter, Function<ICrewMember, String> convertInfoToStr) {
-        List<ICrewMember> memberList = getMemberList(filter);
+        List<ICrewMember> memberList = getMemberList(filter); //get a list of the crew members using the predicate filter
         List<String> memberInfoList = new ArrayList<>();
         for (ICrewMember member : memberList) {
-            memberInfoList.add(convertInfoToStr.apply(member));
+            memberInfoList.add(convertInfoToStr.apply(member)); //now convert everything using the function and add to our final list
         }
-        return memberInfoList;
+        return memberInfoList; //return after we've converted all the members
     }
 
     /**
@@ -154,8 +154,8 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
      */
     @Override
     public ICrewMember getCrewMember(Predicate<ICrewMember> findThisMember) {
-        TreeNode<ICrewMember> memberNode = root.findNode(findThisMember);
-        return memberNode.getData();
+        TreeNode<ICrewMember> memberNode = root.findNode(findThisMember); //find the node with the crew member we want
+        return memberNode.getData(); //return just the crew member not the entire node
     }
 
     /**
@@ -168,8 +168,8 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
      */
     @Override
     public String getCrewMemberInfo(Predicate<ICrewMember> findThisMember, Function<ICrewMember, String> convertInfoToStr) {
-        TreeNode<ICrewMember> memberNode = root.findNode(findThisMember);
-        return convertInfoToStr.apply(memberNode.getData());
+        TreeNode<ICrewMember> memberNode = root.findNode(findThisMember); //use predicate to find the crew member
+        return convertInfoToStr.apply(memberNode.getData()); //then use function to convert to string format specified
     }
 
     /**
