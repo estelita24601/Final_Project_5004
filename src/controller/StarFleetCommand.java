@@ -124,7 +124,7 @@ public class StarFleetCommand implements ICrewController {
      * Gets the user to initialize the crew model either by loading in a file or by creating the crew's captain from scratch
      *
      * @return true if user successfully initialized the crew
-     * @return false if the user asked to quit before initializing the crew
+     * false if the user asked to quit before initializing the crew
      */
     private boolean initializeCrew() {
         //what we want the view to do while we're trying to get valid input
@@ -153,7 +153,7 @@ public class StarFleetCommand implements ICrewController {
 
     /**
      * @return true if program was able to open the file and read in it's data
-     * @return false if program was unable to open a file and the user decided to qui
+     * false if program was unable to open a file and the user decided to qui
      */
     private boolean loadFile() {
         boolean validFile = false;
@@ -180,7 +180,7 @@ public class StarFleetCommand implements ICrewController {
      * runs the menu that creates a new crew member and sets them to be the root commanding officer of the crew
      *
      * @return true if successfully able to create a captain for the crew
-     * @return false if unsuccesful or user decided to exit early
+     * false if unsuccessful or user decided to exit early
      */
     private boolean createCaptain() {
         ViewDisplayer askForCaptainParameters = () -> view.askForCaptain();
@@ -211,7 +211,7 @@ public class StarFleetCommand implements ICrewController {
      *
      * @param createMemberPrompt (view.ViewDisplayer) what you want the view to do to prompt the user to create a crew member
      * @return (ICrewMember) the crew member object created with information the user gave
-     * @return null if the user decided to quit early
+     * null if the user decided to quit early
      */
     private ICrewMember createCrewMember(ViewDisplayer createMemberPrompt) {
         boolean tryingToCreateNewMember = true;
@@ -273,7 +273,7 @@ public class StarFleetCommand implements ICrewController {
      * @param choicePrompt    (view.ViewDisplayer) how you want the view to prompt the user to make this choice
      * @param invalidResponse (view.ViewDisplayer) how you want the view to react if the user gives invalid input
      * @return (Object) one of the objects in the options array that the user chose
-     * @return null if user decided to quit instead of making a valid choice
+     * null if user decided to quit instead of making a valid choice
      */
     private Object getValidChoice(Object[] options, ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int choiceNumber = -1000; //initializing with something that will never be an option
@@ -287,7 +287,7 @@ public class StarFleetCommand implements ICrewController {
 
             // now see if input corresponds to an option in the list
             try {
-                choiceNumber = Integer.valueOf(userInput);
+                choiceNumber = Integer.parseInt(userInput);
                 chosenOption = options[choiceNumber];
                 receivedValidChoice = true;
             } catch (NumberFormatException e) {
@@ -320,7 +320,7 @@ public class StarFleetCommand implements ICrewController {
             choicePrompt.display();
             String userInput = scanner.nextLine().strip();
             try {
-                choice = Integer.valueOf(userInput);
+                choice = Integer.parseInt(userInput);
             } catch (NumberFormatException e) {
                 // didn't even receive a number
                 invalidResponse.display();
@@ -339,7 +339,7 @@ public class StarFleetCommand implements ICrewController {
      * @param choicePrompt    (view.ViewDisplayer) how you want the view to ask the yes or no question
      * @param invalidResponse (view.ViewDisplayer) how you want the view to respond if given invalid input
      * @return true if the user selected YES
-     * @return false if the user selected NO or to quit
+     * false if the user selected NO or to quit
      */
     private boolean getYesOrNo(ViewDisplayer choicePrompt, ViewDisplayer invalidResponse) {
         int menuSelection = -1000;
@@ -373,7 +373,7 @@ public class StarFleetCommand implements ICrewController {
     /**
      * @param userPrompt (view.ViewDisplayer) how you want the view to ask the user for a string
      * @return (String) the string the user gave
-     * @return null if the user decided to quit instead
+     * null if the user decided to quit instead
      */
     private String getStringData(ViewDisplayer userPrompt) {
         String userInput = null;
@@ -400,7 +400,7 @@ public class StarFleetCommand implements ICrewController {
      * runs a menu that asks the user to choose a rank
      *
      * @return (Rank) the rank the user chose
-     * @return null if the user decided to quit instead of choosing a rank
+     * null if the user decided to quit instead of choosing a rank
      */
     private Rank getRank() {
         ViewDisplayer askForRank = () -> view.askForRank();
@@ -437,7 +437,7 @@ public class StarFleetCommand implements ICrewController {
      * runs a menu that asks the user to choose a species
      *
      * @return (Species) the species the user chose
-     * @return null if the user decided to quit instead of choosing a species
+     * null if the user decided to quit instead of choosing a species
      */
     private Species getSpecies() {
         ViewDisplayer askForSpecies = () -> view.askForSpecies();
@@ -449,7 +449,7 @@ public class StarFleetCommand implements ICrewController {
      * runs a menu that asks the user to choose a shift rotation
      *
      * @return (Rotation) the shift rotation the user chose
-     * @return null if the user decided to quit instead of choosing a shift rotation
+     * null if the user decided to quit instead of choosing a shift rotation
      */
     private Rotation getShiftRotation() {
         ViewDisplayer askForRotation = () -> view.askForRotation();
@@ -461,7 +461,7 @@ public class StarFleetCommand implements ICrewController {
      * runs a menu that asks the user to choose a department
      *
      * @return (Department) the department the user chose
-     * @return null if the user decided to quit instead of choosing a department
+     * null if the user decided to quit instead of choosing a department
      */
     private Department getDepartment() {
         ViewDisplayer askForDepartment = () -> view.askForDepartment();
