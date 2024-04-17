@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5f8c80ab-d56b-466d-89b7-4235ad2e1b96" name="Changes" comment="putting everything in packages to make it easier to find everything">
+      <change afterPath="$PROJECT_DIR$/src/starships/BirdOfPrey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/starships/Cloakable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/starships/CombatShip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/starships/Freighter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/starships/SpaceFaringVessel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/starships/SpaceVessel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/starships/StarFleetShip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/starships/WarpCapable.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="JUnit3 Test Class" />
+        <option value="JUnit4 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIEW_PUSH_ON_COMMIT_AND_PUSH" value="false" />
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="bug-fix-broken-tree" />
+      </map>
+    </option>
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;estelita24601&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/estelita24601/Final_Project_5004.git&quot;,
+    &quot;accountId&quot;: &quot;5d9ff0ea-a8e5-41b3-8b82-5b60f13a2d31&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/StarfleetCommand.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2eZCWUoq2YaQuMZNC5vaAuAAhFh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="flattenModules" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+    <option name="sortByType" value="true" />
+    <option name="sortKey" value="BY_TYPE" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.SimpleTreeNodeTest.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "JUnit.ALL.executor": "Coverage",
+    "JUnit.All in Final_Project_5004.executor": "Coverage",
+    "JUnit.ShiftTest.executor": "Coverage",
+    "JUnit.ShiftTest.testGetAndSetBoth.executor": "Run",
+    "JUnit.ShiftTest.testGetAndSetDepartment.executor": "Run",
+    "JUnit.ShiftTest.testGetAndSetEnd.executor": "Run",
+    "JUnit.ShiftTest.testGetAndSetShiftName.executor": "Run",
+    "JUnit.ShiftTest.testGetAndSetStart.executor": "Run",
+    "JUnit.ShiftTest.testGetNumHours.executor": "Run",
+    "JUnit.ShiftTest.testToString.executor": "Run",
+    "JUnit.StarFleetCrewTest.addCrewMember.executor": "Run",
+    "JUnit.StarFleetCrewTest.countAll.executor": "Run",
+    "JUnit.StarFleetCrewTest.countFilter.executor": "Run",
+    "JUnit.StarFleetCrewTest.editCrewMember.executor": "Run",
+    "JUnit.StarFleetCrewTest.executor": "Run",
+    "JUnit.StarFleetCrewTest.getCrewMember.executor": "Run",
+    "JUnit.StarFleetCrewTest.getCrewMemberInfo.executor": "Run",
+    "JUnit.StarFleetCrewTest.getMemberInfoList.executor": "Run",
+    "JUnit.StarFleetCrewTest.getMemberList.executor": "Run",
+    "JUnit.StarFleetCrewTest.loadFromFile.executor": "Run",
+    "JUnit.StarFleetCrewTest.putInCommandOf.executor": "Coverage",
+    "JUnit.StarFleetCrewTest.reAssignTo.executor": "Run",
+    "JUnit.StarFleetCrewTest.removeCrewMember.executor": "Coverage",
+    "JUnit.StarFleetCrewTest.setRoot.executor": "Run",
+    "JUnit.StarFleetCrewTest.testToString.executor": "Run",
+    "JUnit.StarFleetOfficerTest.addAndRemoveToHeritage.executor": "Run",
+    "JUnit.StarFleetOfficerTest.compareTo.executor": "Profiler#1",
+    "JUnit.StarFleetOfficerTest.executor": "Run",
+    "JUnit.StarFleetOfficerTest.setHeritage.executor": "Run",
+    "JUnit.StarFleetOfficerTest.testEquals.executor": "Run",
+    "JUnit.StarFleetOfficerTest.testToString.executor": "Run",
+    "JUnit.TextViewTest.askForCaptain.executor": "Run",
+    "JUnit.TextViewTest.executor": "Run",
+    "JUnit.TreeNodeTest.getData.executor": "Run",
+    "JUnit.TreeNodeTest.setData.executor": "Run",
+    "JUnit.TreeNodeTest.testEditData.executor": "Run",
+    "JUnit.TreeTest.testAddChild.executor": "Run",
+    "JUnit.TreeTest.testAddChildCrew.executor": "Run",
+    "JavaClassFindUsagesOptions.isSearchForTextOccurrences": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "treeADT.TreeNode",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Productive Estelita/OneDrive - Northeastern University/CODING/CS_5004/Final_Project_5004/tests",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.folding",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="treeADT.TreeNode" />
+      <recent name="" />
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="treeADT" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="model" />
+      <recent name="model.scheduling" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+      <recent name="model" />
+      <recent name="model.personnel" />
+      <recent name="model.scheduling" />
+      <recent name="treeADT" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Final_Project_5004" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in Final_Project_5004" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Final_Project_5004" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StarFleetCrewTest.editCrewMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Final_Project_5004" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StarFleetCrewTest" />
+      <option name="METHOD_NAME" value="editCrewMember" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StarFleetCrewTest.getCrewMemberInfo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Final_Project_5004" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StarFleetCrewTest" />
+      <option name="METHOD_NAME" value="getCrewMemberInfo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StarFleetCrewTest.getMemberInfoList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Final_Project_5004" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StarFleetCrewTest" />
+      <option name="METHOD_NAME" value="getMemberInfoList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.All in Final_Project_5004" />
+        <item itemvalue="JUnit.StarFleetCrewTest.editCrewMember" />
+        <item itemvalue="JUnit.StarFleetCrewTest.getCrewMemberInfo" />
+        <item itemvalue="JUnit.StarFleetCrewTest.getMemberInfoList" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f8c80ab-d56b-466d-89b7-4235ad2e1b96" name="Changes" comment="" />
+      <created>1712102744946</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712102744946</updated>
+      <workItem from="1712102746021" duration="10472000" />
+      <workItem from="1712195195230" duration="4455000" />
+      <workItem from="1712373517995" duration="324000" />
+      <workItem from="1712442914783" duration="301000" />
+      <workItem from="1712443229611" duration="1426000" />
+      <workItem from="1712537042893" duration="3402000" />
+      <workItem from="1712610992868" duration="1610000" />
+      <workItem from="1712624440129" duration="1308000" />
+      <workItem from="1712694746590" duration="11471000" />
+      <workItem from="1712713382353" duration="5438000" />
+      <workItem from="1712780009790" duration="3500000" />
+      <workItem from="1712799179126" duration="8508000" />
+      <workItem from="1712860237740" duration="317000" />
+      <workItem from="1712860618519" duration="329000" />
+      <workItem from="1712860957576" duration="23627000" />
+      <workItem from="1712953008902" duration="3641000" />
+      <workItem from="1712956996258" duration="812000" />
+      <workItem from="1712986329548" duration="132000" />
+      <workItem from="1712994782379" duration="311000" />
+      <workItem from="1713036529633" duration="1000000" />
+      <workItem from="1713037743116" duration="7150000" />
+      <workItem from="1713044965093" duration="6438000" />
+      <workItem from="1713138722883" duration="889000" />
+      <workItem from="1713152567732" duration="4000" />
+      <workItem from="1713154312983" duration="4343000" />
+      <workItem from="1713205303904" duration="4506000" />
+      <workItem from="1713210123843" duration="21919000" />
+      <workItem from="1713293529811" duration="6473000" />
+    </task>
+    <task id="LOCAL-00055" summary="toString for individual crew members so they can be displayed to user">
+      <option name="closed" value="true" />
+      <created>1713041734653</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1713041734653</updated>
+    </task>
+    <task id="LOCAL-00056" summary="success message for the user after creating a new crewmember">
+      <option name="closed" value="true" />
+      <created>1713042217303</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1713042217303</updated>
+    </task>
+    <task id="LOCAL-00057" summary="trying to write toString for crew">
+      <option name="closed" value="true" />
+      <created>1713042849114</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1713042849114</updated>
+    </task>
+    <task id="LOCAL-00058" summary="created class that reads in csv data">
+      <option name="closed" value="true" />
+      <created>1713050698599</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050698599</updated>
+    </task>
+    <task id="LOCAL-00059" summary="renamed">
+      <option name="closed" value="true" />
+      <created>1713050723982</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050723982</updated>
+    </task>
+    <task id="LOCAL-00060" summary="added some more species">
+      <option name="closed" value="true" />
+      <created>1713050779291</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050779291</updated>
+    </task>
+    <task id="LOCAL-00061" summary="updated interface so it can support reading in from a csv file">
+      <option name="closed" value="true" />
+      <created>1713050810197</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050810197</updated>
+    </task>
+    <task id="LOCAL-00062" summary="renaming a variable for clarity">
+      <option name="closed" value="true" />
+      <created>1713050820993</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050820993</updated>
+    </task>
+    <task id="LOCAL-00063" summary="adding some comments + file formatting">
+      <option name="closed" value="true" />
+      <created>1713050844802</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050844802</updated>
+    </task>
+    <task id="LOCAL-00064" summary="generating test stubs">
+      <option name="closed" value="true" />
+      <created>1713050858969</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050858969</updated>
+    </task>
+    <task id="LOCAL-00065" summary="renaming star fleet command">
+      <option name="closed" value="true" />
+      <created>1713050892691</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050892691</updated>
+    </task>
+    <task id="LOCAL-00066" summary="adding ide settings to gitignore">
+      <option name="closed" value="true" />
+      <created>1713050907328</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050907328</updated>
+    </task>
+    <task id="LOCAL-00067" summary="writing tests, found issue with find node method">
+      <option name="closed" value="true" />
+      <created>1713051454871</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1713051454871</updated>
+    </task>
+    <task id="LOCAL-00068" summary="testing the tree ADT and making some adjustments. also fixed findNode method">
+      <option name="closed" value="true" />
+      <created>1713207357334</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1713207357334</updated>
+    </task>
+    <task id="LOCAL-00069" summary="loadFromFile test now seems to be working">
+      <option name="closed" value="true" />
+      <created>1713207378495</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1713207378495</updated>
+    </task>
+    <task id="LOCAL-00070" summary="trying to improve toString to show tree hierarchy">
+      <option name="closed" value="true" />
+      <created>1713207853620</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1713207853620</updated>
+    </task>
+    <task id="LOCAL-00071" summary="fixed error when trying to count an empty crew">
+      <option name="closed" value="true" />
+      <created>1713208159462</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1713208159462</updated>
+    </task>
+    <task id="LOCAL-00072" summary="adding some helpful methods to the interface">
+      <option name="closed" value="true" />
+      <created>1713211559381</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211559381</updated>
+    </task>
+    <task id="LOCAL-00073" summary="writing tests">
+      <option name="closed" value="true" />
+      <created>1713211570209</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211570209</updated>
+    </task>
+    <task id="LOCAL-00074" summary="added some comments">
+      <option name="closed" value="true" />
+      <created>1713211855179</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211855179</updated>
+    </task>
+    <task id="LOCAL-00075" summary="implemented new methods for getting superiors and suboordinates of a crew member">
+      <option name="closed" value="true" />
+      <created>1713211936926</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211936926</updated>
+    </task>
+    <task id="LOCAL-00076" summary="fixed removeCrewMember bug that wouldn't notice when the predicate was unable to find the member to remove, also renamed variable">
+      <option name="closed" value="true" />
+      <created>1713212151019</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1713212151019</updated>
+    </task>
+    <task id="LOCAL-00077" summary="fixed bug with adding parents and children">
+      <option name="closed" value="true" />
+      <created>1713213984002</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1713213984002</updated>
+    </task>
+    <task id="LOCAL-00078" summary="put an override of equals and hashcode so department and shift are ignored when determining equality between crew members">
+      <option name="closed" value="true" />
+      <created>1713214068014</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1713214068014</updated>
+    </task>
+    <task id="LOCAL-00079" summary="adding comments and fixed mixup between crew member and a crew member node in the setRoot test">
+      <option name="closed" value="true" />
+      <created>1713214118297</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1713214118297</updated>
+    </task>
+    <task id="LOCAL-00080" summary="package change to make it easier to find files">
+      <option name="closed" value="true" />
+      <created>1713216561152</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1713216561152</updated>
+    </task>
+    <task id="LOCAL-00081" summary="import statements for new package">
+      <option name="closed" value="true" />
+      <created>1713216635833</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1713216635833</updated>
+    </task>
+    <task id="LOCAL-00082" summary="fleshed out test for removing crew members">
+      <option name="closed" value="true" />
+      <created>1713216661899</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1713216661899</updated>
+    </task>
+    <task id="LOCAL-00083" summary="testing overridden .equals and .hashcode">
+      <option name="closed" value="true" />
+      <created>1713216704303</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1713216704303</updated>
+    </task>
+    <task id="LOCAL-00084" summary="testing and debugging reAssignTo()">
+      <option name="closed" value="true" />
+      <created>1713217621454</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1713217621454</updated>
+    </task>
+    <task id="LOCAL-00085" summary="adding test for putInCommandOf">
+      <option name="closed" value="true" />
+      <created>1713218137508</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1713218137508</updated>
+    </task>
+    <task id="LOCAL-00086" summary="simplified putInCommandOf to re-use code from reAssignTo">
+      <option name="closed" value="true" />
+      <created>1713218162858</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1713218162858</updated>
+    </task>
+    <task id="LOCAL-00087" summary="created predicate class to make it faster/easier to find crew members by their name">
+      <option name="closed" value="true" />
+      <created>1713224573029</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1713224573029</updated>
+    </task>
+    <task id="LOCAL-00088" summary="finished writing tests on to do list">
+      <option name="closed" value="true" />
+      <created>1713224586388</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1713224586388</updated>
+    </task>
+    <task id="LOCAL-00089" summary="updating view with needed methods">
+      <option name="closed" value="true" />
+      <created>1713227613094</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1713227613094</updated>
+    </task>
+    <task id="LOCAL-00090" summary="created helper that gets string info from user while also giving them the option to exti">
+      <option name="closed" value="true" />
+      <created>1713227698393</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1713227698393</updated>
+    </task>
+    <task id="LOCAL-00091" summary="added option to load crew from a file">
+      <option name="closed" value="true" />
+      <created>1713227741364</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1713227741364</updated>
+    </task>
+    <task id="LOCAL-00092" summary="made separate createCrewMember method that can be used in the beginning to create the captain and again later when user wants to add more crew members">
+      <option name="closed" value="true" />
+      <created>1713227789837</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1713227789837</updated>
+    </task>
+    <task id="LOCAL-00093" summary="changing order of methods">
+      <option name="closed" value="true" />
+      <created>1713228419925</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1713228419925</updated>
+    </task>
+    <task id="LOCAL-00094" summary="adding more methods to view to prompt user">
+      <option name="closed" value="true" />
+      <created>1713228452999</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1713228452999</updated>
+    </task>
+    <task id="LOCAL-00095" summary="altering main menu options to be more clear and specific">
+      <option name="closed" value="true" />
+      <created>1713229115260</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1713229115260</updated>
+    </task>
+    <task id="LOCAL-00096" summary="can now add crew members">
+      <option name="closed" value="true" />
+      <created>1713230554505</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1713230554505</updated>
+    </task>
+    <task id="LOCAL-00097" summary="added department prompt to crew member creation menu">
+      <option name="closed" value="true" />
+      <created>1713231136612</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1713231136612</updated>
+    </task>
+    <task id="LOCAL-00098" summary="added another menu option (and re-ordering of methods)">
+      <option name="closed" value="true" />
+      <created>1713232798978</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1713232798978</updated>
+    </task>
+    <task id="LOCAL-00099" summary="added way to list all crew members, abbreviated information shown on list of possible superior officers">
+      <option name="closed" value="true" />
+      <created>1713232836298</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1713232836298</updated>
+    </task>
+    <task id="LOCAL-00100" summary="adding documentation and psuedocode">
+      <option name="closed" value="true" />
+      <created>1713296266724</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1713296266724</updated>
+    </task>
+    <task id="LOCAL-00101" summary="code formatting and rearranging">
+      <option name="closed" value="true" />
+      <created>1713296341269</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1713296341269</updated>
+    </task>
+    <task id="LOCAL-00102" summary="added new method, added some comments">
+      <option name="closed" value="true" />
+      <created>1713296542527</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1713296542527</updated>
+    </task>
+    <task id="LOCAL-00103" summary="putting everything in packages to make it easier to find everything">
+      <option name="closed" value="true" />
+      <created>1713296741909</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1713296741909</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="controller-alternate-impl" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="adding comments and fixed mixup between crew member and a crew member node in the setRoot test" />
+    <MESSAGE value="package change to make it easier to find files" />
+    <MESSAGE value="import statements for new package" />
+    <MESSAGE value="fleshed out test for removing crew members" />
+    <MESSAGE value="testing overridden .equals and .hashcode" />
+    <MESSAGE value="testing and debugging reAssignTo()" />
+    <MESSAGE value="adding test for putInCommandOf" />
+    <MESSAGE value="simplified putInCommandOf to re-use code from reAssignTo" />
+    <MESSAGE value="created predicate class to make it faster/easier to find crew members by their name" />
+    <MESSAGE value="finished writing tests on to do list" />
+    <MESSAGE value="updating view with needed methods" />
+    <MESSAGE value="created helper that gets string info from user while also giving them the option to exti" />
+    <MESSAGE value="added option to load crew from a file" />
+    <MESSAGE value="made separate createCrewMember method that can be used in the beginning to create the captain and again later when user wants to add more crew members" />
+    <MESSAGE value="changing order of methods" />
+    <MESSAGE value="adding more methods to view to prompt user" />
+    <MESSAGE value="altering main menu options to be more clear and specific" />
+    <MESSAGE value="can now add crew members" />
+    <MESSAGE value="added department prompt to crew member creation menu" />
+    <MESSAGE value="added another menu option (and re-ordering of methods)" />
+    <MESSAGE value="added way to list all crew members, abbreviated information shown on list of possible superior officers" />
+    <MESSAGE value="adding documentation and psuedocode" />
+    <MESSAGE value="code formatting and rearranging" />
+    <MESSAGE value="added new method, added some comments" />
+    <MESSAGE value="putting everything in packages to make it easier to find everything" />
+    <option name="LAST_COMMIT_MESSAGE" value="putting everything in packages to make it easier to find everything" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.AssertionError" package="java.lang" />
+          <option name="timeStamp" value="35" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="treeADT.BranchNode" memberName="children" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Final_Project_5004$All_in_Final_Project_5004.ic" NAME="All in Final_Project_5004 Coverage Results" MODIFIED="1713224468580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Final_Project_5004$Main.ic" NAME="Main Coverage Results" MODIFIED="1713043165356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Final_Project_5004$StarFleetCrewTest_putInCommandOf.ic" NAME="StarFleetCrewTest.putInCommandOf Coverage Results" MODIFIED="1713218070173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Final_Project_5004$StarFleetOfficerTest_testEquals.ic" NAME="StarFleetOfficerTest.testEquals Coverage Results" MODIFIED="1713215437882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Final_Project_5004$StarFleetCrewTest_removeCrewMember.ic" NAME="StarFleetCrewTest.removeCrewMember Coverage Results" MODIFIED="1713214632870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Final_Project_5004$ShiftTest.ic" NAME="ShiftTest Coverage Results" MODIFIED="1712794041332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>model.scheduling.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Final_Project_5004$ALL.ic" NAME="ALL Coverage Results" MODIFIED="1713214695391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>

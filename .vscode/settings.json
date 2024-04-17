@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "tests",
+        "src",
+        "resources",
+        "lib",
+        ".idea",
+        ".vscode"
+    ]
+}
