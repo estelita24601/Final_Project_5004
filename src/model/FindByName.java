@@ -1,4 +1,5 @@
-package model; /**
+package model;
+/*
  * Functional class that extends predicate so we can more easily create predicates that find crew members by name
  */
 

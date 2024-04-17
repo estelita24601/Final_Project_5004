@@ -25,16 +25,16 @@ public class ShiftTest {
     @Test
     public void testToString() {
         //"%s Shift: %s\n\t%d - %d\n"
-        String expectedAlpha = "Alpha Shift (Bridge)\n\t06:00 - 12:00\n";
+        String expectedAlpha = "Alpha (Bridge)\n\t06:00 - 12:00\n";
         assertEquals(expectedAlpha, alpha.toString());
 
-        String expectedBeta = "Beta Shift (Bridge)\n\t12:00 - 18:00\n";
+        String expectedBeta = "Beta (Bridge)\n\t12:00 - 18:00\n";
         assertEquals(expectedBeta, beta.toString());
 
-        String expectedGamma = "Gamma Shift (Bridge)\n\t18:00 - 00:00\n";
+        String expectedGamma = "Gamma (Bridge)\n\t18:00 - 00:00\n";
         assertEquals(expectedGamma, gamma.toString());
 
-        String expectedDelta = "Delta Shift (Bridge)\n\t00:00 - 06:00\n";
+        String expectedDelta = "Delta (Bridge)\n\t00:00 - 06:00\n";
         assertEquals(expectedDelta, delta.toString());
     }
 

@@ -352,7 +352,7 @@ public class StarFleetCommand implements ICrewController {
 
             //make sure user gave a number for the menu item they chose
             try {
-                menuSelection = Integer.valueOf(userInput);
+                menuSelection = Integer.parseInt(userInput);
             } catch (NumberFormatException e) {
                 // didn't even receive a number
                 invalidResponse.display();
@@ -383,7 +383,7 @@ public class StarFleetCommand implements ICrewController {
         userInput = scanner.nextLine().strip();
 
         try {
-            int exitChoice = Integer.valueOf(userInput); //see if they gave us a number
+            int exitChoice = Integer.parseInt(userInput); //see if they gave us a number
             if (exitChoice == -1) {
                 //if the number was -1 they want to quit
                 return null; //return null so caller knows the user tried to quit

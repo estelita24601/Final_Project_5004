@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class StarFleetOfficerTest {
     StarFleetOfficer janeway;
@@ -44,14 +45,14 @@ public class StarFleetOfficerTest {
         assert (dax.equals(daxWithNewJob));
 
         //now test that it returns false when necessary
-        assertFalse(janeway.equals(sisko)); //everything the same except name
+        assertNotEquals(janeway, sisko); //everything the same except name
         StarFleetOfficer futureJaneway = new StarFleetOfficer("Katheryn Janeway", Rank.ADMIRAL, Department.BRIDGE, Rotation.ALPHA, Species.HUMAN);
-        ;
-        assertFalse(janeway.equals(futureJaneway)); //everything the same except rank
-        StarFleetOfficer hologramJaneway = new StarFleetOfficer("Katheryn Janeway", Rank.CAPTAIN, Department.BRIDGE, Rotation.ALPHA, Species.HOLOGRAM);
-        assertFalse(janeway.equals(hologramJaneway)); //everything the same except species
 
-        assertFalse(janeway.equals(Rank.CAPTAIN)); //wrong object type should give false
+        assertNotEquals(janeway, futureJaneway); //everything the same except rank
+        StarFleetOfficer hologramJaneway = new StarFleetOfficer("Katheryn Janeway", Rank.CAPTAIN, Department.BRIDGE, Rotation.ALPHA, Species.HOLOGRAM);
+        assertNotEquals(janeway, hologramJaneway); //everything the same except species
+
+        assertNotEquals(janeway, Rank.CAPTAIN); //wrong object type should give false
     }
 
     @Test

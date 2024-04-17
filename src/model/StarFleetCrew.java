@@ -241,7 +241,7 @@ public class StarFleetCrew implements ICrewModel<ICrewMember> {
 
         //move children to grandparent if needed
         ArrayList<TreeNode<ICrewMember>> oldChildren = memberNode.getChildren();
-        BranchNode<ICrewMember> grandparent = (BranchNode) memberNode.getParent();
+        BranchNode<ICrewMember> grandparent = (BranchNode<ICrewMember>) memberNode.getParent();
         if (!oldChildren.isEmpty()) {
             memberNode.moveChildren(grandparent);
         }

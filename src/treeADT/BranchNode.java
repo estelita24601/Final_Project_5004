@@ -139,7 +139,6 @@ public class BranchNode<T> extends TreeNode<T> {
 
     @Override
     public String toString() {
-        String initial = "";
         BiFunction<String, T, String> foldToString;
         foldToString = (currentStr, thisNode) -> {
             return String.format("%s\n%s", currentStr, thisNode);

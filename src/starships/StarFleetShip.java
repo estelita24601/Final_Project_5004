@@ -71,7 +71,7 @@ public class StarFleetShip extends SpaceVessel implements WarpCapable, CombatShi
 
     @Override
     public void modifyWarpSpeed(double newWarpSpeed) {
-        if (this.isAtWarp == false) {
+        if (!this.isAtWarp) {
             throw new IllegalStateException("Unable to modify warp speed due to not being at warp");
         }
         this.currentSpeed = newWarpSpeed;

@@ -108,7 +108,6 @@ public class TextView implements ICrewView {
 
     @Override
     public void displayYesOrNo() {
-        String[] yesOrNo = {"YES", "NO"};
         printToTerminal(String.format("0. NO\n"));
         printToTerminal(String.format("1. YES\n"));
     }
@@ -119,7 +118,7 @@ public class TextView implements ICrewView {
     }
 
     @Override
-    public void displayEntireCrew(ICrewModel entireCrew) {
+    public void displayEntireCrew(ICrewModel<ICrewMember> entireCrew) {
         printToTerminal(entireCrew.toString());
     }
 

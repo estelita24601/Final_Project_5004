@@ -38,7 +38,7 @@ public class TreeTest {
         stringTree.setData("NEW root");
         assertEquals("NEW root", stringTree.getData());
 
-        intTree.setData(Integer.valueOf(100));
+        intTree.setData(100);
         assertEquals(Integer.valueOf(100), intTree.getData());
 
         ICrewMember temporaryCaptain = new StarFleetOfficer("chakotay", Rank.COMMANDER, Department.BRIDGE, Rotation.BETA, Species.HUMAN);
@@ -53,14 +53,6 @@ public class TreeTest {
         };
         crewMemberTree.editData(consumer);
         assertEquals(Department.SCIENCE, crewMemberTree.getData().getJob());
-    }
-
-    @Test
-    public void testGetParent() {
-    }
-
-    @Test
-    public void testSetParent() {
     }
 
     @Test
@@ -108,19 +100,6 @@ public class TreeTest {
         assertEquals(2, crewMemberTree.getChildren().size());
 
         System.out.println(crewMemberTree);
-    }
-
-    @Test
-    public void testMapToList() {
-    }
-
-    @Test
-    public void testFilterToList() {
-    }
-
-    @Test
-    public void testMap() {
-
     }
 
 }

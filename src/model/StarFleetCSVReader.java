@@ -25,13 +25,13 @@ public class StarFleetCSVReader {
         }
 
         ArrayList<String> fileLines = readInAllLines();
-        fileLines.remove(0); //remove the header line
+        fileLines.removeFirst(); //remove the header line
 
         //create the commanding officer and add them to the crew first
-        String commandingOfficerInfo = fileLines.get(0);
+        String commandingOfficerInfo = fileLines.getFirst();
         StarFleetOfficer commandingOfficer = createOfficerFromTokens(commandingOfficerInfo.split(","));
-        starFleetCrew.setRoot(commandingOfficer); //TODO: exception handling for if commanding officer isn't elligible to be root
-        fileLines.remove(0); //remove info for commanding officer since we're finished with it
+        starFleetCrew.setRoot(commandingOfficer);
+        fileLines.removeFirst(); //remove info for commanding officer since we're finished with it
 
         //add the rest of the officers to the crew
         for (String officerInfo : fileLines) {

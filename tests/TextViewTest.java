@@ -6,7 +6,7 @@ import view.TextView;
 
 public class TextViewTest {
     ICrewView view = new TextView(System.out);
-    ICrewModel model;
+    ICrewModel<ICrewMember> model;
     Rank[] rankOptions;
     Species[] speciesOptions;
     Rotation[] rotationOptions;
@@ -37,27 +37,4 @@ public class TextViewTest {
     }
 
 
-    @Test
-    public void displayYesOrNo() {
-    }
-
-    @Test
-    public void askIfFinishedGivingHeritage() {
-    }
-
-    @Test
-    public void displayMainMenu() {
-    }
-
-    @Test
-    public void goodbyeMessage() {
-    }
-
-    @Test
-    public void displayError() {
-    }
-
-    @Test
-    public void displayTryAgainMessage() {
-    }
 }
