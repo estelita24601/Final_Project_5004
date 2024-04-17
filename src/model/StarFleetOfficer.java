@@ -81,7 +81,7 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
     @Override
     public String toString() {
         StringBuilder heritageString = new StringBuilder();
-        if (heritage.size() == 0) {
+        if (heritage.isEmpty()) {
             heritageString.append("Undisclosed");
         } else {
             for (Species s : this.heritage) {
@@ -157,7 +157,7 @@ public class StarFleetOfficer implements ICrewMember, Comparable<StarFleetOffice
     public void editShift(Consumer<Shift> shiftEditor) {
         try {
             shiftEditor.accept(this.shift);
-        } catch (Exception e) { // TODO: maybe make this more specific...?
+        } catch (Exception e) {
             throw new IllegalArgumentException("Proposed edits to shift are not possible");
         }
     }
