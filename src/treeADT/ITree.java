@@ -20,7 +20,6 @@ public interface ITree<T> {
 
     ArrayList<TreeNode<T>> getChildren();
 
-    //ABSTRACT METHODS//////////////////////////////////////////////////////////////////
     void moveChildren(Predicate<T> findChildrenToReassign, BranchNode<T> newParent);
 
     void moveChildren(BranchNode<T> newParent);
