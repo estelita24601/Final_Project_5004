@@ -26,13 +26,6 @@ public class TreeTest {
         crewMemberTree = new BranchNode<>(captain);
     }
 
-    //helper method that adds more items to all the trees so we can test more complicated methods
-    public void addToAllTrees() {
-        //todo: add strings to the str tree
-        //todo: add integers to the int tree
-        //todo: add crew members to the crew tree
-    }
-
     @Test
     public void testGetData() {
         assertEquals("root", stringTree.getData());
@@ -118,42 +111,7 @@ public class TreeTest {
     }
 
     @Test
-    public void testRemoveChild() {
-        //todo give a tree node object that we want to delete
-        //todo give a predicate to find child to delete
-    }
-
-
-    @Test
-    public void testGetChildren() {
-    }
-
-    @Test
-    public void testCountIf() {
-    }
-
-    @Test
-    public void testCountAll() {
-    }
-
-    @Test
-    public void testToList() {
-    }
-
-    @Test
-    public void testFindNode() {
-    }
-
-    @Test
-    public void testFold() {
-    }
-
-    @Test
     public void testMapToList() {
-    }
-
-    @Test
-    public void testToString() {
     }
 
     @Test
