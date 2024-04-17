@@ -1,14 +1,4 @@
-# Final_Project_5004
-
-instructions: [5004 Final - Synthesis - Google Docs](https://docs.google.com/document/d/1fgGaoVQYOf_dAHWcgWOyhlFRQtPa9TxKWn687pfGSWs/edit)
-
-| Requirement                        | Description                                                                                                             | Points    |
-|:----------------------------------:|:-----------------------------------------------------------------------------------------------------------------------:|:---------:|
-| 1. Recursion in Practice           | a logical use of recursion that simplifies your code                                                                    | 10 Points |
-| 2. Abstract Classes and Interfaces | Logical Structure and Design using Abstract Classes and Interfaces                                                      | 10 Points |
-| 3. Generics and Lambda             | Useful and Logical Abstraction using Generics and Lambda Expressions                                                    | 10 Points |
-| 4. Higher Order Functions          | Map, Filter, and Fold                                                                                                   | 10 Points |
-| 5. Abstract Data Type              | Hierarchical Data Representation as an ADT or a Linked List ADT (Whatever makes the most sense for your application)    | 10 Points |
-| 6. Design Pattern                  | Architectures and Design Patterns MVC Design and a design pattern                                                       | 10 Points |
-| 7. SOLID Principles                | Single Responsibility, Open-Close Principle, Liskov Substitution, Interface Segregation, Dependency Inversion Principle | 10 Points |
-
+# instructions
+1. go to [Main.java](https://github.com/estelita24601/Final_Project_5004/blob/63a853122f44fdc496011e10d56d539f52481ad5/src/Main.java) and run it
+2. when asked to create a crew you can use [VoyagerCrew.csv](https://github.com/estelita24601/Final_Project_5004/blob/63a853122f44fdc496011e10d56d539f52481ad5/resources/VoyagerCrew.csv) to load in the crew members in that file by giving the relative path "resources/VoyagerCrew.csv"
+3. follow menu instructions
