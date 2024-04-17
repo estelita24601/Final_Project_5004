@@ -33,7 +33,7 @@ public class StarFleetCommand implements ICrewController {
 
         this.view.welcomeMessage();
         boolean createdCrew = initializeCrew(); //try to get user to create the crew from a file or by hand
-        //check if user succesfulyl created crew or if they decided to quit entire program
+        //check if user successfully created crew or if they decided to quit entire program
         if (!createdCrew) {
             //they declined to initialize a crew so there's nothing left to do
             view.goodbyeMessage();
